@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package controllers;
 
 /**
  *
  * @author Utilisateur
  */
-public class test {
+public class PresentPageController {
     
 }

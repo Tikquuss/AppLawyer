@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label contentDisplay="CENTER" prefHeight="44.0" prefWidth="476.0" styleClass="labelTitle" text=" LISTE DES DOSSIERS COURANTS" AnchorPane.leftAnchor="262.0" AnchorPane.rightAnchor="262.0" AnchorPane.topAnchor="20.0" />
+      <JFXListView minHeight="128.0" minWidth="820.0" prefHeight="555.0" prefWidth="800.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0" />
+      <JFXButton layoutX="648.0" layoutY="675.0" prefHeight="44.0" prefWidth="180.0" styleClass="pretty-button" text="Ouvrir dossier" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="200.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="750.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXButton contentDisplay="CENTER" layoutX="708.0" layoutY="663.0" prefHeight="50.0" prefWidth="200.0" styleClass="pretty-button" text="Enregistrer" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" />
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="500.0" prefHeight="700.0" prefWidth="500.0" stylesheets="@../ressources/css/style.css" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="-6.0" prefHeight="75.0" prefWidth="500.0" styleClass="labelTitle" text="   Autres informations sur le dossier" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <TextField prefHeight="40.0" prefWidth="400.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="120.0" />
+            <TextField prefHeight="40.0" prefWidth="300.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="210.0" />
+            <Label prefHeight="35.0" prefWidth="300.0" styleClass="small-label" text="Nom de l'adversaire" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="80.0" />
+            <Label prefHeight="31.0" prefWidth="300.0" styleClass="small-label" text="Provisions" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="530.0" />
+            <Label prefHeight="30.0" prefWidth="300.0" styleClass="small-label" text="Juridiction" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="440.0" />
+            <JFXComboBox prefHeight="35.0" prefWidth="300.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="390.0" />
+            <JFXComboBox prefHeight="35.0" prefWidth="300.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="300.0" />
+            <Label prefHeight="30.0" prefWidth="300.0" styleClass="small-label" text="Qualité" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="350.0" />
+            <Label prefHeight="30.0" prefWidth="300.0" styleClass="small-label" text="Type d'affaire" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="260.0" />
+            <JFXComboBox prefHeight="35.0" prefWidth="300.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="480.0" />
+            <Label prefHeight="31.0" prefWidth="300.0" styleClass="small-label" text="Honoraires" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="170.0" />
+            <TextField prefHeight="40.0" prefWidth="300.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="570.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="500.0" stylesheets="@../ressources/css/style.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="22.0" layoutY="130.0" prefHeight="75.0" prefWidth="500.0" styleClass="labelTitle" text="          Infos relatives au client" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <TextField layoutX="22.0" layoutY="130.0" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="250.0" promptText="Noms" AnchorPane.leftAnchor="50.0" />
+            <TextField layoutX="22.0" layoutY="130.0" prefHeight="50.0" prefWidth="300.0" promptText="Prenoms" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="230.0" />
+            <TextField layoutX="22.0" layoutY="130.0" prefHeight="50.0" prefWidth="300.0" promptText="Adresse" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="330.0" />
+            <TextField layoutX="22.0" layoutY="130.0" prefHeight="50.0" prefWidth="300.0" promptText="Telephone" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="430.0" />
+            <TextField layoutX="22.0" layoutY="130.0" prefHeight="50.0" prefWidth="300.0" promptText="Email" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="530.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
