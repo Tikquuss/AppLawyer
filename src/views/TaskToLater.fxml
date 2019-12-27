@@ -16,14 +16,14 @@
       <AnchorPane layoutY="74.0" minHeight="730.0" minWidth="620.0" prefHeight="730.0" prefWidth="620.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="62.0" minHeight="46.0" minWidth="355.0" prefHeight="46.0" prefWidth="355.0" styleClass="labelTitle" text="      LISTE DES TACHES" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="0.0" />
-            <JFXListView layoutX="10.0" layoutY="149.0" maxHeight="600.0" maxWidth="800.0" minHeight="494.0" minWidth="600.0" prefHeight="510.0" prefWidth="600.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0" />
-            <JFXButton layoutX="383.0" layoutY="723.0" minHeight="40.0" minWidth="100.0" prefHeight="50.0" prefWidth="160.0" styleClass="pretty-button-rounded" text="Débuter tâche" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="80.0" />
-            <JFXButton layoutX="208.0" layoutY="723.0" minHeight="40.0" minWidth="100.0" prefHeight="50.0" prefWidth="160.0" styleClass="pretty-button-rounded" text="Finaliser tâche" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="300.0" />
+            <JFXListView fx:id="listeTaches_listView" layoutX="10.0" layoutY="149.0" maxHeight="600.0" maxWidth="800.0" minHeight="494.0" minWidth="600.0" prefHeight="510.0" prefWidth="600.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0" />
+            <JFXButton fx:id="initTache_button" layoutX="383.0" layoutY="723.0" minHeight="40.0" minWidth="100.0" prefHeight="50.0" prefWidth="160.0" styleClass="pretty-button-rounded" text="Débuter tâche" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="80.0" />
+            <JFXButton fx:id="finaliseTache_button" layoutX="208.0" layoutY="723.0" minHeight="40.0" minWidth="100.0" prefHeight="50.0" prefWidth="160.0" styleClass="pretty-button-rounded" text="Finaliser tâche" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="300.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="650.0" minHeight="800.0" minWidth="380.0" prefHeight="800.0" prefWidth="380.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXButton layoutX="74.0" layoutY="67.0" prefHeight="40.0" prefWidth="250.0" styleClass="pretty-button" text="Programmer nouvelle tâche" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" />
+            <JFXButton fx:id="programNewTache_button" layoutX="74.0" layoutY="67.0" prefHeight="40.0" prefWidth="250.0" styleClass="pretty-button" text="Programmer nouvelle tâche" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" />
             <GridPane layoutX="13.0" layoutY="295.0" prefHeight="210.0" prefWidth="355.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="141.0" />
@@ -36,13 +36,13 @@
                </rowConstraints>
                <children>
                   <Label prefHeight="39.0" prefWidth="125.0" styleClass="small-label" text="Date " GridPane.rowIndex="1" />
-                  <TextField minHeight="46.0" minWidth="320.0" prefHeight="46.0" prefWidth="320.0" promptText="Label" styleClass="small-label" GridPane.columnSpan="2147483647" />
-                  <JFXDatePicker prefHeight="40.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="labelNewTache_textField" minHeight="46.0" minWidth="320.0" prefHeight="46.0" prefWidth="320.0" promptText="Label" styleClass="small-label" GridPane.columnSpan="2147483647" />
+                  <JFXDatePicker fx:id="dateNewTache_datePicker" prefHeight="40.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label prefHeight="40.0" prefWidth="82.0" styleClass="small-label" text="Heure" GridPane.rowIndex="2" />
-                  <JFXTimePicker prefHeight="40.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <JFXTimePicker fx:id="heureNewTache_timePicker" prefHeight="40.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            <JFXButton layoutX="190.0" layoutY="576.0" prefHeight="40.0" prefWidth="180.0" styleClass="pretty-button-rounded" text="Valider" AnchorPane.rightAnchor="80.0" />
+            <JFXButton fx:id="valider_button" layoutX="190.0" layoutY="576.0" prefHeight="40.0" prefWidth="180.0" styleClass="pretty-button-rounded" text="Valider" AnchorPane.rightAnchor="80.0" />
          </children>
       </AnchorPane>
    </children>

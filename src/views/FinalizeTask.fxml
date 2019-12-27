@@ -30,17 +30,17 @@
                   <AnchorPane prefHeight="250.0" prefWidth="550.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
                      <children>
                         <Label layoutY="11.0" prefHeight="35.0" prefWidth="400.0" styleClass="small-label" text="Compte rendu" />
-                        <TextArea layoutX="-1.0" layoutY="51.0" prefHeight="170.0" prefWidth="530.0" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" />
+                        <TextArea fx:id="compteRendu_textArea" layoutX="-1.0" layoutY="51.0" prefHeight="170.0" prefWidth="530.0" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" />
                      </children>
                   </AnchorPane>
-                  <TextField minHeight="40.0" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="depenses_textField" minHeight="40.0" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label prefHeight="40.0" prefWidth="400.0" GridPane.columnIndex="1" />
-                  <Label prefHeight="50.0" prefWidth="400.0" styleClass="small-label" text="Titre donné à l'opération" GridPane.columnIndex="1" />
+                  <Label fx:id="labelTache_label" prefHeight="50.0" prefWidth="400.0" styleClass="small-label" text="Titre donné à l'opération" GridPane.columnIndex="1" />
                </children>
             </GridPane>
          </children>
       </AnchorPane>
-      <JFXButton layoutX="588.0" layoutY="445.0" prefHeight="35.0" prefWidth="141.0" styleClass="pretty-button" text="Sauvegarder" />
+      <JFXButton fx:id="save_button" layoutX="588.0" layoutY="445.0" prefHeight="35.0" prefWidth="141.0" styleClass="pretty-button" text="Sauvegarder" />
       <ButtonBar prefHeight="40.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

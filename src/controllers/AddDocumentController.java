@@ -22,24 +22,27 @@ public class AddDocumentController {
     
    
     @FXML
-    private JFXComboBox<?> categoriesDoc;
+    private JFXComboBox<?> categoriesDoc_comboBox;
 
     @FXML
-    private JFXComboBox<?> typesDoc;
+    private JFXComboBox<?> typesDoc_comboBox;
 
     @FXML
-    private JFXButton choiceDocButton;
+    private JFXButton valider_button;
 
     @FXML
-    private JFXTextField nomDoc;
+    private JFXTextField choiceDoc_textField;
+
+    @FXML
+    private JFXButton choiceDoc_button;
+    @FXML
     
-    @FXML
     public void initialize(){
-        choiceDocButton.setOnAction(e -> {
+        choiceDoc_button.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
             File selectedFile = fileChooser.showOpenDialog(null);
             if(selectedFile != null)
-                nomDoc.setText(selectedFile.getName());
+                choiceDoc_textField.setText(selectedFile.getName());
         });
     }
     

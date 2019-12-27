@@ -5,11 +5,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="1000.0" minWidth="1000.0" prefHeight="1000.0" prefWidth="1000.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PresentPageController">
    <children>
-      <AnchorPane layoutX="88.0" layoutY="620.0" prefHeight="200.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <AnchorPane fx:id="content" layoutY="7.0" minHeight="650.0" minWidth="1000.0" prefHeight="650.0" prefWidth="1000.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane layoutX="88.0" layoutY="620.0" prefHeight="150.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <JFXButton fx:id="homeButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="466.0" layoutY="50.0" prefHeight="150.0" prefWidth="200.0" styleClass="audiowide-button" text="Accueil" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0">
+            <JFXButton fx:id="home_button" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="466.0" layoutY="50.0" prefHeight="150.0" prefWidth="200.0" styleClass="audiowide-button" text="Accueil" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -18,7 +19,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="clientListButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="472.0" layoutY="14.0" maxWidth="200.0" minHeight="150.0" minWidth="200.0" prefHeight="150.0" prefWidth="200.0" styleClass="audiowide-button" text="Liste des clients" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+            <JFXButton fx:id="clientsList_button" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="472.0" layoutY="14.0" maxWidth="200.0" minHeight="150.0" minWidth="200.0" prefHeight="150.0" prefWidth="200.0" styleClass="audiowide-button" text="Liste des clients" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -27,7 +28,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="archDocButton" buttonType="RAISED" contentDisplay="TOP" prefHeight="150.0" prefWidth="200.0" styleClass="audiowide-button" text="Dossiers archivés" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <JFXButton fx:id="archDoc_button" buttonType="RAISED" contentDisplay="TOP" prefHeight="150.0" prefWidth="200.0" styleClass="audiowide-button" text="Dossiers archivés" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,6 +39,5 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="content" layoutY="7.0" minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

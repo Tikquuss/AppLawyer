@@ -10,7 +10,7 @@
    <children>
       <VBox minHeight="800.0" minWidth="200.0" prefHeight="800.0" prefWidth="200.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXButton fx:id="homeFolder" alignment="BOTTOM_CENTER" contentDisplay="TOP" minHeight="150.0" minWidth="200.0" prefHeight="150.0" prefWidth="200.0" text="Accueil dossier" textFill="WHITE">
+            <JFXButton fx:id="homefolder_button" alignment="BOTTOM_CENTER" contentDisplay="TOP" minHeight="150.0" minWidth="200.0" prefHeight="150.0" prefWidth="200.0" text="Accueil dossier" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -19,7 +19,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="tasks" alignment="BOTTOM_CENTER" contentDisplay="TOP" minHeight="150.0" minWidth="200.0" prefHeight="150.0" prefWidth="200.0" text="Planning" textFill="WHITE">
+            <JFXButton fx:id="planning_button" alignment="BOTTOM_CENTER" contentDisplay="TOP" minHeight="150.0" minWidth="200.0" prefHeight="150.0" prefWidth="200.0" text="Planning" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -28,7 +28,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="documents" alignment="BOTTOM_CENTER" contentDisplay="TOP" minHeight="150.0" minWidth="200.0" prefHeight="150.0" prefWidth="200.0" text="Documents" textFill="WHITE">
+            <JFXButton fx:id="documents_button" alignment="BOTTOM_CENTER" contentDisplay="TOP" minHeight="150.0" minWidth="200.0" prefHeight="150.0" prefWidth="200.0" text="Documents" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>

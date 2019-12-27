@@ -8,8 +8,8 @@
    <children>
       <HBox alignment="TOP_CENTER" layoutX="7.0" minHeight="50.0" minWidth="1000.0" prefHeight="50.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXButton fx:id="toDone" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="500.0" styleClass="pretty-button" text="Opérations à effectuer" />
-            <JFXButton fx:id="done" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="500.0" styleClass="pretty-button" text="Opérations effectuées" />
+            <JFXButton fx:id="taskToDone_button" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="500.0" styleClass="pretty-button" text="Opérations à effectuer" />
+            <JFXButton fx:id="taskDone_button" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="500.0" styleClass="pretty-button" text="Opérations effectuées" />
          </children>
       </HBox>
       <AnchorPane fx:id="planningContainer" layoutY="594.0" minHeight="748.0" minWidth="1000.0" prefHeight="748.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />

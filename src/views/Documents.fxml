@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DocumentsController">
    <children>
-      <TableView layoutX="50.0" layoutY="141.0" minHeight="549.0" minWidth="900.0" prefHeight="549.0" prefWidth="900.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="150.0">
+      <TableView fx:id="documents_tableView" layoutX="50.0" layoutY="141.0" minHeight="549.0" minWidth="900.0" prefHeight="549.0" prefWidth="900.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="150.0">
         <columns>
           <TableColumn prefWidth="254.0" text="Nom du document" />
           <TableColumn prefWidth="291.0" text="Catégorie" />
@@ -17,8 +17,8 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <JFXButton fx:id="newDoc" layoutX="578.0" layoutY="64.0" prefHeight="47.0" prefWidth="294.0" styleClass="pretty-button-rounded" text="Nouveau document" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="80.0" />
-      <JFXButton fx:id="openDoc" layoutX="598.0" layoutY="704.0" prefHeight="50.0" prefWidth="268.0" styleClass="pretty-button-rounded" text="Ouvrir document" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="100.0" />
-      <JFXButton fx:id="suppDoc" layoutX="290.0" layoutY="700.0" prefHeight="50.0" prefWidth="268.0" styleClass="pretty-button-rounded" text="Supprimer document" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="390.0" />
+      <JFXButton fx:id="newDoc_button" layoutX="578.0" layoutY="64.0" prefHeight="47.0" prefWidth="294.0" styleClass="pretty-button-rounded" text="Nouveau document" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="80.0" />
+      <JFXButton fx:id="openDoc_button" layoutX="598.0" layoutY="704.0" prefHeight="50.0" prefWidth="268.0" styleClass="pretty-button-rounded" text="Ouvrir document" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="100.0" />
+      <JFXButton fx:id="suppDoc_button" layoutX="290.0" layoutY="700.0" prefHeight="50.0" prefWidth="268.0" styleClass="pretty-button-rounded" text="Supprimer document" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="390.0" />
    </children>
 </AnchorPane>

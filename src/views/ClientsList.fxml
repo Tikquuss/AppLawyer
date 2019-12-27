@@ -6,10 +6,10 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="1000.0" prefHeight="650.0" prefWidth="1000.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="157.0" layoutY="37.0" prefHeight="48.0" prefWidth="724.0" styleClass="labelTitle" text="                      LISTE DES CLIENTS" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" />
-      <TableView layoutX="45.0" layoutY="167.0" prefHeight="604.0" prefWidth="900.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="120.0">
+      <Label layoutX="157.0" layoutY="37.0" prefHeight="48.0" prefWidth="724.0" styleClass="labelTitle" text="                      LISTE DES CLIENTS" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="40.0" />
+      <TableView layoutX="45.0" layoutY="167.0" prefHeight="604.0" prefWidth="900.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="120.0">
         <columns>
             <TableColumn prefWidth="75.0" text="Noms" />
           <TableColumn prefWidth="75.0" text="Prénoms" />
@@ -22,6 +22,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <JFXButton layoutX="568.0" layoutY="741.0" prefHeight="40.0" prefWidth="200.0" styleClass="pretty-button-rounded" text="Modifier" AnchorPane.rightAnchor="250.0" />
+      <JFXButton layoutX="568.0" layoutY="741.0" prefHeight="40.0" prefWidth="200.0" styleClass="pretty-button-rounded" text="Modifier" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="250.0" />
    </children>
 </AnchorPane>

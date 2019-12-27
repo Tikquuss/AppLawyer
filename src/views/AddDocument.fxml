@@ -8,13 +8,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddDocumentController">
    <children>
-      <JFXComboBox fx:id="categoriesDoc" layoutX="87.0" layoutY="250.0" prefHeight="40.0" prefWidth="300.0" styleClass="small-label" />
+      <JFXComboBox fx:id="categoriesDoc_comboBox" layoutX="87.0" layoutY="250.0" prefHeight="40.0" prefWidth="300.0" styleClass="small-label" />
       <Label layoutX="87.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" styleClass="small-label" text="Catégorie" />
-      <JFXComboBox fx:id="typesDoc" layoutX="87.0" layoutY="350.0" prefHeight="40.0" prefWidth="300.0" styleClass="small-label" />
+      <JFXComboBox fx:id="typesDoc_comboBox" layoutX="87.0" layoutY="350.0" prefHeight="40.0" prefWidth="300.0" styleClass="small-label" />
       <Label layoutX="87.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" styleClass="small-label" text="Type" />
       <Label layoutX="87.0" layoutY="100.0" prefHeight="40.0" prefWidth="300.0" styleClass="small-label" text="Choisir document" />
-      <JFXButton layoutX="205.0" layoutY="469.0" prefHeight="50.0" prefWidth="180.0" styleClass="pretty-button-rounded" text="Valider" />
-      <JFXTextField fx:id="nomDoc" layoutX="87.0" layoutY="148.0" prefHeight="44.0" prefWidth="300.0" />
-      <JFXButton fx:id="choiceDocButton" layoutX="393.0" layoutY="153.0" prefHeight="40.0" prefWidth="100.0" styleClass="pretty-button" text="Choisir" />
+      <JFXButton fx:id="valider_button" layoutX="205.0" layoutY="469.0" prefHeight="50.0" prefWidth="180.0" styleClass="pretty-button-rounded" text="Valider" />
+      <JFXTextField fx:id="choiceDoc_textField" layoutX="87.0" layoutY="148.0" prefHeight="44.0" prefWidth="300.0" />
+      <JFXButton fx:id="choiceDoc_button" layoutX="393.0" layoutY="153.0" prefHeight="40.0" prefWidth="100.0" styleClass="pretty-button" text="Choisir" />
    </children>
 </AnchorPane>

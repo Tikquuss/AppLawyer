@@ -22,13 +22,13 @@ import utilities.ViewDimensionner;
 public class PlanningController {
 
     @FXML
+    private JFXButton taskToDone_button;
+
+    @FXML
+    private JFXButton taskDone_button;
+
+    @FXML
     private AnchorPane planningContainer;
-
-    @FXML
-    private JFXButton toDone;
-
-    @FXML
-    private JFXButton done;
 
     private Parent taskLaterParent, taskPassedParent; 
     @FXML
@@ -48,10 +48,10 @@ public class PlanningController {
         }        
     }
     public void initActions(){
-        toDone.setOnAction(event -> {
+        taskToDone_button.setOnAction(event -> {
             this.add(taskLaterParent);
         });
-        done.setOnAction(event -> {
+        taskDone_button.setOnAction(event -> {
             this.add(taskPassedParent);
         });
     }
