@@ -19,7 +19,7 @@ public class AppLawyer extends Application {
         homeForFolder =  new FXMLLoader(getClass().getResource("./views/homeForFolder.fxml"));
         Parent root = homeForFolder.load();
         Parent presentPageRoot = FXMLLoader.load(getClass().getResource("./views/PresentPage.fxml"));
-        Parent homeCF = FXMLLoader.load(getClass().getResource("./views/homeClientFolder2.fxml"));
+        Parent homeCF = FXMLLoader.load(getClass().getResource("./views/homeClientFolder.fxml"));
         ((HomeForFolderController)homeForFolder.getController()).add(homeCF);
         primaryStage.setScene(new Scene(presentPageRoot));
         primaryStage.setMinHeight(700);

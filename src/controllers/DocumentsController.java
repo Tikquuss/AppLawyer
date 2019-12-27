@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -25,13 +26,16 @@ import javafx.stage.Stage;
 public class DocumentsController {
     
     @FXML
-    private JFXButton newDoc;
+    private TableView<?> documents_tableView;
 
     @FXML
-    private JFXButton openDoc;
+    private JFXButton newDoc_button;
 
     @FXML
-    private JFXButton suppDoc;
+    private JFXButton openDoc_button;
+
+    @FXML
+    private JFXButton suppDoc_button;
         
     
     
@@ -43,7 +47,7 @@ public class DocumentsController {
         stageNewDoc.setScene(new Scene(parent));
         stageNewDoc.setResizable(false);
         stageNewDoc.initModality(Modality.APPLICATION_MODAL);
-        newDoc.setOnAction(e -> {
+        newDoc_button.setOnAction(e -> {
            stageNewDoc.show();
         });
     }

@@ -20,13 +20,13 @@ import utilities.ViewDimensionner;
 public class HomeForFolderController {
     
     @FXML
-    private JFXButton homeFolder;
+    private JFXButton homefolder_button;
 
     @FXML
-    private JFXButton tasks;
+    private JFXButton planning_button;
 
     @FXML
-    private JFXButton documents;
+    private JFXButton documents_button;
 
     @FXML
     private AnchorPane singleFolderContainer;
@@ -43,20 +43,20 @@ public class HomeForFolderController {
          
     @FXML
     public void initialize() throws IOException{
-             homeCFParent =  FXMLLoader.load(getClass().getResource("../views/HomeClientFolder2.fxml"));
+             homeCFParent =  FXMLLoader.load(getClass().getResource("../views/HomeClientFolder.fxml"));
              planningParent = FXMLLoader.load(getClass().getResource("../views/Planning.fxml"));
              docParent =FXMLLoader.load(getClass().getResource("../views/Documents.fxml"));
              this.initActions();
     }
     
     public void initActions(){
-          homeFolder.setOnAction(event -> {
+          homefolder_button.setOnAction(event -> {
               this.add(homeCFParent);
           });
-          tasks.setOnAction(event -> {
+          planning_button.setOnAction(event -> {
               this.add(planningParent);
           });
-          documents.setOnAction(event -> {
+          documents_button.setOnAction(event -> {
                this.add(docParent);
           });
     }    
