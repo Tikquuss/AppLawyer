@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="750.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="750.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateFolderController">
    <children>
       <JFXButton fx:id="save_button" contentDisplay="CENTER" layoutX="708.0" layoutY="663.0" prefHeight="50.0" prefWidth="200.0" styleClass="pretty-button" text="Enregistrer" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" />
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="500.0" prefHeight="700.0" prefWidth="500.0" stylesheets="@../ressources/css/style.css" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -17,11 +17,11 @@
             <Label prefHeight="35.0" prefWidth="300.0" styleClass="small-label" text="Nom de l'adversaire" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="80.0" />
             <Label prefHeight="31.0" prefWidth="300.0" styleClass="small-label" text="Provisions" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="530.0" />
             <Label prefHeight="30.0" prefWidth="300.0" styleClass="small-label" text="Juridiction" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="440.0" />
-            <JFXComboBox fx:id="qualiteAvocat_comboBox" prefHeight="35.0" prefWidth="300.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="390.0" />
-            <JFXComboBox fx:id="typeAffaire_comboBox" prefHeight="35.0" prefWidth="300.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="300.0" />
+            <JFXComboBox fx:id="qualiteAvocat_comboBox" prefHeight="35.0" prefWidth="300.0" style="-fx-font-family: Montserrat;" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="390.0" />
+            <JFXComboBox fx:id="typeAffaire_comboBox" prefHeight="35.0" prefWidth="300.0" style="-fx-font-family: Montserrat;" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="300.0" />
             <Label prefHeight="30.0" prefWidth="300.0" styleClass="small-label" text="Qualité" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="350.0" />
             <Label prefHeight="30.0" prefWidth="300.0" styleClass="small-label" text="Type d'affaire" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="260.0" />
-            <JFXComboBox fx:id="juridiction_comboBox" prefHeight="35.0" prefWidth="300.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="480.0" />
+            <JFXComboBox fx:id="juridiction_comboBox" prefHeight="35.0" prefWidth="300.0" style="-fx-font-family: Montserrat;" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="480.0" />
             <Label prefHeight="31.0" prefWidth="300.0" styleClass="small-label" text="Honoraires" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="170.0" />
             <TextField fx:id="provisions_textField" prefHeight="40.0" prefWidth="300.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="570.0" />
          </children>

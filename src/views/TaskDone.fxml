@@ -5,10 +5,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxWidth="-Infinity" minHeight="740.0" minWidth="998.0" prefHeight="740.0" prefWidth="998.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxWidth="-Infinity" minHeight="740.0" minWidth="998.0" prefHeight="740.0" prefWidth="998.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TaskDoneController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="110.0" layoutY="37.0" prefHeight="56.0" prefWidth="575.0" styleClass="labelTitle" text="   LISTE DES OPERATIONS EFFECTUEES" textAlignment="CENTER" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="37.0" />
-      <JFXListView fx:id="listOperations_listView" layoutX="22.0" layoutY="186.0" minHeight="500.0" minWidth="700.0" prefHeight="512.0" prefWidth="808.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="96.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="150.0" />
+      <JFXListView fx:id="listOperations_listView" layoutX="22.0" layoutY="186.0" minHeight="500.0" minWidth="700.0" prefHeight="512.0" prefWidth="808.0" style="-fx-font-family: audiowide;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="96.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="150.0" />
       <JFXButton fx:id="voirPlus_button" layoutX="573.0" layoutY="736.0" prefHeight="40.0" prefWidth="142.0" styleClass="pretty-button-rounded" text="Voir plus" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="300.0" />
    </children>
 </AnchorPane>

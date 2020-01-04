@@ -1,4 +1,5 @@
 import controllers.HomeForFolderController;
+import dbsimulator.BeansObjects;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.application.Preloader;
@@ -16,14 +17,15 @@ public class AppLawyer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        BeansObjects.initObjects();
         homeForFolder =  new FXMLLoader(getClass().getResource("./views/homeForFolder.fxml"));
         Parent root = homeForFolder.load();
         Parent presentPageRoot = FXMLLoader.load(getClass().getResource("./views/PresentPage.fxml"));
         Parent homeCF = FXMLLoader.load(getClass().getResource("./views/homeClientFolder.fxml"));
         ((HomeForFolderController)homeForFolder.getController()).add(homeCF);
-        primaryStage.setScene(new Scene(presentPageRoot));
+        primaryStage.setScene(new Scene(root));
         primaryStage.setMinHeight(700);
-        primaryStage.setMinWidth(1050);
+        primaryStage.setMinWidth(1100);
         primaryStage.show();
     }
     

@@ -30,12 +30,18 @@ public class PlanningController {
     @FXML
     private AnchorPane planningContainer;
 
-    private Parent taskLaterParent, taskPassedParent; 
+    private Parent tasksLaterParent, tasksPassedParent; 
+    
+    public static FXMLLoader tasksPassed, tasksLater;
+ 
     @FXML
     public void initialize() throws IOException {
-        taskLaterParent = FXMLLoader.load(getClass().getResource("../views/TaskToLater.fxml"));
-        taskPassedParent = FXMLLoader.load(getClass().getResource("../views/TaskDone.fxml"));
-        this.initActions();
+        tasksPassed = new FXMLLoader(getClass().getResource("../views/TaskDone.fxml"));
+        tasksLater = new FXMLLoader(getClass().getResource("../views/TaskToLater.fxml"));
+        tasksLaterParent = tasksLater.load();
+        tasksPassedParent = tasksPassed.load();
+        this.add(tasksLaterParent);
+        this.initButtonsActions();
     }    
     
     
@@ -47,12 +53,12 @@ public class PlanningController {
 
         }        
     }
-    public void initActions(){
+    public void initButtonsActions(){
         taskToDone_button.setOnAction(event -> {
-            this.add(taskLaterParent);
+            this.add(tasksLaterParent);
         });
         taskDone_button.setOnAction(event -> {
-            this.add(taskPassedParent);
+            this.add(tasksPassedParent);
         });
     }
     

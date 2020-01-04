@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditTaskController">
    <children>
       <AnchorPane layoutX="10.0" layoutY="146.0" minHeight="370.0" minWidth="700.0" prefHeight="370.0" prefWidth="700.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
@@ -26,33 +26,33 @@
                </rowConstraints>
                <children>
                   <Label minWidth="240.0" prefHeight="40.0" prefWidth="250.0" styleClass="small-label" text="Dépenses " GridPane.rowIndex="2" />
-                  <Label minWidth="240.0" prefHeight="40.0" prefWidth="250.0" styleClass="small-label" text="A débuté " />
+                  <Label minWidth="240.0" prefHeight="40.0" prefWidth="250.0" styleClass="small-label" text="A débuté le      :" />
                   <AnchorPane prefHeight="250.0" prefWidth="550.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
                      <children>
                         <Label layoutY="11.0" prefHeight="35.0" prefWidth="400.0" styleClass="small-label" text="Compte rendu" />
                         <TextArea fx:id="compteRendu_textArea" layoutX="-1.0" layoutY="51.0" prefHeight="170.0" prefWidth="530.0" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" />
                      </children>
                   </AnchorPane>
-                  <TextField fx:id="depenses_textField" layoutX="150.0" maxWidth="300.0" minHeight="40.0" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label fx:id="dateHeureDebut_label" prefHeight="40.0" prefWidth="569.0" styleClass="small-label" text=" le 18/10/19 à 11 :22 PM" GridPane.columnIndex="1" />
+                  <Label fx:id="dateHeureDebut_label" prefHeight="40.0" prefWidth="569.0" styleClass="small-label" GridPane.columnIndex="1" />
+                  <TextField fx:id="depenses_textField" maxWidth="300.0" minHeight="40.0" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>
       </AnchorPane>
       <JFXButton fx:id="modifier_button" layoutX="587.0" layoutY="534.0" prefHeight="35.0" prefWidth="141.0" styleClass="pretty-button" text="Modifier" AnchorPane.bottomAnchor="70.0" />
-      <Label layoutX="50.0" layoutY="14.0" prefHeight="45.0" prefWidth="200.0" styleClass="small-label" text="Label" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="0.0" />
+      <Label layoutX="50.0" layoutY="14.0" prefHeight="45.0" prefWidth="200.0" styleClass="small-label" text="Label             :" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="0.0" />
       <HBox layoutX="43.0" layoutY="62.0" prefHeight="60.0" prefWidth="700.0" AnchorPane.leftAnchor="50.0">
          <children>
-            <Label prefHeight="50.0" prefWidth="200.0" styleClass="small-label" text="En retard de " />
-            <Label fx:id="dureeRetard_label" prefHeight="50.0" prefWidth="500.0" styleClass="small-label" text="2h 30" />
+            <Label prefHeight="50.0" prefWidth="200.0" styleClass="small-label" text="Prévue le      :" />
+            <Label fx:id="datePrevue_label" prefHeight="50.0" prefWidth="500.0" styleClass="small-label" />
          </children>
       </HBox>
       <HBox layoutX="46.0" layoutY="130.0" prefHeight="60.0" prefWidth="700.0" AnchorPane.leftAnchor="50.0">
          <children>
-            <Label prefHeight="50.0" prefWidth="200.0" styleClass="small-label" text="Finalisé " />
-            <Label fx:id="dateHeureFin_label" prefHeight="50.0" prefWidth="500.0" styleClass="small-label" text="le 28/10/19 à 10h 00" />
+            <Label prefHeight="50.0" prefWidth="200.0" styleClass="small-label" text="Finalisée le    :" />
+            <Label fx:id="dateHeureFin_label" prefHeight="50.0" prefWidth="500.0" styleClass="small-label" />
          </children>
       </HBox>
-      <Label fx:id="labelTache_label" layoutX="253.0" layoutY="-1.0" prefHeight="45.0" prefWidth="400.0" styleClass="small-label" text="Label tache" />
+      <Label fx:id="labelTache_label" layoutX="253.0" layoutY="-1.0" prefHeight="45.0" prefWidth="400.0" styleClass="small-label" />
    </children>
 </AnchorPane>

@@ -9,9 +9,9 @@
    <children>
       <TableView fx:id="documents_tableView" layoutX="50.0" layoutY="141.0" minHeight="549.0" minWidth="900.0" prefHeight="549.0" prefWidth="900.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="150.0">
         <columns>
-          <TableColumn prefWidth="254.0" text="Nom du document" />
-          <TableColumn prefWidth="291.0" text="Catégorie" />
-            <TableColumn prefWidth="308.0" text="Type" />
+          <TableColumn fx:id="nomDoc_tableColumn" prefWidth="254.0" text="Nom du document" />
+          <TableColumn fx:id="categDoc_tableColumn" prefWidth="291.0" text="Catégorie" />
+            <TableColumn fx:id="typeDoc_tableColumn" prefWidth="308.0" text="Type" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

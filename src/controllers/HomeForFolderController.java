@@ -33,6 +33,7 @@ public class HomeForFolderController {
     
     private Parent homeCFParent, planningParent, docParent;
     
+    public static FXMLLoader docsLoader;
     public void add(Parent parent){
       if(!singleFolderContainer.getChildren().contains(parent)){
           singleFolderContainer.getChildren().clear();
@@ -45,7 +46,8 @@ public class HomeForFolderController {
     public void initialize() throws IOException{
              homeCFParent =  FXMLLoader.load(getClass().getResource("../views/HomeClientFolder.fxml"));
              planningParent = FXMLLoader.load(getClass().getResource("../views/Planning.fxml"));
-             docParent =FXMLLoader.load(getClass().getResource("../views/Documents.fxml"));
+             docsLoader = new FXMLLoader(getClass().getResource("../views/Documents.fxml"));
+             docParent =  docsLoader.load();
              this.initActions();
     }
     
