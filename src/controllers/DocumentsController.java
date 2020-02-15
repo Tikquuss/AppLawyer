@@ -27,6 +27,9 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import static controllers.CurrentFoldersController.currentFolder;
+import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -55,8 +58,6 @@ public class DocumentsController {
     @FXML
     private JFXButton suppDoc_button;
         
-    
-
     @FXML
     public void initialize() throws IOException{
         this.initButtonsActions();
@@ -72,12 +73,24 @@ public class DocumentsController {
            stageNewDoc.show();
         });
         openDoc_button.setOnAction(event -> {
-            String absPath = documents_tableView.getSelectionModel().getSelectedItem().getFichier();
-            Desktop desk = Desktop.getDesktop();
-            try {
-                desk.open(new File(absPath));
-            } catch (IOException ex) {
-                Logger.getLogger(DocumentsController.class.getName()).log(Level.SEVERE, null, ex);
+            Document doc = documents_tableView.getSelectionModel().getSelectedItem();
+            if(doc != null){
+                String absPath = doc.getFichier();
+                Desktop desk = Desktop.getDesktop();
+                try {
+                    desk.open(new File(absPath));
+                } catch (IOException ex) {
+                    Logger.getLogger(DocumentsController.class.getName()).log(Level.SEVERE, null, ex);
+                }   
+            }
+
+        });
+        suppDoc_button.setOnAction(e -> {
+            Document doc = documents_tableView.getSelectionModel().getSelectedItem();
+            if(doc != null){
+                File file = new File(doc.getFichier());
+                if(file.delete() && doc.delete())
+                    documents_tableView.getItems().remove(doc);
             }
         });
     }
@@ -87,11 +100,9 @@ public class DocumentsController {
         typeDoc_tableColumn.setCellValueFactory(new PropertyValueFactory<Document, String>("type"));
         categDoc_tableColumn.setCellValueFactory(new PropertyValueFactory<Document, String>("categorie"));
        
-        nomDoc_tableColumn.setCellFactory(TextFieldTableCell.forTableColumn()); 
-        documents_tableView.setItems(FXCollections.observableList(Document.all()));
-        documents_tableView.setEditable(true);
+        documents_tableView.setItems(FXCollections.observableList(Document.listByDossier(currentFolder)));
     }
     public void updateTabView(){
-        documents_tableView.setItems(FXCollections.observableList(Document.all()));
+        documents_tableView.setItems(FXCollections.observableList(Document.listByDossier(currentFolder)));
     }
 }

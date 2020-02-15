@@ -38,6 +38,5 @@ public interface ManagerI {
     
     
     public List LoadByAtt(Class ObjectType , String attribute_name , Object value);
-    public List LoadByDifAtt(Class ObjectType , String attribute_name , Object value);
     
 }

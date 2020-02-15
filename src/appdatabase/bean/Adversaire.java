@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -23,7 +24,9 @@ import javax.persistence.Table;
 @Table(name = "adversaire")
 public class Adversaire extends Personne implements Serializable{
     private long id;
+    private Dossier dossier;
     private static Manager DAO;
+    
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,13 +38,29 @@ public class Adversaire extends Personne implements Serializable{
         this.id = id;
     }
 
+    public Adversaire(String nom, String prenom, String CNI) {
+        super(nom, prenom, CNI);
+    }
+
+    public Adversaire(){
+        
+    }
     
+    
+    public Dossier getDossier() {
+        return dossier;
+    }
+
+    public void setDossier(Dossier dossier) {
+        this.dossier = dossier;
+    }
     
     @Column(name = "nom")
     @Override
     public String getNom() {
         return super.getNom();
     }
+
     
     @Column(name = "prenom")
     @Override

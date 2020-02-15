@@ -31,17 +31,20 @@ public class Document implements Serializable {
     private String nom;
     private String type;
     private String fichier;
+    private Dossier dossier;
     private CategorieDocument categorie;
     private static Manager DAO;
 
     public Document() {}
 
-    public Document(String nom, String type, String fichier, CategorieDocument categorie){
+    public Document(String nom, String type, String fichier, CategorieDocument categorie, Dossier dossier){
         this.nom = nom;
         this.type = type;
         this.fichier = fichier;
         this.categorie = categorie;
+        this.dossier = dossier;
     }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId() {
@@ -53,10 +56,29 @@ public class Document implements Serializable {
     }
 
     
+   
     
     @Column(name = "nom") 
     public String getNom() {
         return nom;
+    }
+    
+    @ManyToOne
+    public Dossier getDossier() {
+        return dossier;
+    }
+
+    public void setDossier(Dossier dossier) {
+        this.dossier = dossier;
+    }
+
+    @ManyToOne
+    public CategorieDocument getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(CategorieDocument categorie) {
+        this.categorie = categorie;
     }
 
     public void setNom(String nom) {
@@ -81,15 +103,6 @@ public class Document implements Serializable {
         this.fichier = fichier;
     }
 
-    @ManyToOne
-    public CategorieDocument getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(CategorieDocument categorie) {
-        this.categorie = categorie;
-    }
-    
     public static Manager getDAO() {
         if(DAO == null){
             DAO = new Manager();
@@ -122,19 +135,24 @@ public class Document implements Serializable {
         }
     }
 
-    public static List<Document> listByNom(String otherNom){
-        return getDAO().LoadByAtt(Document.class, "nom", otherNom);
+    public static List<Document> listByNom(String otherNom, Dossier dossier){
+        return getDAO().LoadByAttrs(Document.class, "nom", otherNom, "dossier", dossier);
+        
     }
     
-    public static List<Document> listByType(String otherType){
-        return getDAO().LoadByAtt(Document.class, "type", otherType);
+    public static List<Document> listByType(String otherType,Dossier dossier){
+        return getDAO().LoadByAttrs(Document.class, "type", otherType, "dossier", dossier);
     }
 
-    public static List<Document> listByFichier(String otherFichier){
-        return getDAO().LoadByAtt(Document.class, "fichier", otherFichier);
+    public static List<Document> listByFichier(String otherFichier, Dossier dossier){
+        return getDAO().LoadByAttrs(Document.class, "fichier", otherFichier, "dossier", dossier);
     }
     
-    public static List<Document> listByCategorie(String otherCategorie){
-        return getDAO().LoadByAtt(Document.class, "categorie", otherCategorie);
+    public static List<Document> listByCategorie(String otherCategorie, Dossier dossier){
+        return getDAO().LoadByAttrs(Document.class, "categorie", otherCategorie, "dossier", dossier);
+    }
+    
+    public static List<Document> listByDossier(Dossier otherDossier){
+        return getDAO().LoadByAtt(Document.class, "dossier", otherDossier);
     }
 }

@@ -20,7 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.util.StringConverter;
 import utilities.GestionSpinner;
-
+import static controllers.TaskDoneController.editTaskStage;
 /**
  * FXML Controller class
  *
@@ -42,13 +42,16 @@ public class EditTaskController {
     private Label dateHeureFin_label;
     @FXML
     private Label labelTache_label;
+    
+    private Operation operation;
 
     @FXML
     public void initialize() {
         
         modifier_button.setOnAction(event -> {
-        
+            editTaskStage.close();
         });     
+        initTextFieldForNumbers();
     }    
     
     public void initTextFieldForNumbers(){
@@ -65,13 +68,15 @@ public class EditTaskController {
         this.depenses_textField.setTextFormatter(new TextFormatter<>(filter));
     }
     public void setContent(Operation operation){
+        this.operation = operation;
+    }
+    
+    public void initView(){
         this.labelTache_label.setText(operation.getTache());
         this.compteRendu_textArea.setText(operation.getCompteRendu());
         this.dateHeureDebut_label.setText(operation.dateFormatter(operation.getDateDebut()));
-        this.depenses_textField.setText(String.valueOf(operation.getDepenses()));
+        this.depenses_textField.setText(String.valueOf((int)operation.getDepenses()));
         this.dateHeureFin_label.setText(operation.dateFormatter(operation.getDateFin()));
         this.datePrevue_label.setText(operation.dateFormatter(operation.getDate()));
     }
-    
-    
 }

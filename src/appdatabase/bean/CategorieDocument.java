@@ -52,7 +52,11 @@ public class CategorieDocument implements Serializable {
     }
     
     public static Manager getDAO() {
-        return DAO;
+        if(DAO == null){
+            DAO = new Manager();
+        }
+         return DAO;
+
     }
     
     public boolean save() {

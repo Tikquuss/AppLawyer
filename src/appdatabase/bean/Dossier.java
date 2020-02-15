@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -33,9 +34,26 @@ public class Dossier implements Serializable {
     private String typeAffaire;
     private double honoraires;
     private double provisions;
+    private String statut;
     private static Manager DAO;
 
-    public Dossier() {}
+    public Dossier() {
+        this.dateOuverture = LocalDate.now();
+    }
+
+    public Dossier(Client client, Adversaire adversaire, String qualite, String juridiction, String typeAffaire, double honoraires, double provisions) {
+        this.client = client;
+        this.adversaire = adversaire;
+        this.qualite = qualite;
+        this.juridiction = juridiction;
+        this.typeAffaire = typeAffaire;
+        this.honoraires = honoraires;
+        this.dateOuverture = LocalDate.now();
+        this.provisions = provisions;
+        this.statut = "En cours";
+    }
+    
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,8 +68,17 @@ public class Dossier implements Serializable {
     public static void setDAO(Manager DAO) {
         Dossier.DAO = DAO;
     }
-    
 
+    @Column(name="statut")
+    public String getStatut() {
+        return statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+    
+    
     @Column(name = "dateOuverture")
     public LocalDate getDateOuverture() {
         return dateOuverture;
@@ -127,6 +154,9 @@ public class Dossier implements Serializable {
     }
     
     public static Manager getDAO() {
+        if(DAO == null){
+            DAO = new Manager();
+        }
         return DAO;
     }
     
@@ -178,4 +208,17 @@ public class Dossier implements Serializable {
     public static List<Dossier> listByProvisions(String otherProvisions){
         return getDAO().LoadByAtt(Dossier.class, "provisions", otherProvisions);
     }
+    public static List<Dossier> listByClient(Client otherClient){
+        return getDAO().LoadByAtt(Dossier.class, "client", otherClient);
+    }
+    public static List<Dossier> listByStatus(String otherStatus){
+        return getDAO().LoadByAtt(Dossier.class, "statut", otherStatus);
+    }
+
+    @Override
+    public String toString() {
+        return "DOSSIER " + client.getNom().toUpperCase()+" "+client.getPrenom().toUpperCase()+" "+this.getId();
+    }
+    
+    
 }

@@ -34,10 +34,13 @@ public class PresentPageController {
     
     private Parent clientList, archDocs, home;
     
+    public static FXMLLoader homeLoader;
+    
     @FXML
     public void initialize() throws IOException{
         clientList = FXMLLoader.load(getClass().getResource("../views/ClientsList.fxml"));
-        home = FXMLLoader.load(getClass().getResource("../views/CurrentFolders.fxml"));
+        homeLoader = new FXMLLoader(getClass().getResource("../views/CurrentFolders.fxml"));
+        home = homeLoader.load();
         initActions();
     }
     

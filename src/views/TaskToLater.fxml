@@ -11,21 +11,21 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="740.0" minWidth="998.0" prefHeight="740.0" prefWidth="998.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TaskToLaterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="595.0" minWidth="898.0" prefHeight="595.0" prefWidth="898.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TaskToLaterController">
    <children>
-      <AnchorPane layoutY="74.0" minHeight="730.0" minWidth="620.0" prefHeight="730.0" prefWidth="620.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutY="74.0" minHeight="595.0" minWidth="545.0" prefHeight="595.0" prefWidth="545.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="62.0" minHeight="46.0" minWidth="355.0" prefHeight="46.0" prefWidth="355.0" styleClass="labelTitle" text="      LISTE DES TACHES" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="0.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="62.0" minHeight="46.0" minWidth="355.0" prefHeight="46.0" prefWidth="380.0" styleClass="labelTitle" text="   LISTE DES TACHES" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0" />
             <JFXListView fx:id="listeTaches_listView" layoutX="10.0" layoutY="149.0" maxHeight="600.0" maxWidth="800.0" minHeight="494.0" minWidth="600.0" prefHeight="510.0" prefWidth="600.0" style="-fx-font-family: audiowide;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0" />
-            <JFXButton fx:id="initTache_button" layoutX="383.0" layoutY="723.0" minHeight="40.0" minWidth="100.0" prefHeight="50.0" prefWidth="160.0" styleClass="pretty-button-rounded" text="Débuter tâche" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="350.0" />
-            <JFXButton fx:id="finaliseTache_button" layoutX="208.0" layoutY="723.0" minHeight="40.0" minWidth="100.0" prefHeight="50.0" prefWidth="160.0" styleClass="pretty-button-rounded" text="Finaliser tâche" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="180.0" />
-            <JFXButton fx:id="deleteTache_button" minHeight="40.0" minWidth="100.0" prefHeight="50.0" prefWidth="160.0" styleClass="pretty-button-rounded" text="Annuler tâche" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="10.0" />
+            <JFXButton fx:id="initTache_button" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="383.0" layoutY="723.0" minHeight="40.0" minWidth="100.0" prefHeight="56.0" prefWidth="120.0" styleClass="pretty-button-rounded" text="Débuter tâche" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="60.0" AnchorPane.rightAnchor="330.0" />
+            <JFXButton fx:id="finaliseTache_button" alignment="TOP_CENTER" layoutX="208.0" layoutY="723.0" minHeight="40.0" minWidth="100.0" prefHeight="56.0" prefWidth="120.0" styleClass="pretty-button-rounded" text="Finaliser tâche" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="60.0" AnchorPane.rightAnchor="180.0" />
+            <JFXButton fx:id="deleteTache_button" alignment="TOP_CENTER" minHeight="40.0" minWidth="100.0" prefHeight="56.0" prefWidth="120.0" styleClass="pretty-button-rounded" text="Annuler tâche" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="60.0" AnchorPane.rightAnchor="30.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="650.0" minHeight="800.0" minWidth="380.0" prefHeight="800.0" prefWidth="380.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="650.0" minHeight="595.0" minWidth="350.0" prefHeight="595.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXButton fx:id="programNewTache_button" layoutX="74.0" layoutY="67.0" prefHeight="40.0" prefWidth="250.0" styleClass="pretty-button" text="Programmer nouvelle tâche" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" />
-            <GridPane layoutX="13.0" layoutY="295.0" prefHeight="210.0" prefWidth="355.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+            <JFXButton fx:id="programNewTache_button" layoutX="74.0" layoutY="67.0" prefHeight="40.0" prefWidth="250.0" styleClass="pretty-button" text="Programmer nouvelle tâche" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="70.0" />
+            <GridPane layoutX="13.0" layoutY="295.0" prefHeight="210.0" prefWidth="320.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="180.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="141.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="199.0" />
@@ -43,7 +43,7 @@
                   <JFXTimePicker fx:id="heureNewTache_timePicker" prefHeight="40.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            <JFXButton fx:id="valider_button" layoutX="190.0" layoutY="576.0" prefHeight="40.0" prefWidth="180.0" styleClass="pretty-button-rounded" text="Valider" AnchorPane.rightAnchor="80.0" />
+            <JFXButton fx:id="valider_button" layoutX="190.0" layoutY="576.0" prefHeight="40.0" prefWidth="180.0" styleClass="pretty-button-rounded" text="Valider" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="435.0" />
          </children>
       </AnchorPane>
    </children>

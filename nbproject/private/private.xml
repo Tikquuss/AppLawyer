@@ -3,33 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/PlanningController.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/HomeForFolderController.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/dbsimulator/BeansObjects.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/AppLawyer.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/PresentPageController.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/bean/Personne.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/AddDocumentController.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/Appdatabase.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/DocumentsController.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/TaskToLaterController.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/bean/LoginResponse.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/interfaces/ManagerI.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/HibernateUtil.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/bean/Operation.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/manager/LoginManager.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/bean/CategorieDocument.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/views/HomeForFolder.fxml</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/bean/Dossier.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/manager/Manager.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/views/Planning.fxml</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/bean/Client.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/bean/Groupe.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/bean/Adversaire.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/utilities/ViewDimensionner.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/FinalizeTaskController.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/utilities/NotifExample.java</file>
             <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/CurrentFoldersController.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/bean/Payement.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/TaskDoneController.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/AddDocumentController.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/DocumentsController.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/Appdatabase.java</file>
             <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/bean/Document.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/main/AppLawyer.java</file>
         </group>
     </open-files>
 </project-private>

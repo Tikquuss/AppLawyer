@@ -26,13 +26,13 @@ public class BeansObjects {
     public static ArrayList<String> typeAff = new ArrayList<>();
     public static ArrayList<String> juridictions = new ArrayList<>();
     public static void initObjects(){
-        Operation op = new Operation("Audiance", LocalDateTime.of(2020, 11, 01, 14, 30));
+      /*  Operation op = new Operation("Audiance", LocalDateTime.of(2020, 11, 01, 14, 30));
         Operation op1 = new Operation("Reunion au cabinet", LocalDateTime.of(2024, 03, 14, 11, 20));
         Operation op2 = new Operation("Paiement assurances", LocalDateTime.of(2020, 07, 07, 10, 25));
       
         taches.add(op);
         taches.add(op1);
-        taches.add(op2);
+        taches.add(op2);*/
       
       
         CategorieDocument cd1 = new CategorieDocument("Acte de procedure");

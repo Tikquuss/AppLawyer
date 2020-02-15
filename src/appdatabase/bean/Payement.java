@@ -8,12 +8,14 @@ package appdatabase.bean;
 import appdatabase.manager.Manager;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,14 +23,25 @@ import javax.persistence.Table;
  * @author User
  */
 @Entity
-@Table(name = "operation")
+@Table(name = "payement")
 public class Payement implements Serializable {
     private long id;
+    private int numero;
     private double montant;
     private LocalDate date; 
+    private LocalTime heure;
+    private Dossier dossier;
     private static Manager DAO;
 
     public Payement() {
+    }
+
+    public Payement(int numero, double montant,  Dossier dossier, LocalDate date, LocalTime heure) {
+        this.numero = numero;
+        this.montant = montant;
+        this.date = date;
+        this.heure = heure;
+        this.dossier = dossier;
     }
     
     @Id
@@ -41,10 +54,33 @@ public class Payement implements Serializable {
         this.id = id;
     }
 
-    public static void setDAO(Manager DAO) {
-        Payement.DAO = DAO;
+    @Column(name = "numero")
+    public int getNumero() {
+        return numero;
     }
-    
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    @Column(name = "heure")
+    public LocalTime getHeure() {
+        return heure;
+    }
+
+    public void setHeure(LocalTime heure) {
+        this.heure = heure;
+    }
+
+    @ManyToOne
+    public Dossier getDossier() {
+        return dossier;
+    }
+
+    public void setDossier(Dossier dossier) {
+        this.dossier = dossier;
+    }
+
     @Column(name = "montant")
     public double getMontant() {
         return montant;
@@ -94,6 +130,11 @@ public class Payement implements Serializable {
             });
         }
     }
+    
+    public String toString(){
+    
+        return this.montant+" "+this.date;
+    }
  
     public static List<Payement> listByMontant(String otherMontant){
         return getDAO().LoadByAtt(Payement.class, "montant", otherMontant);
@@ -101,5 +142,9 @@ public class Payement implements Serializable {
     
     public static List<Payement> listByDate(String otherDate){
         return getDAO().LoadByAtt(Payement.class, "date", otherDate);
+    }
+    
+    public static List<Payement> listByDossier(Dossier otherDossier){
+        return getDAO().LoadByAtt(Payement.class, "dossier", otherDossier);
     }
 }

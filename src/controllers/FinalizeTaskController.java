@@ -23,6 +23,7 @@ import javafx.util.StringConverter;
 import utilities.GestionSpinner;
 import static controllers.PlanningController.tasksPassed;
 import static controllers.PlanningController.tasksLater;
+import static controllers.TaskToLaterController.stageTask;
 import java.time.LocalDateTime;
 /**
  * FXML Controller class
@@ -51,13 +52,31 @@ public class FinalizeTaskController  {
             op.setEtat("effectuée");
             op.setDateFin(LocalDateTime.now());
             op.setCompteRendu(compteRendu_textArea.getText());
-            op.setDepenses(Integer.valueOf(depenses_textField.getText()));
+            if(depenses_textField.getText().equals(""))
+                op.setDepenses(0);
+            else{
+                op.setDepenses(Integer.valueOf(depenses_textField.getText()));   
+            }
             op.update();
             ((TaskDoneController)tasksPassed.getController()).updateListView(op);
             ((TaskToLaterController)tasksLater.getController()).removeFromListView(op);
+             stageTask.close();
         });
+        initTextFieldForNumbers();
     }    
-    
+    public void initTextFieldForNumbers(){
+        UnaryOperator<TextFormatter.Change> filter = new UnaryOperator<TextFormatter.Change>() {
+            @Override
+            public TextFormatter.Change apply(TextFormatter.Change t) {
+                String newText = t.getControlNewText() ;
+                if(newText.matches("-?[0-9]*")) {
+                    return t ;
+                }
+                return null ;
+            }
+        };
+        this.depenses_textField.setTextFormatter(new TextFormatter<>(filter));
+    }
     public void setContent(Operation operation){
         labelTache_label.setText(operation.getTache());
         this.op = operation;

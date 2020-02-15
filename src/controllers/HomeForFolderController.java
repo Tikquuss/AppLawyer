@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import utilities.ViewDimensionner;
+import static controllers.CurrentFoldersController.currentFolder;
 
 
 /**
@@ -32,7 +33,7 @@ public class HomeForFolderController {
     private AnchorPane singleFolderContainer;
     
     private Parent homeCFParent, planningParent, docParent;
-    
+    private FXMLLoader homeClientFolder;
     public static FXMLLoader docsLoader;
     public void add(Parent parent){
       if(!singleFolderContainer.getChildren().contains(parent)){
@@ -44,10 +45,13 @@ public class HomeForFolderController {
          
     @FXML
     public void initialize() throws IOException{
-             homeCFParent =  FXMLLoader.load(getClass().getResource("../views/HomeClientFolder.fxml"));
+             homeClientFolder = new FXMLLoader(getClass().getResource("../views/homeClientFolder.fxml"));
+             homeCFParent = homeClientFolder.load();
+             ((HomeClientFolderController)homeClientFolder.getController()).setContent(currentFolder);
              planningParent = FXMLLoader.load(getClass().getResource("../views/Planning.fxml"));
              docsLoader = new FXMLLoader(getClass().getResource("../views/Documents.fxml"));
              docParent =  docsLoader.load();
+             this.add(homeCFParent);
              this.initActions();
     }
     

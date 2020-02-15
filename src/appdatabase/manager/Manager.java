@@ -218,17 +218,32 @@ public class Manager implements ManagerI{
         return result;   
     }
  
-
-    @Override
-    public List LoadByDifAtt(Class ObjectType, String attribute_name, Object value) {
+    public List LoadByAttrs(Class ObjectType, String attribute_name1, Object value1, String attribute_name2, Object value2){
         List result = null;
         try{
             Criteria c = this.execute_criteria(ObjectType);
-            result = c.add(Restrictions.ne(attribute_name, value)).list();
+            result = c.add(Restrictions.eq(attribute_name1, value1))
+                        .add(Restrictions.eq(attribute_name2, value2)).list();
         }
         catch(Exception e){
             return result;
         }
         
-        return result;       }
+        return result; 
+    }
+    
+    public List LoadByDifAtt(Class ObjectType, String attribute_name, Object value, String att2_name, Object value2) {
+        List result = null;
+        try{
+            Criteria c = this.execute_criteria(ObjectType);
+            result = c.add(Restrictions.ne(attribute_name, value))
+                    .add(Restrictions.eq(att2_name, value2))
+                    .list();
+        }
+        catch(Exception e){
+            return result;
+        }
+        
+        return result;       
+    }
 }

@@ -32,6 +32,7 @@ public class HibernateUtil {
                     .addAnnotatedClass(CategorieDocument.class)
                     .addAnnotatedClass(Adversaire.class)
                     .addAnnotatedClass(Groupe.class)
+                    .addAnnotatedClass(Payement.class)                    
                     .configure().buildSessionFactory();
         } catch (Throwable ex) {
             // Log the exception. 

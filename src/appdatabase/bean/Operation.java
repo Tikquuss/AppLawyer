@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -33,16 +34,18 @@ public class Operation implements Serializable {
     private double depenses;
     private String compteRendu;
     private String etat;
+    private Dossier dossier;
     private static Manager DAO;
 
     public Operation() {
     }
     
-    public Operation(String tache, LocalDateTime date){
+    public Operation(String tache, LocalDateTime date, Dossier dossier){
         this.tache = tache;
         this.etat = "En attente";
         this.date = date;
         this.depenses = 0;
+        this.dossier = dossier;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,7 +56,6 @@ public class Operation implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
-
     
     @Column(name = "tache")
     public String getTache() {
@@ -64,6 +66,15 @@ public class Operation implements Serializable {
         this.tache = tache;
     }
 
+    @ManyToOne
+    public Dossier getDossier() {
+        return dossier;
+    }
+
+    public void setDossier(Dossier dossier) {
+        this.dossier = dossier;
+    }
+    
     
     @Column(name = "date")
     public LocalDateTime getDate() {
@@ -150,8 +161,8 @@ public class Operation implements Serializable {
             });
         }
     }
-    public static List<Operation> listByTache(String otherTache){
-        return getDAO().LoadByAtt(Operation.class, "tache", otherTache);
+    public static List<Operation> listByTache(String otherTache, Dossier dossier){
+        return getDAO().LoadByAttrs(Operation.class, "tache", otherTache, "dossier", dossier);
     }
     public static List<Operation> listByDate(String otherDate){
         return getDAO().LoadByAtt(Operation.class, "date", otherDate);
@@ -165,17 +176,22 @@ public class Operation implements Serializable {
         return getDAO().LoadByAtt(Operation.class, "compteRendu", otherCompteRendu);
     }
     
-    public static List<Operation > listByEtat(String otherEtat){
-        return getDAO().LoadByAtt(Operation.class, "etat", otherEtat);
+    public static List<Operation > listByEtat(String otherEtat, Dossier dossier){
+        return getDAO().LoadByAttrs(Operation.class, "etat", otherEtat , "dossier", dossier);
     }
 
-    public static List<Operation> listByDifEtat(String otherEtat){
-        return getDAO().LoadByDifAtt(Operation.class, "etat", otherEtat);
+    public static List<Operation> listByDifEtat(String otherEtatString, Dossier dossier){
+        return getDAO().LoadByDifAtt(Operation.class, "etat", otherEtatString, "dossier", dossier);
     }
+    
+    public static List<Operation> listByDossier(String otherDossier){
+        return getDAO().LoadByAtt(Operation.class, "dossier", otherDossier);
+    }
+    
     @Override
     public String toString(){
         String operation = new String();
-        if(this.etat != "effectuée")
+        if(!this.etat.equals("effectuée"))
             operation = this.tache + "  Le "+dateFormatter(this.date)+"  ("+ this.etat+")";
         else{
             operation = this.tache +" ;  a été prévue pour le "+this.dateFormatter(this.date)+ ", a débuté le "+this.dateFormatter(this.getDateDebut());
@@ -184,7 +200,7 @@ public class Operation implements Serializable {
     }
     
     public String dateFormatter(LocalDateTime date){
-        return this.date.getDayOfMonth()+"/"+this.date.getMonthValue()+
-                    "/"+this.date.getYear()+" à "+this.date.getHour()+":"+this.date.getMinute();
+        return date.getDayOfMonth()+"/"+date.getMonthValue()+
+                    "/"+date.getYear()+" à "+date.getHour()+":"+date.getMinute();
     }
 }

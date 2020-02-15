@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -27,11 +28,20 @@ public class Client extends Personne implements Serializable{
     private String telephone;
     private String email;
     private String adresse;
+    private Dossier dossier;
     private static Manager DAO;
     
     public Client() {
     }
 
+    public Client(String telephone, String email, String adresse, String nom, String prenom, String CNI) {
+        super(nom, prenom, CNI);
+        this.telephone = telephone;
+        this.email = email;
+        this.adresse = adresse;
+    }
+
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId() {
@@ -42,6 +52,15 @@ public class Client extends Personne implements Serializable{
         this.id = id;
     }
 
+    public Dossier getDossier() {
+        return dossier;
+    }
+
+    public void setDossier(Dossier dossier) {
+        this.dossier = dossier;
+    }
+
+    
     @Column(name = "telephone") 
     public String getTelephone() {
         return telephone;
@@ -107,7 +126,7 @@ public class Client extends Personne implements Serializable{
     }
     
     public static List<Client> all() {
-        return getDAO().all(Adversaire.class);
+        return getDAO().all(Client.class);
     }
     
     public static void deleteAll() {
