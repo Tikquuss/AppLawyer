@@ -15,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -35,6 +34,7 @@ public class Dossier implements Serializable {
     private double honoraires;
     private double provisions;
     private String statut;
+    private String cheminDossier;
     private static Manager DAO;
 
     public Dossier() {
@@ -87,7 +87,16 @@ public class Dossier implements Serializable {
     public void setDateOuverture(LocalDate dateOuverture) {
         this.dateOuverture = dateOuverture;
     }
-    
+
+    @Column(name = "cheminDossier")
+    public String getCheminDossier() {
+        return cheminDossier;
+    }
+
+    public void setCheminDossier(String cheminDossier) {
+        this.cheminDossier = cheminDossier;
+    }
+     
     
     @ManyToOne // un même adversaire peut faire partir de plusieus dossiers, mais la reciproque est fausse
     public Adversaire getAdversaire() {
@@ -214,10 +223,18 @@ public class Dossier implements Serializable {
     public static List<Dossier> listByStatus(String otherStatus){
         return getDAO().LoadByAtt(Dossier.class, "statut", otherStatus);
     }
-
+    public Dossier getById(List<Dossier> listDossier, long id){
+        int i = 0;
+        while(i<listDossier.size() && listDossier.get(i).getId() != id)
+                i++;
+        return i == listDossier.size() ? null : listDossier.get(i);
+    }   
     @Override
     public String toString() {
-        return "DOSSIER " + client.getNom().toUpperCase()+" "+client.getPrenom().toUpperCase()+" "+this.getId();
+        List <Dossier> listDossier = Dossier.listByClient(client);
+        int indDossier = listDossier.indexOf(getById(listDossier, id));
+        String stringDoc = "DOSSIER " + client.getNom().toUpperCase()+" "+client.getPrenom().toUpperCase();     
+        return indDossier == 0 ? stringDoc : stringDoc+ " "+String.valueOf(indDossier+1);
     }
     
     

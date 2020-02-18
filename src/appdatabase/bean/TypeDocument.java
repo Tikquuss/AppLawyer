@@ -1,6 +1,6 @@
-
 package appdatabase.bean;
 
+import static appdatabase.bean.Client.getDAO;
 import appdatabase.manager.Manager;
 import java.io.Serializable;
 import java.util.List;
@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,13 +17,22 @@ import javax.persistence.Table;
  * @author User
  */
 @Entity
-@Table(name = "categorieDocument")
-public class CategorieDocument implements Serializable {
+@Table(name = "type")
+public class TypeDocument implements Serializable {
+    
     private long id;
     private String nom;
+    private CategorieDocument categorie; 
     private static Manager DAO;
 
-    public CategorieDocument() {}
+    public TypeDocument() {
+    }
+
+    public TypeDocument(String nom, CategorieDocument categorie) {
+        this.nom = nom;
+        this.categorie = categorie;
+    }
+    
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,31 +43,25 @@ public class CategorieDocument implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
-
-    public static void setDAO(Manager DAO) {
-        CategorieDocument.DAO = DAO;
-    }
     
-    public CategorieDocument(String nom) {
-        this.nom = nom;
-    }
-
     @Column(name = "nom")
     public String getNom() {
-        return this.nom;
+        return nom;
     }
 
     public void setNom(String nom) {
         this.nom = nom;
+    } 
+
+    @ManyToOne
+    public CategorieDocument getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(CategorieDocument categorie) {
+        this.categorie = categorie;
     }
     
-    public static Manager getDAO() {
-        if(DAO == null){
-            DAO = new Manager();
-        }
-         return DAO;
-
-    }
     
     public boolean save() {
         return getDAO().save(this);
@@ -71,12 +75,12 @@ public class CategorieDocument implements Serializable {
         return getDAO().delete(this);
     }
     
-    public static List<CategorieDocument> all() {
-        return getDAO().all(CategorieDocument.class);
+    public static List<TypeDocument> all() {
+        return getDAO().all(TypeDocument.class);
     }
     
     public static void deleteAll() {
-        List<CategorieDocument> list = all();
+        List<TypeDocument> list = all();
         if(!list.isEmpty()){
             list.forEach((a) -> {
                 a.delete();
@@ -84,14 +88,12 @@ public class CategorieDocument implements Serializable {
         }
     }
 
-    public static CategorieDocument getByNom(String otherNom){
-        List<CategorieDocument> list = getDAO().LoadByAtt(CategorieDocument.class, "nom", otherNom);
-        if(list != null){
-            if(!list.isEmpty()){
-                return list.get(0);
-            }
-        }
-        return new CategorieDocument();
+    public static List<TypeDocument> listByNom(String otherNom){
+        return getDAO().LoadByAtt(TypeDocument.class, "nom", otherNom);
+    }
+    
+    public static List<TypeDocument> listByCategorie(CategorieDocument cd){
+        return getDAO().LoadByAtt(TypeDocument.class, "categorie", cd);
     }
     
     @Override
@@ -99,3 +101,5 @@ public class CategorieDocument implements Serializable {
         return this.nom;
     }
 }
+
+

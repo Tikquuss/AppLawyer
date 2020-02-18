@@ -66,3 +66,9 @@
     -fx-text-alignment: center;
     -fx-alignment: center;
 }
+
+.audiowide-combobox{
+        -fx-font-family: "Audiowide";
+         -fx-font-size: 18px ;
+
+}

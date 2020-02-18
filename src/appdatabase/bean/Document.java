@@ -16,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -29,7 +28,7 @@ import javax.persistence.Table;
 public class Document implements Serializable {
     private long id;
     private String nom;
-    private String type;
+    private TypeDocument type;
     private String fichier;
     private Dossier dossier;
     private CategorieDocument categorie;
@@ -37,7 +36,7 @@ public class Document implements Serializable {
 
     public Document() {}
 
-    public Document(String nom, String type, String fichier, CategorieDocument categorie, Dossier dossier){
+    public Document(String nom, TypeDocument type, String fichier, CategorieDocument categorie, Dossier dossier){
         this.nom = nom;
         this.type = type;
         this.fichier = fichier;
@@ -55,7 +54,6 @@ public class Document implements Serializable {
         this.id = id;
     }
 
-    
    
     
     @Column(name = "nom") 
@@ -85,14 +83,17 @@ public class Document implements Serializable {
         this.nom = nom;
     }
 
-    @Column(name = "type") 
-    public String getType() {
+    @ManyToOne
+    public TypeDocument getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TypeDocument type) {
         this.type = type;
     }
+
+    
+    
 
     @Column(name = "fichier") 
     public String getFichier() {
@@ -151,7 +152,9 @@ public class Document implements Serializable {
     public static List<Document> listByCategorie(String otherCategorie, Dossier dossier){
         return getDAO().LoadByAttrs(Document.class, "categorie", otherCategorie, "dossier", dossier);
     }
-    
+    public static List<Document> listByCategorie(CategorieDocument otherCategorie){
+        return getDAO().LoadByAtt(Document.class, "categorie", otherCategorie);
+    }
     public static List<Document> listByDossier(Dossier otherDossier){
         return getDAO().LoadByAtt(Document.class, "dossier", otherDossier);
     }

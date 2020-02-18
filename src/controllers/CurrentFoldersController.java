@@ -30,14 +30,27 @@ public class CurrentFoldersController {
     
     private Stage newFolderStage, singleFolderStage;
     private FXMLLoader homeForFolder, homeClientFolder;
-    private Parent root,  newFoldParent;
-    public static Parent homeClientFolderParent;
+    private Parent root,  newFoldParent, homeClientFolderParent;
     public static Dossier currentFolder;
+    public static FXMLLoader newFoldLoader;
+    
             
     public void initialize() throws IOException{
         initListView();
         initButtonsActions();
+        Dossier.all().forEach( fold -> {
+            checkIfFolderExist(fold);
+        });
     }
+        
+    public boolean checkIfFolderExist(Dossier fold){
+            File dir = new File(fold.getCheminDossier());
+            boolean exist = false;
+            if(!(exist = dir.exists()))
+                dir.mkdirs();
+            return exist;         
+        }
+    
     
     public void initButtonsActions() throws IOException{      
         newFolder_button.setOnAction(e -> {
@@ -56,11 +69,17 @@ public class CurrentFoldersController {
             Dossier fold   = listFolders_listView.getSelectionModel().getSelectedItem();
             currentFolder = fold;
             if(fold != null){
-                try {     
-                    makeStageForSingleFolder(fold);
-                    
-                } catch (IOException ex) {
-                    Logger.getLogger(CurrentFoldersController.class.getName()).log(Level.SEVERE, null, ex);
+                if(checkIfFolderExist(fold))
+                    try {     
+                         makeStageForSingleFolder(fold);
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(CurrentFoldersController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                else{
+                    Alert al = new Alert(Alert.AlertType.WARNING);
+                    al.setContentText("Le chemin vers le repertoire correspondant à ce dossier n'a pas été retrouvé. Il a peut ëtre été supprimé.");
+                    al.show();
                 }
             }
             else {
@@ -87,7 +106,8 @@ public class CurrentFoldersController {
     
     public void makeStageForCreateFolder() throws IOException{
         newFolderStage = new Stage();
-        newFoldParent = FXMLLoader.load(getClass().getResource("../views/CreateFolder.fxml"));
+        newFoldLoader = new FXMLLoader(getClass().getResource("../views/CreateFolder.fxml"));
+        newFoldParent = newFoldLoader.load();
         newFolderStage.setScene(new Scene(newFoldParent));
         newFolderStage.setResizable(false);
         newFolderStage.initModality(Modality.APPLICATION_MODAL);

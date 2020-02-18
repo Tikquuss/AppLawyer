@@ -53,6 +53,7 @@ public class NotifExample {
                             TrayIconDemo td = new TrayIconDemo();
                 try {
                         td.displayTray(task, datetime);
+                        scheduler.shutdown();
                   } catch (AWTException ex) {
                         Logger.getLogger(NotifExample.class.getName()).log(Level.SEVERE, null, ex);
                   }

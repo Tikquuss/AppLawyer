@@ -8,31 +8,18 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTimePicker;
 import static controllers.PlanningController.tasksPassed;
 import static controllers.CurrentFoldersController.currentFolder;
-import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import utilities.ConcatList;
 import java.io.IOException;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javax.management.Notification;
-import javax.swing.text.Position;
 import utilities.NotifExample;
 
 
@@ -115,7 +102,7 @@ public class TaskToLaterController  {
             Operation op = listeTaches_listView.getSelectionModel().getSelectedItem();
 
             if(op != null ){
-                if(op.getEtat() == "En cours"){
+                if("En cours".equals(op.getEtat())){
                     Alert al = new Alert(Alert.AlertType.ERROR);
                     al.setContentText("Cette tâche a déjà débutée !");
                     al.setHeaderText("OPERAION DEJA EN COURS");
@@ -135,24 +122,24 @@ public class TaskToLaterController  {
             //listeTaches_listView.setItems(FXCollections.observableArrayList(Operation.listByDifEtat("effectuée")));
            });
         
-        finaliseTache_button.setOnAction(event -> {
+        finaliseTache_button.setOnAction((ActionEvent event) -> {
             Operation op = listeTaches_listView.getSelectionModel().getSelectedItem();
-         
-            if(op != null && op.getEtat().equals("En cours")){
-             ((FinalizeTaskController)finalizeTaskLoader.getController()).setContent(op);
-              stageTask.show();     
-            }
-            else{
-                if(!op.getEtat().equals("En cours")){
-                    Alert al = new Alert(Alert.AlertType.WARNING);
-                    al.setContentText("Vous ne pouvez pas finaliser une tâche qui n'a pas encore débuté !");
-                    al.setHeaderText("ERREUR");
-                    al.show();
+            if(op != null){
+                if( op.getEtat().equals("En cours")){
+                ((FinalizeTaskController)finalizeTaskLoader.getController()).setContent(op);
+                stageTask.show();
                 }
                 else{
-                    displaySelectionError();
+                        Alert al = new Alert(Alert.AlertType.WARNING);
+                        al.setContentText("Vous ne pouvez pas finaliser une tâche qui n'a pas encore débuté !");
+                        al.setHeaderText("ERREUR");
+                        al.show();
                 }
             }
+
+            else{
+                displaySelectionError();
+            }         
             //listeTaches_listView.setItems(FXCollections.observableList(Operation.listByDifEtat("effectuée")));            
         });
         

@@ -29,6 +29,7 @@ public class HibernateUtil {
                     .addAnnotatedClass(Dossier.class)
                     .addAnnotatedClass(Operation.class)
                     .addAnnotatedClass(Payement.class)
+                    .addAnnotatedClass(TypeDocument.class)
                     .addAnnotatedClass(CategorieDocument.class)
                     .addAnnotatedClass(Adversaire.class)
                     .addAnnotatedClass(Groupe.class)

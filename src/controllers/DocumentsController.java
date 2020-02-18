@@ -15,20 +15,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableView;
-import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import appdatabase.bean.*;
 import java.awt.Desktop;
-import java.util.ArrayList;
-import org.apache.commons.io.IOUtils;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import static controllers.CurrentFoldersController.currentFolder;
-import javafx.event.EventHandler;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.Alert;
 
 /**
@@ -61,8 +56,18 @@ public class DocumentsController {
     @FXML
     public void initialize() throws IOException{
         this.initButtonsActions();
-        this.manageTable();      
+        this.manageTable();    
+        this.checkIfDocExist();
     }
+    public void checkIfDocExist(){
+        Document.listByDossier(currentFolder).forEach(doc -> {
+            File file = new File(doc.getFichier());
+            if(!file.exists()){
+                doc.delete();
+            }
+        });
+    }
+    
     public void initButtonsActions()  throws IOException{
         Stage stageNewDoc = new Stage();
         Parent parent = FXMLLoader.load(getClass().getResource("../views/AddDocument.fxml"));
@@ -78,7 +83,15 @@ public class DocumentsController {
                 String absPath = doc.getFichier();
                 Desktop desk = Desktop.getDesktop();
                 try {
-                    desk.open(new File(absPath));
+                    File file = new File(absPath);
+                    if(file.exists())
+                        desk.open(new File(absPath));
+                    else{
+                        Alert al = new Alert(Alert.AlertType.WARNING);
+                        al.setHeaderText("FICHIER NON EXISTANT");
+                        al.setContentText("Ce fichier n'existe plus. Il a pu être supprimé.");
+                        al.show();
+                    }
                 } catch (IOException ex) {
                     Logger.getLogger(DocumentsController.class.getName()).log(Level.SEVERE, null, ex);
                 }   
@@ -89,17 +102,30 @@ public class DocumentsController {
             Document doc = documents_tableView.getSelectionModel().getSelectedItem();
             if(doc != null){
                 File file = new File(doc.getFichier());
-                if(file.delete() && doc.delete())
-                    documents_tableView.getItems().remove(doc);
+                    if(file.exists())
+                        if(file.delete() && doc.delete())
+                            documents_tableView.getItems().remove(doc);
+                    else{
+                        Alert al = new Alert(Alert.AlertType.WARNING);
+                        al.setHeaderText("FICHIER NON EXISTANT");
+                        al.setContentText("Ce fichier n'existe plus. Il a pu être supprimé.");
+                        al.show();
+                    }
+                
             }
         });
     }
     
     public void manageTable(){
-        nomDoc_tableColumn.setCellValueFactory(new PropertyValueFactory<Document, String>("nom"));
-        typeDoc_tableColumn.setCellValueFactory(new PropertyValueFactory<Document, String>("type"));
-        categDoc_tableColumn.setCellValueFactory(new PropertyValueFactory<Document, String>("categorie"));
-       
+        nomDoc_tableColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        typeDoc_tableColumn.setCellValueFactory(value -> {
+           return value.getValue().getType() != null ? new ReadOnlyObjectWrapper<>(value.getValue().getType().getNom()) :  new ReadOnlyObjectWrapper<>("");
+                    });
+        categDoc_tableColumn.setCellValueFactory(value -> {
+            System.out.println(value.getValue());
+            System.out.println(value.getValue().getCategorie().getNom());
+           return new ReadOnlyObjectWrapper<String>(value.getValue().getCategorie().getNom());
+                    });
         documents_tableView.setItems(FXCollections.observableList(Document.listByDossier(currentFolder)));
     }
     public void updateTabView(){

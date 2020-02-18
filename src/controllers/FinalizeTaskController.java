@@ -7,20 +7,12 @@ package controllers;
 
 import appdatabase.bean.Operation;
 import com.jfoenix.controls.JFXButton;
-import com.sun.org.apache.xpath.internal.compiler.OpCodes;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
-import javafx.util.StringConverter;
-import utilities.GestionSpinner;
 import static controllers.PlanningController.tasksPassed;
 import static controllers.PlanningController.tasksLater;
 import static controllers.TaskToLaterController.stageTask;
@@ -65,15 +57,12 @@ public class FinalizeTaskController  {
         initTextFieldForNumbers();
     }    
     public void initTextFieldForNumbers(){
-        UnaryOperator<TextFormatter.Change> filter = new UnaryOperator<TextFormatter.Change>() {
-            @Override
-            public TextFormatter.Change apply(TextFormatter.Change t) {
-                String newText = t.getControlNewText() ;
-                if(newText.matches("-?[0-9]*")) {
-                    return t ;
-                }
-                return null ;
+        UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
+            String newText = t.getControlNewText() ;
+            if(newText.matches("-?[0-9]*")) {
+                return t ;
             }
+            return null ;
         };
         this.depenses_textField.setTextFormatter(new TextFormatter<>(filter));
     }

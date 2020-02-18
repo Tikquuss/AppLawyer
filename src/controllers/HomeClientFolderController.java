@@ -11,13 +11,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -90,10 +87,10 @@ public class HomeClientFolderController {
     }    
     
     public void initTable(){
-        numero_tableColumn.setCellValueFactory(new PropertyValueFactory<Payement, Integer>("numero"));
-        date_tableColumn.setCellValueFactory(new PropertyValueFactory<Payement, LocalDate>("date"));
-        heure_tableColumn.setCellValueFactory(new PropertyValueFactory<Payement, LocalTime>("heure"));
-        montant_tableColumn.setCellValueFactory(new PropertyValueFactory<Payement, Integer>("montant"));
+        numero_tableColumn.setCellValueFactory(new PropertyValueFactory<>("numero"));
+        date_tableColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        heure_tableColumn.setCellValueFactory(new PropertyValueFactory<>("heure"));
+        montant_tableColumn.setCellValueFactory(new PropertyValueFactory<>("montant"));
         paiements_tableView.setItems(FXCollections.observableList(Payement.listByDossier(currentFolder)));
     }
     public void initView(){
@@ -138,16 +135,12 @@ public class HomeClientFolderController {
         });
     }
     public void initTextFieldForNumbers(){
-        UnaryOperator<TextFormatter.Change> filter = new UnaryOperator<TextFormatter.Change>() {
-            @Override
-            public TextFormatter.Change apply(TextFormatter.Change t) {
-                String newText = t.getControlNewText() ;
-                if(newText.matches("-?[0-9]*")) {
-                    return t ;
-                }
-                return null ;
+        UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
+            String newText = t.getControlNewText() ;
+            if(newText.matches("-?[0-9]*")) {
+                return t ;
             }
-            
+            return null ;            
         };
         montantPaiement_textField.setTextFormatter(new TextFormatter<>(filter));
     }

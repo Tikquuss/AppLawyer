@@ -30,7 +30,7 @@ public class AppLawyer extends Application {
         stage.setMinWidth(1100);
         stage.show();
     }
-    
+   
     public static void main(String[] args) {
         launch(args);
     }

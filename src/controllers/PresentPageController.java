@@ -41,7 +41,9 @@ public class PresentPageController {
         clientList = FXMLLoader.load(getClass().getResource("../views/ClientsList.fxml"));
         homeLoader = new FXMLLoader(getClass().getResource("../views/CurrentFolders.fxml"));
         home = homeLoader.load();
-        initActions();
+        this.add(home);
+        initButtonsActions();
+        
     }
     
     public void add(Parent parent){
@@ -52,7 +54,7 @@ public class PresentPageController {
         }
     }
     
-    public void initActions(){
+    public void initButtonsActions(){
         home_button.setOnAction( e -> {
             this.add(home);
         });

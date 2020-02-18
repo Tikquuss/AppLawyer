@@ -5,24 +5,19 @@
  */
 package controllers;
 
-import appdatabase.bean.Adversaire;
-import appdatabase.bean.Client;
 import appdatabase.bean.Client;
 import appdatabase.bean.Document;
 import appdatabase.bean.Dossier;
 import com.jfoenix.controls.JFXButton;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import static controllers.PresentPageController.homeLoader;
 import java.io.File;
+import java.util.List;
 /**
  * FXML Controller class
  *
@@ -30,7 +25,7 @@ import java.io.File;
  */
 public class ClientsListController {
 
-     @FXML
+    @FXML
     private TableView<Client> clientsList_tableView;
 
     @FXML
@@ -52,20 +47,19 @@ public class ClientsListController {
     private TableColumn<Client, String> docStatus_column;
 
     @FXML
-    private JFXButton edit_button;
+    private JFXButton choiceClient_button;
     
     
     
-    @FXML
     public void initialize() {
        initTable();
     }    
     public void initTable(){
-        noms_column.setCellValueFactory(new PropertyValueFactory<Client, String>("nom"));
-        prenoms_column.setCellValueFactory(new PropertyValueFactory<Client, String>("prenom"));
-        email_column.setCellValueFactory(new PropertyValueFactory<Client, String>("email"));
-        adresse_column.setCellValueFactory(new PropertyValueFactory<Client, String>("adresse"));
-        telephone_column.setCellValueFactory(new PropertyValueFactory<Client, String>("telephone"));
+        noms_column.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        prenoms_column.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        email_column.setCellValueFactory(new PropertyValueFactory<>("email"));
+        adresse_column.setCellValueFactory(new PropertyValueFactory<>("adresse"));
+        telephone_column.setCellValueFactory(new PropertyValueFactory<>("telephone"));
         
         noms_column.setCellFactory(TextFieldTableCell.forTableColumn());
         prenoms_column.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -73,75 +67,77 @@ public class ClientsListController {
         adresse_column.setCellFactory(TextFieldTableCell.forTableColumn());
         telephone_column.setCellFactory(TextFieldTableCell.forTableColumn());
         
-        noms_column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Client, String>>() {
-        @Override
-        public void handle(TableColumn.CellEditEvent<Client, String> event) {
+        noms_column.setOnEditCommit((TableColumn.CellEditEvent<Client, String> event) -> {
             Client client = ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow()));
-            Dossier.listByClient(client).forEach(doc -> {
-                String pathDoc = "F:\\Dossiers Clients\\DOSSIER "+doc.getClient().getNom().toUpperCase()+" "+doc.getClient().getPrenom().toUpperCase()+" "+doc.getId()+"\\";
-                Document.listByDossier(doc).forEach(a -> {
-                a.setFichier(pathDoc+a.getNom());
+            List <Dossier> listDossier = Dossier.listByClient(client);
+            client.setNom(removeLeadingEmptySpace(event.getNewValue()));
+            client.update();
+            for(int ind = 0; ind < listDossier.size(); ind++){
+                Dossier doc = listDossier.get(ind);
+                String pathDoc0 = "F:\\Dossiers Clients\\DOSSIER "+doc.getClient().getNom().toUpperCase()+" "+doc.getClient().getPrenom().toUpperCase();
+                String pathDoc = ind == 0 ? pathDoc0 : pathDoc0 + " " + String.valueOf(ind+1);                
+                /*Document.listByDossier(doc).forEach(a -> {
+                a.setFichier(pathDoc+"\\"+a.getNom());
                 a.update();
                 });
                 ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).setNom(removeLeadingEmptySpace(event.getNewValue()));
-                ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).update();
-                ((CurrentFoldersController)homeLoader.getController()).initListView();
-                String newPathDoc = "F:\\Dossiers Clients\\DOSSIER "+doc.getClient().getNom().toUpperCase()+" "+doc.getClient().getPrenom().toUpperCase()+" "+doc.getId()+"\\";
+                ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).update();*/
+                String newPathDoc0 = "F:\\Dossiers Clients\\DOSSIER "+client.getNom().toUpperCase()+" "+client.getPrenom().toUpperCase(); 
+                String newPathDoc = ind == 0 ? newPathDoc0 : newPathDoc0+" "+String.valueOf(ind+1);
                 Document.listByDossier(doc).forEach(a -> {
-                    a.setFichier(newPathDoc+a.getNom());
-                    a.update();
-                });
-                File file = new File(pathDoc);
-                File newFile = new File(newPathDoc);
-                file.renameTo(newFile); 
-            });
-            }
-        });
-        prenoms_column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Client, String>>() {
-        @Override
-        public void handle(TableColumn.CellEditEvent<Client, String> event) {
-            Client client = ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow()));
-            Dossier.listByClient(client).forEach(doc -> {
-                String pathDoc = "F:\\Dossiers Clients\\DOSSIER "+doc.getClient().getNom().toUpperCase()+" "+doc.getClient().getPrenom().toUpperCase()+" "+doc.getId()+"\\";
-                Document.listByDossier(doc).forEach(a -> {
-                    a.setFichier(pathDoc+a.getNom());
-                    a.update();
-                });
-                ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).setPrenom(removeLeadingEmptySpace(event.getNewValue()));
-                ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).update();
-                ((CurrentFoldersController)homeLoader.getController()).initListView();
-                String newPathDoc = "F:\\Dossiers Clients\\DOSSIER "+doc.getClient().getNom().toUpperCase()+" "+doc.getClient().getPrenom().toUpperCase()+" "+doc.getId()+"\\"; 
-                Document.listByDossier(doc).forEach(a -> {
-                    a.setFichier(newPathDoc+a.getNom());
+                    a.setFichier(newPathDoc+"\\"+a.getNom());
                     a.update();
                 });
                 File file = new File(pathDoc);
                 File newFile = new File(newPathDoc);
                 file.renameTo(newFile);
-                });
-        }
+                doc.setCheminDossier(newPathDoc);
+                doc.update();
+                ((CurrentFoldersController)homeLoader.getController()).initListView();
+
+            }
         });
-        email_column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Client, String>>() {
-        @Override
-        public void handle(TableColumn.CellEditEvent<Client, String> event) {
+        prenoms_column.setOnEditCommit((TableColumn.CellEditEvent<Client, String> event) -> {
+            Client client = ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            List <Dossier> listDossier = Dossier.listByClient(client);
+            client.setPrenom(removeLeadingEmptySpace(event.getNewValue()));
+            client.update();
+            for(int ind = 0; ind < listDossier.size(); ind++){
+                Dossier doc = listDossier.get(ind);
+                String pathDoc0 = "F:\\Dossiers Clients\\DOSSIER "+doc.getClient().getNom().toUpperCase()+" "+doc.getClient().getPrenom().toUpperCase();
+                String pathDoc = ind == 0 ? pathDoc0 : pathDoc0 + " " + String.valueOf(ind+1);
+                /* Document.listByDossier(doc).forEach(a -> {
+                a.setFichier(pathDoc+"\\"+a.getNom());
+                a.update();
+                });*/
+                /*((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).setPrenom(removeLeadingEmptySpace(event.getNewValue()));
+                ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).update();*/
+                String newPathDoc0 = "F:\\Dossiers Clients\\DOSSIER "+client.getNom().toUpperCase()+" "+client.getPrenom().toUpperCase();
+                String newPathDoc = ind == 0 ? newPathDoc0 : newPathDoc0+" "+String.valueOf(ind+1);
+                Document.listByDossier(doc).forEach(a -> {
+                    a.setFichier(newPathDoc+"\\"+a.getNom());
+                    a.update();
+                });
+                File file = new File(pathDoc);
+                File newFile = new File(newPathDoc);
+                file.renameTo(newFile);
+                doc.setCheminDossier(newPathDoc);
+                doc.update();
+                ((CurrentFoldersController)homeLoader.getController()).initListView();
+            }
+        });
+        email_column.setOnEditCommit((TableColumn.CellEditEvent<Client, String> event) -> {
             ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).setEmail(event.getNewValue());
             ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).update();
-            }
         });
-        telephone_column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Client, String>>() {
-        @Override
-        public void handle(TableColumn.CellEditEvent<Client, String> event) {
+        telephone_column.setOnEditCommit((TableColumn.CellEditEvent<Client, String> event) -> {
             ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).setTelephone(event.getNewValue());
             ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).update();
-            }
         });
-        adresse_column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Client, String>>() {
-        @Override
-        public void handle(TableColumn.CellEditEvent<Client, String> event) {
+        adresse_column.setOnEditCommit((TableColumn.CellEditEvent<Client, String> event) -> {
             ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).setAdresse(event.getNewValue());
             ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).update();
             ((CurrentFoldersController)homeLoader.getController()).initListView();
-            }
         });
         clientsList_tableView.setItems(FXCollections.observableArrayList(Client.all()));
         clientsList_tableView.setEditable(true);

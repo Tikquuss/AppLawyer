@@ -5,28 +5,20 @@
  */
 package controllers;
 
-import appdatabase.bean.Document;
 import appdatabase.bean.Operation;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
-import dbsimulator.BeansObjects;
 import java.io.IOException;
-import java.net.URL;
 import java.time.format.DateTimeFormatter;
-import java.util.ResourceBundle;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import static controllers.CurrentFoldersController.currentFolder;
-import javafx.beans.property.Property;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -85,8 +77,8 @@ public class TaskDoneController{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         tache_tableColumn.setCellValueFactory(new PropertyValueFactory<Operation, String>("tache"));
         date_tableColumn.setCellValueFactory(value -> new ReadOnlyObjectWrapper<String>(value.getValue().getDate().format(formatter)));
-        dateInit_tableColumn.setCellValueFactory(value -> new ReadOnlyObjectWrapper<String>(value.getValue().getDateDebut().format(formatter)));
-        dateFin_tableColumn.setCellValueFactory(value -> new ReadOnlyObjectWrapper<String>(value.getValue().getDateFin().format(formatter)));
+        dateInit_tableColumn.setCellValueFactory(value -> new ReadOnlyObjectWrapper<>(value.getValue().getDateDebut().format(formatter)));
+        dateFin_tableColumn.setCellValueFactory(value -> new ReadOnlyObjectWrapper<>(value.getValue().getDateFin().format(formatter)));
         listeOperation_tableView.setItems(FXCollections.observableList(Operation.listByEtat("effectuée", currentFolder)));
 
     }

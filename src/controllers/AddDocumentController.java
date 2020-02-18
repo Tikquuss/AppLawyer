@@ -2,13 +2,14 @@
 package controllers;
 
 import appdatabase.bean.CategorieDocument;
+import appdatabase.bean.Client;
 import appdatabase.bean.Document;
 import appdatabase.bean.Dossier;
+import appdatabase.bean.TypeDocument;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import static controllers.CurrentFoldersController.currentFolder;
-import dbsimulator.BeansObjects;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,13 +21,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import org.apache.commons.io.IOUtils;
 import static controllers.HomeForFolderController.docsLoader;
 import static controllers.CurrentFoldersController.currentFolder;
 import java.util.List;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 /**
  *
@@ -39,7 +41,7 @@ public class AddDocumentController {
     private JFXComboBox<CategorieDocument> categoriesDoc_comboBox;
 
     @FXML
-    private JFXComboBox<String> typesDoc_comboBox;
+    private JFXComboBox<TypeDocument> typesDoc_comboBox;
 
     @FXML
     private JFXButton valider_button;
@@ -59,17 +61,37 @@ public class AddDocumentController {
         //File dir = new File(dirName);
         //boolean isCreated = dir.mkdirs();
         initButtonsActions();
-        
-        categoriesDoc_comboBox.setItems(FXCollections.observableList(BeansObjects.ctgdocs));
-        typesDoc_comboBox.setItems(FXCollections.observableList(FXCollections.observableList(BeansObjects.typesDoc)));
+        initComboBox();
+        //typesDoc_comboBox.setItems(FXCollections.observableList(FXCollections.observableList(BeansObjects.typesDoc)));
     }
     
     public boolean checkIfNoEmptyFields(){
-        return !(categoriesDoc_comboBox.getSelectionModel().getSelectedItem() == null || typesDoc_comboBox.getSelectionModel().getSelectedItem()==null || choiceDoc_textField.getText()=="");
+        return !(categoriesDoc_comboBox.getSelectionModel().getSelectedItem() == null  || choiceDoc_textField.getText().equals(""));
     }
     public String makePathToFolder(Dossier dossier){
-        return dossier.getClient().getNom().toUpperCase()+" "+dossier.getClient().getPrenom().toUpperCase()+" "+dossier.getId();
+        Client cl = dossier.getClient();
+        int nb = Dossier.listByClient(cl).size();
+        String path0 = dossier.getClient().getNom().toUpperCase()+" "+dossier.getClient().getPrenom().toUpperCase();
+        return nb==1 ? path0 : path0+" "+String.valueOf(nb);
     }
+    
+    public void initComboBox(){              
+        categoriesDoc_comboBox.setItems(FXCollections.observableList(CategorieDocument.all()));
+        categoriesDoc_comboBox.valueProperty().addListener((ObservableValue<? extends CategorieDocument> observable, CategorieDocument oldValue, CategorieDocument newValue) -> {
+            if(newValue != oldValue){
+                List <TypeDocument> listTypesDocuments = TypeDocument.listByCategorie(newValue);
+                if(!listTypesDocuments.isEmpty()){
+                    typesDoc_comboBox.setDisable(false);
+                    typesDoc_comboBox.setItems(FXCollections.observableArrayList(listTypesDocuments));
+                }
+                else {            
+                    typesDoc_comboBox.setDisable(true);
+                }
+            }
+        });
+        typesDoc_comboBox.setDisable(true);
+    }
+    
     public void initButtonsActions() throws IOException, FileNotFoundException{
         choiceDoc_button.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
@@ -78,58 +100,59 @@ public class AddDocumentController {
                 choiceDoc_textField.setText(selectedFile.getName());
         });
         
-        valider_button.setOnAction(e -> {
-            if(this.checkIfNoEmptyFields())
-                if(selectedFile != null){
-                    InputStream input = null;
-                    OutputStream output = null;
-                    try {
+        valider_button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                if (AddDocumentController.this.checkIfNoEmptyFields()) {
+                    if(selectedFile != null){
+                        InputStream input = null;
+                        OutputStream output = null;
+                        try {
                             input = new FileInputStream(selectedFile.getAbsolutePath());
                             String pathDoc = "F:\\Dossiers Clients\\DOSSIER "+makePathToFolder(currentFolder)+"\\"+selectedFile.getName();
                             output = new FileOutputStream(pathDoc);
                             IOUtils.copy(input, output);
-                            CategorieDocument cd = new CategorieDocument();
-                            cd.save();
                             List<Document> docList = Document.listByDossier(currentFolder);
                             int i = 0;
                             while(i< docList.size() && !docList.get(i).getFichier().equals(pathDoc)){
                                 i++;
                             }
                             if(i == docList.size()){
-                                Document doc = new Document(selectedFile.getName(), typesDoc_comboBox.getSelectionModel().getSelectedItem(), 
-                                pathDoc, cd, currentFolder);
+                                Document doc = new Document(selectedFile.getName(),
+                                        typesDoc_comboBox.isDisabled() ? null : typesDoc_comboBox.getSelectionModel().getSelectedItem(),
+                                        pathDoc, categoriesDoc_comboBox.getSelectionModel().getSelectedItem(), currentFolder);
                                 doc.save();
                                 ((DocumentsController)docsLoader.getController()).updateTabView();
                             }
                             
-                            } catch (FileNotFoundException excep) {
-                                Logger.getLogger(AddDocumentController.class.getName()).log(Level.SEVERE, null, excep);
-                            } catch (IOException exc) {
-                                Logger.getLogger(AddDocumentController.class.getName()).log(Level.SEVERE, null, exc);
-                            } finally {
-                                try {
-                                    input.close();
-                                    output.close();
-                                    
-                                } catch (IOException ex) {
-                                    Logger.getLogger(AddDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                                }
+                        } catch (FileNotFoundException excep) {
+                            Logger.getLogger(AddDocumentController.class.getName()).log(Level.SEVERE, null, excep);
+                        } catch (IOException exc) {
+                            Logger.getLogger(AddDocumentController.class.getName()).log(Level.SEVERE, null, exc);
+                        } finally {
+                            try {
+                                input.close();
+                                output.close();
+                                
+                            } catch (IOException ex) {
+                                Logger.getLogger(AddDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                             }
+                        }
                     }
-                else {
+                    else {
                         Alert al = new Alert(Alert.AlertType.ERROR);
                         al.setContentText("Veuillez choisir un fichier s'il vous plait ! "
                                 + "Cliquez tout d'abord sur le bouton choisir  puis sélectionnez le fichier àchoisir à l'aide de la boîte de dialogue qui "
                                 + "s'ouvira et enfin validez.");
                         al.setHeaderText("AUCUN FICHIER CHOISI");
                         al.show();
+                    }
+                } else {
+                    Alert al = new Alert(Alert.AlertType.WARNING);
+                    al.setContentText("Remplissez tous les champs s'il vous plait !");
+                    al.show();
                 }
-            else{
-                        Alert al = new Alert(Alert.AlertType.WARNING);
-                        al.setContentText("Remplissez tous les champs s'il vous plait !");
-                        al.show();
             }
-            
         });
     }
 }

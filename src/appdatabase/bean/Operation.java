@@ -7,9 +7,7 @@ package appdatabase.bean;
 
 import appdatabase.manager.Manager;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
