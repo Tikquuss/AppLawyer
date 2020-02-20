@@ -10,8 +10,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import utilities.ViewDimensionner;
 import static controllers.CurrentFoldersController.currentFolder;
-
-
+import java.util.Optional;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import static main.AppLawyer.stage;
+import static main.AppLawyer.presentPageScene;
 /**
  *
  * @author Utilisateur
@@ -25,7 +31,10 @@ public class HomeForFolderController {
     private JFXButton planning_button;
 
     @FXML
-    private JFXButton documents_button;
+    private JFXButton documents_button;  
+    
+    @FXML
+    private JFXButton backhome_button;
 
     @FXML
     private AnchorPane singleFolderContainer;
@@ -62,6 +71,16 @@ public class HomeForFolderController {
           });
           documents_button.setOnAction(event -> {
                this.add(docParent);
+          });
+          backhome_button.setOnAction((ActionEvent e) -> {
+              Alert dialogConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+              dialogConfirm.setTitle("Confirmation du retour à l'accueil");
+              dialogConfirm.setHeaderText("Confirmation du retour à l'accueil");
+              dialogConfirm.setContentText("Voulez vous vraiment retourner à l'accueil ??");
+              Optional<ButtonType> answer = dialogConfirm.showAndWait();
+              if (answer.get() == ButtonType.OK) {
+                    stage.setScene(presentPageScene);
+              }
           });
     }    
 }

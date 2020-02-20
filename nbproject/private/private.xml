@@ -3,13 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/utilities/GestionSpinner.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/bean/CategorieDocument.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/ClientsList2Controller.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/PresentPageController.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/AddDocumentController.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/Appdatabase.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/DocumentsController.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/CreateFolderController.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/TaskToLaterController.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/main/AppLawyer.java</file>
             <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/utilities/NotifExample.java</file>
             <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/HibernateUtil.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/utilities/TrayIconDemo.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/Appdatabase.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/CurrentFoldersController.java</file>
+            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/hibernate.cfg.xml</file>
             <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/appdatabase/bean/Document.java</file>
-            <file>file:/C:/Users/Utilisateur/Desktop/Projets/AppLawyer/src/controllers/TaskToLaterController.java</file>
         </group>
     </open-files>
 </project-private>

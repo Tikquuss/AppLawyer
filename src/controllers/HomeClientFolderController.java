@@ -22,9 +22,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import static controllers.CurrentFoldersController.currentFolder;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.Optional;
 import java.util.function.UnaryOperator;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -67,8 +71,6 @@ public class HomeClientFolderController {
     @FXML
     private TableView<Payement> paiements_tableView;
     @FXML
-    private TableColumn<Payement, Integer> numero_tableColumn;
-    @FXML
     private TableColumn<Payement, LocalDate> date_tableColumn;
     @FXML
     private TableColumn<Payement, LocalTime> heure_tableColumn;
@@ -87,7 +89,6 @@ public class HomeClientFolderController {
     }    
     
     public void initTable(){
-        numero_tableColumn.setCellValueFactory(new PropertyValueFactory<>("numero"));
         date_tableColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         heure_tableColumn.setCellValueFactory(new PropertyValueFactory<>("heure"));
         montant_tableColumn.setCellValueFactory(new PropertyValueFactory<>("montant"));
@@ -120,7 +121,7 @@ public class HomeClientFolderController {
                     
                 }
                 else{
-                    Payement paye = new Payement(Payement.listByDossier(currentFolder).size()+1, Integer.valueOf(montantPaiement_textField.getText()), 
+                    Payement paye = new Payement(Integer.valueOf(montantPaiement_textField.getText()), 
                     currentFolder , datePaiement_datePicker.getValue(), heurePaiement_timePicker.getValue() );
                     paye.save();
                     paiements_tableView.getItems().add(paye);
@@ -132,6 +133,25 @@ public class HomeClientFolderController {
                     al.setHeaderText("CHAMPS VIDES");
                     al.show();
             }      
+        });
+        paiements_tableView.setOnKeyPressed((KeyEvent t)-> {
+            KeyCode key=t.getCode();
+            Payement paye = paiements_tableView.getSelectionModel().getSelectedItem();
+            if(paye != null){
+                
+                
+                if (key==KeyCode.DELETE){
+                    Alert dialogConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+                    dialogConfirm.setTitle("Confirmation suppression");
+                    dialogConfirm.setHeaderText("Confirmation suppression");
+                    dialogConfirm.setContentText("Voulez vous vraiment supprimer ce paiement de la liste ??");
+                    Optional<ButtonType> answer = dialogConfirm.showAndWait();
+                    if (answer.get() == ButtonType.OK) {
+                            paiements_tableView.getItems().remove(paye);
+                            paye.delete();
+                      }
+                }
+            }
         });
     }
     public void initTextFieldForNumbers(){

@@ -1,6 +1,7 @@
 package appdatabase.manager;
 
 import appdatabase.HibernateUtil;
+import appdatabase.bean.Client;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 /*
@@ -160,6 +162,29 @@ public class Manager implements ManagerI{
         finally{
             this.close_session(session);
         }
+    }
+    
+     public static List<Client> filtrer(Class classe,String nom){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Client> liste = null;
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Criteria criteria = session.createCriteria(classe);
+            Criterion nomCriterion = Restrictions.like("nom", "%"+nom+"%");
+            Criterion nomCriterion2 = Restrictions.like("prenom", "%"+nom+"%");
+            criteria.add(Restrictions.or(nomCriterion, nomCriterion2));
+            liste = criteria.list();
+            tx.commit();
+        }catch (Exception ex){
+            if(tx != null){
+                tx.rollback();
+            }
+        }finally {
+            session.close();
+        }
+        return liste;
     }
     
     public void close_session(Session session){

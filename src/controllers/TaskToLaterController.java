@@ -13,11 +13,13 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import java.io.IOException;
+import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import utilities.NotifExample;
@@ -146,9 +148,16 @@ public class TaskToLaterController  {
         deleteTache_button.setOnAction(event -> {
              Operation op = listeTaches_listView.getSelectionModel().getSelectedItem();
              if(op != null){
-                listeTaches_listView.getItems().remove(op);
-                op.delete();
-            }
+                Alert dialogConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+                dialogConfirm.setTitle("Confirmation d'annulation");
+                dialogConfirm.setHeaderText("Confirmation d' annulation de tache");
+                dialogConfirm.setContentText("Tenez vous vraiment à annuler cette tâche ??");
+                Optional<ButtonType> answer = dialogConfirm.showAndWait();
+                if (answer.get() == ButtonType.OK) {
+                    listeTaches_listView.getItems().remove(op);
+                    op.delete();
+                  }
+                }           
              else{
                  displaySelectionError();
              }

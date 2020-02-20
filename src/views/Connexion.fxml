@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Smplace.controllers.ConnexionController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1000.0" stylesheets="@../../ressources/styles/style.css">
+         <children>
+            <AnchorPane layoutX="175.0" layoutY="106.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="661.0" prefWidth="650.0">
+               <children>
+                  <AnchorPane prefHeight="298.0" prefWidth="650.0" style="-fx-background-color: #003125;" AnchorPane.leftAnchor="0.0" />
+                  <AnchorPane layoutX="69.0" layoutY="148.0" prefHeight="457.0" prefWidth="508.0" style="-fx-background-color: white;">
+                     <children>
+                        <JFXTextField fx:id="username_textField" focusColor="#00695c" labelFloat="true" layoutX="110.0" layoutY="242.0" prefHeight="31.0" prefWidth="300.0" promptText="Nom d'utilisateur">
+                           <font>
+                              <Font name="Eras Demi ITC" size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXButton fx:id="connect_button" layoutX="194.0" layoutY="396.0" prefHeight="39.0" prefWidth="167.0" style="-fx-background-color: #003125;" text="Se connecter" textFill="WHITE">
+                           <font>
+                              <Font name="Eras Bold ITC" size="18.0" />
+                           </font>
+                        </JFXButton>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../ressources/images/smalluser.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="73.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../ressources/images/smallkey.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="136.0" fitWidth="141.0" layoutX="169.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../ressources/images/bigusermale.png" />
+                           </image>
+                        </ImageView>
+                        <JFXPasswordField fx:id="password_textField" focusColor="#00695c" labelFloat="true" layoutX="110.0" layoutY="325.0" prefHeight="32.0" prefWidth="300.0" promptText="Mot de passe" unFocusColor="#00695c" />
+                     </children>
+                     <effect>
+                        <DropShadow color="#00000083" height="25.0" radius="18.25" width="50.0" />
+                     </effect>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

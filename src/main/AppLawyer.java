@@ -17,6 +17,7 @@ import javafx.stage.StageStyle;
 public class AppLawyer extends Application {
 
     public static Stage stage = new Stage();
+    public static Scene presentPageScene;
     private FXMLLoader  homeForFolder;
     
     @Override
@@ -24,8 +25,9 @@ public class AppLawyer extends Application {
         BeansObjects.initObjects();
         stage = new Stage();
         Parent presentPageRoot = FXMLLoader.load(getClass().getResource("../views/PresentPage.fxml"));
-        
-        stage.setScene(new Scene(presentPageRoot));
+        presentPageScene = new Scene(presentPageRoot);
+        presentPageScene.setRoot(presentPageRoot);
+        stage.setScene(presentPageScene);
         stage.setMinHeight(700);
         stage.setMinWidth(1100);
         stage.show();

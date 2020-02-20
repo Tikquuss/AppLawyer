@@ -279,5 +279,4 @@ public class CreateFolderController {
      honoraires_textField.setTextFormatter(new TextFormatter<>(filter));
      provisions_textField.setTextFormatter(new TextFormatter<>(filter));
     }
-
 }

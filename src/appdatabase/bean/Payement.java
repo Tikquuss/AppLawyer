@@ -26,7 +26,6 @@ import javax.persistence.Table;
 @Table(name = "payement")
 public class Payement implements Serializable {
     private long id;
-    private int numero;
     private double montant;
     private LocalDate date; 
     private LocalTime heure;
@@ -36,8 +35,7 @@ public class Payement implements Serializable {
     public Payement() {
     }
 
-    public Payement(int numero, double montant,  Dossier dossier, LocalDate date, LocalTime heure) {
-        this.numero = numero;
+    public Payement( double montant,  Dossier dossier, LocalDate date, LocalTime heure) {
         this.montant = montant;
         this.date = date;
         this.heure = heure;
@@ -52,15 +50,6 @@ public class Payement implements Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    @Column(name = "numero")
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
     }
 
     @Column(name = "heure")

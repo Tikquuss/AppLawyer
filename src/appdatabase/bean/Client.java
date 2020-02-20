@@ -179,4 +179,9 @@ public class Client extends Personne implements Serializable{
     public static List<Client> listByAdresse(String otherAdresse){
         return getDAO().LoadByAtt(Client.class, "adresse", otherAdresse);
     }
+    
+    public static List <Client> filtrer(String nameorsurname){
+       return  Manager.filtrer(Client.class, nameorsurname);
+    }
+    
 }

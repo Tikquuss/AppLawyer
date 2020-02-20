@@ -81,6 +81,9 @@ public class ClientsList2Controller {
                 clientListStage.close();
             }
         });
+        search_textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            clientsList_tableView.setItems(FXCollections.observableArrayList(Client.filtrer(search_textField.getText())));
+        });
     }
     
 }

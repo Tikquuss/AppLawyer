@@ -73,7 +73,6 @@
                   <JFXButton fx:id="savePaiement_button" layoutX="168.0" layoutY="756.0" minHeight="50.0" minWidth="140.0" prefHeight="50.0" prefWidth="140.0" styleClass="pretty-button" text="Enregistrer" AnchorPane.bottomAnchor="30.0" />
                   <TableView fx:id="paiements_tableView" layoutX="10.0" layoutY="69.0" prefHeight="285.0" prefWidth="450.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="80.0">
                      <columns>
-                        <TableColumn fx:id="numero_tableColumn" prefWidth="71.0" text="Numero" />
                         <TableColumn fx:id="date_tableColumn" prefWidth="115.0" text="Date" />
                         <TableColumn fx:id="heure_tableColumn" prefWidth="147.0" text="Heure" />
                         <TableColumn fx:id="montant_tableColumn" prefWidth="156.0" text="Montant (FCFA)" />

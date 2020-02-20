@@ -23,8 +23,12 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import static controllers.CurrentFoldersController.currentFolder;
+import java.util.Optional;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import static main.AppLawyer.presentPageScene;
+import static main.AppLawyer.stage;
 
 /**
  *
@@ -101,17 +105,24 @@ public class DocumentsController {
         suppDoc_button.setOnAction(e -> {
             Document doc = documents_tableView.getSelectionModel().getSelectedItem();
             if(doc != null){
-                File file = new File(doc.getFichier());
-                    if(file.exists())
-                        if(file.delete() && doc.delete())
-                            documents_tableView.getItems().remove(doc);
-                    else{
-                        Alert al = new Alert(Alert.AlertType.WARNING);
-                        al.setHeaderText("FICHIER NON EXISTANT");
-                        al.setContentText("Ce fichier n'existe plus. Il a pu être supprimé.");
-                        al.show();
-                    }
-                
+                Alert dialogConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+                dialogConfirm.setTitle("Confirmation de suppression");
+                dialogConfirm.setHeaderText("Confirmation de suppression du document");
+                dialogConfirm.setContentText("Voulez vous vraiment supprimer ce doument ??");
+                Optional<ButtonType> answer = dialogConfirm.showAndWait();
+                if (answer.get() == ButtonType.OK) {
+                      File file = new File(doc.getFichier());
+                      if(file.exists()){                       
+                          if(file.delete() && doc.delete())
+                              documents_tableView.getItems().remove(doc);
+                      }                       
+                      else{
+                          Alert al = new Alert(Alert.AlertType.WARNING);
+                          al.setHeaderText("FICHIER NON EXISTANT");
+                          al.setContentText("Ce fichier n'existe plus. Il a pu être supprimé.");
+                          al.show();
+                      }
+                }                
             }
         });
     }

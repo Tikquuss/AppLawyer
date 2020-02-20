@@ -94,14 +94,14 @@ public class CurrentFoldersController {
         currentFolder = dossier;
         homeForFolder =  new FXMLLoader(getClass().getResource("../views/homeForFolder.fxml"));
         root = homeForFolder.load();
-       /* stage.setScene(new Scene(root));
+        stage.setScene(new Scene(root));
         stage.setMinWidth(1100);
-        stage.setMinHeight(700);*/
-        singleFolderStage = new Stage();
+        stage.setMinHeight(700);
+        /*singleFolderStage = new Stage();
         singleFolderStage.setScene(new Scene(root));
         singleFolderStage.setMinWidth(1100);
         singleFolderStage.setMinHeight(700);
-        singleFolderStage.show();
+        singleFolderStage.show();*/
     }
     
     public void makeStageForCreateFolder() throws IOException{
@@ -112,7 +112,6 @@ public class CurrentFoldersController {
         newFolderStage.setResizable(false);
         newFolderStage.initModality(Modality.APPLICATION_MODAL);
         newFolderStage.show();
-
     }
     public void initListView(){
         listFolders_listView.setItems(FXCollections.observableList(Dossier.listByStatus("En cours")));

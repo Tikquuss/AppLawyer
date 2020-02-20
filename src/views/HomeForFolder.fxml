@@ -8,7 +8,7 @@
 
 <AnchorPane minHeight="650.0" minWidth="1100.0" prefHeight="650.0" prefWidth="1100.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeForFolderController">
    <children>
-      <VBox minHeight="650.0" minWidth="200.0" prefHeight="650.0" prefWidth="200.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox minHeight="650.0" minWidth="200.0" prefHeight="650.0" prefWidth="200.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <JFXButton fx:id="homefolder_button" alignment="BOTTOM_CENTER" contentDisplay="TOP" minHeight="150.0" minWidth="200.0" prefHeight="150.0" prefWidth="200.0" text="Accueil dossier" textFill="WHITE">
                <graphic>
@@ -40,5 +40,14 @@
          </children>
       </VBox>
       <AnchorPane fx:id="singleFolderContainer" layoutX="200.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="650.0" minWidth="900.0" snapToPixel="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <JFXButton fx:id="backhome_button" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutY="500.0" minHeight="150.0" minWidth="200.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: black;" text="Rentrer à l'accueil" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <graphic>
+            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../ressources/images/backhome.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>
