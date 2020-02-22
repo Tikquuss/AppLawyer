@@ -12,18 +12,17 @@
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="39.0" prefHeight="48.0" prefWidth="724.0" styleClass="labelTitle" text="                      LISTE DES CLIENTS" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="5.0" />
       <TableView fx:id="clientsList_tableView" layoutX="45.0" layoutY="167.0" prefHeight="604.0" prefWidth="900.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="120.0">
         <columns>
-            <TableColumn fx:id="noms_column" prefWidth="75.0" text="Noms" />
-          <TableColumn fx:id="prenoms_column" prefWidth="75.0" text="Prénoms" />
-          <TableColumn fx:id="email_column" prefWidth="75.0" text="Email" />
-            <TableColumn fx:id="adresse_column" prefWidth="75.0" text="Adresse" />
-            <TableColumn fx:id="telephone_column" prefWidth="148.0" text="Téléphone" />
-            <TableColumn fx:id="docStatus_column" prefWidth="165.0" />
+            <TableColumn fx:id="noms_column" prefWidth="208.0" text="Noms" />
+          <TableColumn fx:id="prenoms_column" prefWidth="206.0" text="Prénoms" />
+          <TableColumn fx:id="email_column" prefWidth="208.0" text="Email" />
+            <TableColumn fx:id="adresse_column" prefWidth="95.0" text="Adresse" />
+            <TableColumn fx:id="telephone_column" prefWidth="211.0" text="Téléphone" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
       <JFXButton fx:id="choiceClient_button" layoutX="568.0" layoutY="741.0" prefHeight="40.0" prefWidth="200.0" styleClass="pretty-button-rounded" text="Choisir" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="250.0" />
-      <JFXTextField fx:id="search_textfield" labelFloat="true" layoutX="673.0" layoutY="75.0" promptText="Rechercher" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="75.0" />
+      <JFXTextField fx:id="search_textField" labelFloat="true" layoutX="673.0" layoutY="75.0" promptText="Rechercher" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="75.0" />
    </children>
 </AnchorPane>

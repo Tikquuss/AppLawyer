@@ -33,7 +33,10 @@ public class HibernateUtil {
                     .addAnnotatedClass(CategorieDocument.class)
                     .addAnnotatedClass(Adversaire.class)
                     .addAnnotatedClass(Groupe.class)
-                    .addAnnotatedClass(Payement.class)                    
+                    .addAnnotatedClass(Payement.class)   
+                    .addAnnotatedClass(QualiteAvocat.class)
+                    .addAnnotatedClass(Juridiction.class)
+                    .addAnnotatedClass(TypeAffaire.class)
                     .configure().buildSessionFactory();
         } catch (Throwable ex) {
             // Log the exception. 

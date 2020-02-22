@@ -17,7 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import static main.AppLawyer.stage;
-import static main.AppLawyer.presentPageScene;
+import static controllers.ConnexionController.presentPageScene;
 /**
  *
  * @author Utilisateur
@@ -59,10 +59,10 @@ public class HomeForFolderController {
              docsLoader = new FXMLLoader(getClass().getResource("../views/Documents.fxml"));
              docParent =  docsLoader.load();
              this.add(homeCFParent);
-             this.initActions();
+             this.initButtonsActions();
     }
     
-    public void initActions(){
+    public void initButtonsActions(){
           homefolder_button.setOnAction(event -> {
               this.add(homeCFParent);
           });

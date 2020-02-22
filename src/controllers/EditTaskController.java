@@ -42,6 +42,9 @@ public class EditTaskController {
     public void initialize() {
         
         modifier_button.setOnAction(event -> {
+            this.operation.setCompteRendu(compteRendu_textArea.getText());
+            this.operation.setDepenses(Long.valueOf(depenses_textField.getText()));
+            this.operation.update();
             editTaskStage.close();
         });     
         initTextFieldForNumbers();
@@ -50,7 +53,7 @@ public class EditTaskController {
     public void initTextFieldForNumbers(){
         UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
             String newText = t.getControlNewText() ;
-            if(newText.matches("-?[0-9]*")) {
+            if(newText.matches("-?[0-9]*") && newText.length() <= 13) {
                 return t ;
             }
             return null ;

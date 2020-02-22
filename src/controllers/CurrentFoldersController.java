@@ -13,6 +13,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static main.AppLawyer.stage;
@@ -45,10 +47,7 @@ public class CurrentFoldersController {
         
     public boolean checkIfFolderExist(Dossier fold){
             File dir = new File(fold.getCheminDossier());
-            boolean exist = false;
-            if(!(exist = dir.exists()))
-                dir.mkdirs();
-            return exist;         
+            return dir.exists();         
         }
     
     
@@ -64,6 +63,30 @@ public class CurrentFoldersController {
             }
 
         });
+        
+        listFolders_listView.setOnKeyPressed((KeyEvent t)-> {
+            KeyCode key=t.getCode();
+            if(key == KeyCode.ENTER){
+                Dossier fold   = listFolders_listView.getSelectionModel().getSelectedItem();
+                currentFolder = fold;
+                if(fold != null){
+                    if(checkIfFolderExist(fold))
+                        try {     
+                             makeStageForSingleFolder(fold);
+
+                        } catch (IOException ex) {
+                            Logger.getLogger(CurrentFoldersController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    else{
+                        Alert al = new Alert(Alert.AlertType.WARNING);
+                        al.setContentText("Le chemin vers le repertoire correspondant à ce dossier n'a pas été retrouvé. Il a peut ëtre été supprimé.");
+                        al.show();
+                    }
+                }
+            }
+            
+        });
+        
         openFolder_button.setOnAction(event -> {  
             
             Dossier fold   = listFolders_listView.getSelectionModel().getSelectedItem();

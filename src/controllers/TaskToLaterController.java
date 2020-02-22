@@ -14,14 +14,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.function.UnaryOperator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextFormatter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import utilities.NotifExample;
 
 
@@ -63,6 +68,17 @@ public class TaskToLaterController  {
         listeTaches_listView.setItems(FXCollections.observableList(Operation.listByDifEtat("effectuée", currentFolder)));
     }
     
+    public void initTextField(){
+        UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
+            String newText = t.getControlNewText();
+            if(newText.matches("^([^\\s].*)*$") && newText.length()< 80) {
+                return t ;
+            }
+            return null ;
+        };
+        labelNewTache_textField.setTextFormatter(new TextFormatter<>(filter));
+    }
+    
     public void removeFromListView(Operation op){
         listeTaches_listView.getItems().remove(op);
     }
@@ -71,6 +87,7 @@ public class TaskToLaterController  {
         return !(labelNewTache_textField.getText().equals("") || dateNewTache_datePicker.getValue() == null || heureNewTache_timePicker.getValue() == null);
     }
     public void initButtonsActions(){
+     
         stageTask = new Stage();
         stageTask.setScene(new Scene(finalizeTaskParent));
         stageTask.setResizable(false);
@@ -81,8 +98,8 @@ public class TaskToLaterController  {
                 if(date.isAfter(LocalDateTime.now())){
                     Operation op = new Operation(labelNewTache_textField.getText(), date, currentFolder);
                     op.save();
-                    listeTaches_listView.getItems().add(op);
-                    NotifExample.setAlarmTask(date, labelNewTache_textField.getText());
+                    listeTaches_listView.getItems().add(op);              
+                    NotifExample.setAlarmTask(date, op);
                 }
                 else{
                     Alert al = new Alert(Alert.AlertType.ERROR);
@@ -161,11 +178,10 @@ public class TaskToLaterController  {
              else{
                  displaySelectionError();
              }
-             
              //listeTaches_listView.setItems(FXCollections.observableList(Operation.listByDifEtat("effectuée")));
         });
- 
     }
+    
     public void displaySelectionError(){
         Alert al = new Alert(Alert.AlertType.ERROR);
         al.setContentText("Vous n'avez sélectionné aucune tâche !");

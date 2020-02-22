@@ -186,6 +186,12 @@ public class Operation implements Serializable {
         return getDAO().LoadByAtt(Operation.class, "dossier", otherDossier);
     }
     
+    public static Operation getById(long id){
+        List <Operation> list = getDAO().LoadByAtt(Operation.class, "ID", id);
+        if(!list.isEmpty())
+            return list.get(0);
+        return new Operation();
+    }
     @Override
     public String toString(){
         String operation = new String();

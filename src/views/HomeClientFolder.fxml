@@ -19,14 +19,14 @@
    <content>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="980.0" minWidth="1200.0" prefHeight="980.0" prefWidth="1690.0" stylesheets="@../ressources/css/style.css">
          <children>
-            <AnchorPane maxHeight="997.0" maxWidth="1218.0" minHeight="780.0" minWidth="490.0" prefHeight="1000.0" prefWidth="1200.0">
+            <AnchorPane maxHeight="997.0" maxWidth="1218.0" minHeight="780.0" minWidth="490.0" prefHeight="980.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label layoutX="50.0" layoutY="452.0" prefHeight="50.0" prefWidth="300.0" styleClass="small-label" text="Date d'ouverture du dossier :" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="470.0" />
-                  <Label layoutX="273.0" layoutY="695.0" prefHeight="60.0" prefWidth="130.0" styleClass="small-label" text="Provisions :" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="570.0" />
-                  <Label layoutX="734.0" layoutY="522.0" prefHeight="50.0" prefWidth="93.0" styleClass="small-label" text="Qualité :" AnchorPane.rightAnchor="473.0" AnchorPane.topAnchor="550.0" />
-                  <Label layoutX="646.0" layoutY="420.0" prefHeight="50.0" prefWidth="151.0" styleClass="small-label" text="Juridiction : " AnchorPane.rightAnchor="415.0" AnchorPane.topAnchor="660.0" />
-                  <Label layoutX="648.0" layoutY="610.0" prefHeight="50.0" prefWidth="138.0" styleClass="small-label" text="Honoraires :" AnchorPane.rightAnchor="428.0" AnchorPane.topAnchor="440.0" />
-                  <AnchorPane layoutY="8.0" maxHeight="300.0" maxWidth="1000.0" minHeight="200.0" minWidth="500.0" prefHeight="200.0" prefWidth="574.0" AnchorPane.topAnchor="8.0">
+                  <Label layoutX="80.0" layoutY="440.0" prefHeight="50.0" prefWidth="300.0" styleClass="small-label" text="Date d'ouverture du dossier :" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="440.0" />
+                  <Label layoutX="80.0" layoutY="520.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0" styleClass="small-label" text="Provisions :" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="520.0" />
+                  <Label layoutX="80.0" layoutY="760.0" minWidth="200.0" prefHeight="50.0" prefWidth="200.0" styleClass="small-label" text="Qualité :" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="760.0" />
+                  <Label layoutX="80.0" layoutY="840.0" minWidth="200.0" prefHeight="50.0" prefWidth="200.0" styleClass="small-label" text="Juridiction : " AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="840.0" />
+                  <Label layoutX="80.0" layoutY="680.0" minWidth="200.0" prefHeight="50.0" prefWidth="200.0" styleClass="small-label" text="Honoraires :" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="680.0" />
+                  <AnchorPane layoutY="8.0" maxHeight="300.0" maxWidth="1000.0" minHeight="200.0" minWidth="500.0" prefHeight="200.0" prefWidth="700.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0">
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="132.0" layoutX="4.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -37,18 +37,18 @@
                         <Label fx:id="surnamesClient_label" layoutX="168.0" layoutY="101.0" minHeight="50.0" minWidth="400.0" prefHeight="50.0" prefWidth="400.0" styleClass="small-label" text="PRENOMS CLIENTS" AnchorPane.topAnchor="100.0" />
                      </children>
                   </AnchorPane>
-                  <Label layoutX="50.0" layoutY="332.0" prefHeight="50.0" prefWidth="345.0" styleClass="small-label" text="NOM DE L'ADVERSAIRE :" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="330.0" />
-                  <Label layoutX="733.0" layoutY="331.0" prefHeight="50.0" prefWidth="165.0" styleClass="small-label" text="Type d'affaire :" AnchorPane.rightAnchor="401.0" AnchorPane.topAnchor="330.0" />
-                  <Label fx:id="nameAdv_label" alignment="TOP_LEFT" layoutX="50.0" layoutY="399.0" prefHeight="80.0" prefWidth="488.0" styleClass="small-label" wrapText="true" AnchorPane.topAnchor="385.0" />
-                  <Label fx:id="provisions_label" layoutX="187.0" layoutY="700.0" prefHeight="60.0" prefWidth="300.0" styleClass="small-label" AnchorPane.topAnchor="570.0" />
-                  <Label fx:id="dateOpenFolder_label" layoutX="359.0" layoutY="500.0" prefHeight="50.0" prefWidth="230.0" styleClass="small-label" AnchorPane.topAnchor="470.0" />
-                  <Label fx:id="typeAff_label" layoutX="814.0" layoutY="335.0" prefHeight="40.0" prefWidth="286.0" styleClass="small-label" AnchorPane.topAnchor="335.0" />
-                  <Label fx:id="honoraires_label" layoutX="780.0" layoutY="445.0" prefHeight="40.0" prefWidth="291.0" styleClass="small-label" AnchorPane.topAnchor="445.0" />
-                  <Label fx:id="qualite_label" layoutX="735.0" layoutY="522.0" prefHeight="40.0" prefWidth="300.0" styleClass="small-label" AnchorPane.topAnchor="555.0" />
-                  <Label fx:id="juridiction_label" layoutX="789.0" layoutY="665.0" prefHeight="40.0" prefWidth="205.0" styleClass="small-label" AnchorPane.topAnchor="665.0" />
+                  <Label layoutX="80.0" layoutY="280.0" prefHeight="50.0" prefWidth="345.0" styleClass="small-label" text="NOM DE L'ADVERSAIRE :" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="280.0" />
+                  <Label layoutX="80.0" layoutY="600.0" minWidth="200.0" prefHeight="50.0" prefWidth="200.0" styleClass="small-label" text="Type d'affaire :" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="600.0" />
+                  <Label fx:id="nameAdv_label" alignment="TOP_LEFT" layoutX="50.0" layoutY="399.0" prefHeight="80.0" prefWidth="500.0" styleClass="small-label" wrapText="true" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="340.0" />
+                  <Label fx:id="provisions_label" layoutX="500.0" layoutY="520.0" prefHeight="50.0" prefWidth="330.0" styleClass="small-label" AnchorPane.topAnchor="520.0" />
+                  <Label fx:id="dateOpenFolder_label" layoutX="500.0" layoutY="440.0" prefHeight="50.0" prefWidth="300.0" styleClass="small-label" AnchorPane.topAnchor="440.0" />
+                  <Label fx:id="typeAff_label" layoutX="500.0" layoutY="600.0" prefHeight="50.0" prefWidth="330.0" styleClass="small-label" AnchorPane.topAnchor="600.0" />
+                  <Label fx:id="honoraires_label" layoutX="500.0" layoutY="680.0" prefHeight="50.0" prefWidth="330.0" styleClass="small-label" AnchorPane.topAnchor="680.0" />
+                  <Label fx:id="qualite_label" layoutX="500.0" layoutY="760.0" prefHeight="50.0" prefWidth="330.0" styleClass="small-label" AnchorPane.topAnchor="760.0" />
+                  <Label fx:id="juridiction_label" layoutX="500.0" layoutY="840.0" prefHeight="50.0" prefWidth="330.0" styleClass="small-label" AnchorPane.topAnchor="840.0" />
                </children>
             </AnchorPane>
-            <AnchorPane maxWidth="400.0" minHeight="980.0" minWidth="490.0" prefHeight="980.0" prefWidth="490.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane maxWidth="400.0" minHeight="980.0" minWidth="570.0" prefHeight="980.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="450.0" styleClass="labelTitle" text="                   PAIEMENTS" textAlignment="JUSTIFY" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
                   <GridPane layoutX="40.0" layoutY="557.0" prefHeight="165.0" prefWidth="400.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
@@ -71,14 +71,16 @@
                      </children>
                   </GridPane>
                   <JFXButton fx:id="savePaiement_button" layoutX="168.0" layoutY="756.0" minHeight="50.0" minWidth="140.0" prefHeight="50.0" prefWidth="140.0" styleClass="pretty-button" text="Enregistrer" AnchorPane.bottomAnchor="30.0" />
-                  <TableView fx:id="paiements_tableView" layoutX="10.0" layoutY="69.0" prefHeight="285.0" prefWidth="450.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="80.0">
+                  <TableView fx:id="paiements_tableView" layoutX="10.0" layoutY="69.0" prefHeight="285.0" prefWidth="450.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="80.0">
                      <columns>
-                        <TableColumn fx:id="date_tableColumn" prefWidth="115.0" text="Date" />
-                        <TableColumn fx:id="heure_tableColumn" prefWidth="147.0" text="Heure" />
-                        <TableColumn fx:id="montant_tableColumn" prefWidth="156.0" text="Montant (FCFA)" />
+                        <TableColumn fx:id="date_tableColumn" prefWidth="159.0" text="Date" />
+                        <TableColumn fx:id="heure_tableColumn" prefWidth="156.0" text="Heure" />
+                        <TableColumn fx:id="montant_tableColumn" prefWidth="182.0" text="Montant (FCFA)" />
                      </columns>
                   </TableView>
                   <Label alignment="CENTER" layoutX="25.0" layoutY="466.0" prefHeight="156.0" prefWidth="410.0" styleClass="small-label" text="Pour enregistrer un nouveau paiement, remplissez les champs ci-dessous puis cliquez sur Enregistrer. Si vous ne rensignez pas de date ni d'heure, l'heure et la date prises en compte seront l'heure et la date actuelles." wrapText="true" AnchorPane.bottomAnchor="372.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" />
+                  <Label layoutX="40.0" layoutY="380.0" prefHeight="50.0" prefWidth="222.0" styleClass="small-label" stylesheets="@../ressources/css/style.css" text="Reste à payer :" AnchorPane.topAnchor="400.0" />
+                  <Label fx:id="reste_label" layoutX="308.0" layoutY="400.0" prefHeight="50.0" prefWidth="235.0" styleClass="small-label" AnchorPane.topAnchor="400.0" />
                </children>
             </AnchorPane>
          </children>

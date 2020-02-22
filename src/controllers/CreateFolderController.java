@@ -8,13 +8,14 @@ package controllers;
 import appdatabase.bean.Adversaire;
 import appdatabase.bean.Client;
 import appdatabase.bean.Dossier;
+import appdatabase.bean.Juridiction;
+import appdatabase.bean.QualiteAvocat;
+import appdatabase.bean.TypeAffaire;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.jfoenix.validation.base.ValidatorBase;
-
-import dbsimulator.BeansObjects;
 import java.io.File;
 import java.util.function.UnaryOperator;
 import javafx.collections.FXCollections;
@@ -29,6 +30,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
@@ -96,10 +100,11 @@ public class CreateFolderController {
         checkNoEmptyField();
         initTextField();
         initPhoneNumberField();
+        initLimitLenghtEmail();
     }  
 
     
-    public void initButtonsActions() throws IOException{
+    public void initButtonsActions() throws IOException{        
         clientListStage = new Stage();
         Parent rootClientList = FXMLLoader.load(getClass().getResource("../views/ClientsList2.fxml"));
         clientListStage.setResizable(false);
@@ -128,8 +133,8 @@ public class CreateFolderController {
                 doc.setJuridiction(juridiction_comboBox.getSelectionModel().getSelectedItem());
                 doc.setQualite(qualiteAvocat_comboBox.getSelectionModel().getSelectedItem());
                 doc.setTypeAffaire(typeAffaire_comboBox.getSelectionModel().getSelectedItem());
-                doc.setProvisions(Integer.valueOf(provisions_textField.getText()));
-                doc.setHonoraires(Integer.valueOf(honoraires_textField.getText()));
+                doc.setProvisions(Long.valueOf(provisions_textField.getText()));
+                doc.setHonoraires(Long.valueOf(honoraires_textField.getText()));
                 doc.setStatut("En cours");
                 doc.save();
                 ((CurrentFoldersController)homeLoader.getController()).addToListView(doc);               
@@ -153,9 +158,9 @@ public class CreateFolderController {
     
 
     public void initComboBox(){
-        qualiteAvocat_comboBox.setItems(FXCollections.observableList(BeansObjects.qualiteAvo));
-        typeAffaire_comboBox.setItems(FXCollections.observableList(BeansObjects.typeAff));
-        juridiction_comboBox.setItems(FXCollections.observableList(BeansObjects.juridictions));
+        qualiteAvocat_comboBox.setItems(FXCollections.observableList(QualiteAvocat.allQualities()));
+        typeAffaire_comboBox.setItems(FXCollections.observableList(TypeAffaire.allTypesAff()));
+        juridiction_comboBox.setItems(FXCollections.observableList(Juridiction.allJuridictions()));
     }
     
     public void putTextFieldValidator(JFXTextField field, ValidatorBase validator){
@@ -243,8 +248,8 @@ public class CreateFolderController {
     
     public void initTextField(){
         UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
-            String newText = t.getControlNewText() ;
-            if(newText.matches("-?([^\\s].*)*$")) {
+            String newText = t.getControlNewText();
+            if(newText.matches("^([^\\s].*)*$") && newText.length()< 50) {
                 return t ;
             }
             return null ;
@@ -257,10 +262,21 @@ public class CreateFolderController {
         emailClient_textField.setTextFormatter(new TextFormatter<>(filter));
     }
     
+    public void initLimitLenghtEmail(){
+        UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
+            String newText = t.getControlNewText();
+            if(newText.length()< 150) {
+                return t ;
+            }
+            return null ;
+        };
+        emailClient_textField.setTextFormatter(new TextFormatter<>(filter));
+    }
+    
     public void initPhoneNumberField(){
         UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
             String newText = t.getControlNewText() ;
-            if(newText.matches("-?[0-9]*")) {
+            if(newText.matches("^[0-9]*") && newText.length()< 18) {
                 return t ;
             }
             return null ;
@@ -271,7 +287,7 @@ public class CreateFolderController {
     public void initTextFieldForNumbers(){
         UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
             String newText = t.getControlNewText() ;
-            if(newText.matches("-?([1-9][0-9]*)*")) {
+            if(newText.matches("^([1-9][0-9]*)*") && newText.length() <= 13) {
                 return t ;
             }
             return null ;

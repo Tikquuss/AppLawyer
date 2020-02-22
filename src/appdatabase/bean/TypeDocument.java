@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * @author User
  */
 @Entity
-@Table(name = "type")
+@Table(name = "typeDocument")
 public class TypeDocument implements Serializable {
     
     private long id;
@@ -66,7 +66,7 @@ public class TypeDocument implements Serializable {
     public boolean save() {
         return getDAO().save(this);
     }
-
+    
     public boolean update() {
         return getDAO().update(this);
     }

@@ -27,8 +27,6 @@ import java.util.Optional;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import static main.AppLawyer.presentPageScene;
-import static main.AppLawyer.stage;
 
 /**
  *
@@ -67,7 +65,7 @@ public class DocumentsController {
         Document.listByDossier(currentFolder).forEach(doc -> {
             File file = new File(doc.getFichier());
             if(!file.exists()){
-                doc.delete();
+                  doc.delete();
             }
         });
     }
@@ -100,6 +98,9 @@ public class DocumentsController {
                     Logger.getLogger(DocumentsController.class.getName()).log(Level.SEVERE, null, ex);
                 }   
             }
+            else{
+                displaySelectionError();
+            }
 
         });
         suppDoc_button.setOnAction(e -> {
@@ -124,6 +125,9 @@ public class DocumentsController {
                       }
                 }                
             }
+            else{
+                displaySelectionError();
+            }
         });
     }
     
@@ -133,13 +137,18 @@ public class DocumentsController {
            return value.getValue().getType() != null ? new ReadOnlyObjectWrapper<>(value.getValue().getType().getNom()) :  new ReadOnlyObjectWrapper<>("");
                     });
         categDoc_tableColumn.setCellValueFactory(value -> {
-            System.out.println(value.getValue());
-            System.out.println(value.getValue().getCategorie().getNom());
            return new ReadOnlyObjectWrapper<String>(value.getValue().getCategorie().getNom());
                     });
         documents_tableView.setItems(FXCollections.observableList(Document.listByDossier(currentFolder)));
     }
     public void updateTabView(){
         documents_tableView.setItems(FXCollections.observableList(Document.listByDossier(currentFolder)));
+    }
+    
+    public void displaySelectionError(){
+        Alert al = new Alert(Alert.AlertType.ERROR);
+        al.setContentText("Vous n'avez sélectionné aucun document !");
+        al.setHeaderText("AUCUN DOCUMENT SELECTIONNE");
+        al.show();
     }
 }

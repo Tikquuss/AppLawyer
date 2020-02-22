@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Smplace.controllers.ConnexionController">
+<StackPane fx:id="connexion_stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ConnexionController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1000.0" stylesheets="@../../ressources/styles/style.css">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1000.0">
          <children>
             <AnchorPane layoutX="175.0" layoutY="106.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="661.0" prefWidth="650.0">
                <children>
                   <AnchorPane prefHeight="298.0" prefWidth="650.0" style="-fx-background-color: #003125;" AnchorPane.leftAnchor="0.0" />
-                  <AnchorPane layoutX="69.0" layoutY="148.0" prefHeight="457.0" prefWidth="508.0" style="-fx-background-color: white;">
+                  <AnchorPane fx:id="form_anchorPane" layoutX="69.0" layoutY="148.0" prefHeight="457.0" prefWidth="508.0" style="-fx-background-color: white;">
                      <children>
                         <JFXTextField fx:id="username_textField" focusColor="#00695c" labelFloat="true" layoutX="110.0" layoutY="242.0" prefHeight="31.0" prefWidth="300.0" promptText="Nom d'utilisateur">
                            <font>

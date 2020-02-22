@@ -9,6 +9,7 @@ import appdatabase.bean.Client;
 import appdatabase.bean.Document;
 import appdatabase.bean.Dossier;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -47,12 +48,18 @@ public class ClientsListController {
     private TableColumn<Client, String> docStatus_column;
 
     @FXML
+    private JFXTextField search_textField;
+    
+    @FXML
     private JFXButton choiceClient_button;
     
     
     
     public void initialize() {
        initTable();
+       search_textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            clientsList_tableView.setItems(FXCollections.observableArrayList(Client.filtrer(search_textField.getText())));
+       });
     }    
     public void initTable(){
         noms_column.setCellValueFactory(new PropertyValueFactory<>("nom"));

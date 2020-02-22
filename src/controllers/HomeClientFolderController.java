@@ -1,4 +1,5 @@
 /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -21,9 +22,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import static controllers.CurrentFoldersController.currentFolder;
 import java.time.LocalDateTime;
-import java.time.Month;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.UnaryOperator;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextFormatter;
@@ -75,10 +77,13 @@ public class HomeClientFolderController {
     @FXML
     private TableColumn<Payement, LocalTime> heure_tableColumn;
     @FXML
-    private TableColumn<Payement, Integer> montant_tableColumn;
+    private TableColumn<Payement, Long> montant_tableColumn;
+    
+    @FXML
+    private Label reste_label;
 
     private Dossier dossier;
-
+    private double resteapayer;
    
     @FXML
     public void initialize() {
@@ -86,22 +91,27 @@ public class HomeClientFolderController {
         //initView();
         initButtonsActions();
         initTextFieldForNumbers();
+        initReste();
     }    
     
+    public void initReste(){
+        long toBuy = (long)(currentFolder.getHonoraires() - calcMontantPaiementActu(0));
+        reste_label.setText(String.valueOf(toBuy)+" FCFA");
+    }
     public void initTable(){
         date_tableColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         heure_tableColumn.setCellValueFactory(new PropertyValueFactory<>("heure"));
-        montant_tableColumn.setCellValueFactory(new PropertyValueFactory<>("montant"));
+        montant_tableColumn.setCellValueFactory(value -> new ReadOnlyObjectWrapper<Long>((long)value.getValue().getMontant()));
         paiements_tableView.setItems(FXCollections.observableList(Payement.listByDossier(currentFolder)));
     }
     public void initView(){
         namesClient_label.setText(dossier.getClient().getNom().toUpperCase());
         surnamesClient_label.setText(dossier.getClient().getPrenom().toUpperCase());
         nameAdv_label.setText(dossier.getAdversaire().getNom().toUpperCase());
-        provisions_label.setText(String.valueOf((int)dossier.getProvisions())+" FCFA");
+        provisions_label.setText(String.valueOf((long)dossier.getProvisions())+" FCFA");
         dateOpenFolder_label.setText(String.valueOf(dossier.getDateOuverture()));
         typeAff_label.setText(dossier.getTypeAffaire());
-        honoraires_label.setText(String.valueOf((int)dossier.getHonoraires())+" FCFA");
+        honoraires_label.setText(String.valueOf((long)dossier.getHonoraires())+" FCFA");
         qualite_label.setText(dossier.getQualite());
         juridiction_label.setText(dossier.getJuridiction());
     }
@@ -118,13 +128,26 @@ public class HomeClientFolderController {
         savePaiement_button.setOnAction(e -> {
             if(checkIfNoEmptyField()){
                 if(LocalDateTime.of(datePaiement_datePicker.getValue(), heurePaiement_timePicker.getValue()).isAfter(LocalDateTime.now())){
-                    
+                        Alert al = new Alert(Alert.AlertType.WARNING);
+                        al.setContentText("Vous ne pouvez pas enregistrer un paiement à une date ultérieure à la date actuelle.");
+                        al.setHeaderText("ERREUR DATE");
+                        al.show();
                 }
                 else{
-                    Payement paye = new Payement(Integer.valueOf(montantPaiement_textField.getText()), 
-                    currentFolder , datePaiement_datePicker.getValue(), heurePaiement_timePicker.getValue() );
-                    paye.save();
-                    paiements_tableView.getItems().add(paye);
+                    if(calcMontantPaiementActu(Long.valueOf(montantPaiement_textField.getText())) > currentFolder.getHonoraires()){
+                        Alert al = new Alert(Alert.AlertType.WARNING);
+                        al.setContentText("La valeur totale des paiements n'est pas censée dépasser celle des honoraires.");
+                        al.setHeaderText("VALEUR DE CHAMP ERRONEE");
+                        al.show();
+                    }
+                    else{
+                        Payement paye = new Payement(Long.valueOf(montantPaiement_textField.getText()), 
+                        currentFolder , datePaiement_datePicker.getValue(), heurePaiement_timePicker.getValue() );
+                        resteapayer = currentFolder.getHonoraires() - calcMontantPaiementActu(Long.valueOf(montantPaiement_textField.getText()));
+                        reste_label.setText(String.valueOf((long)resteapayer)+" FCFA");
+                        paye.save();
+                        paiements_tableView.getItems().add(paye);
+                    }                 
                 }
             }
             else {
@@ -137,9 +160,7 @@ public class HomeClientFolderController {
         paiements_tableView.setOnKeyPressed((KeyEvent t)-> {
             KeyCode key=t.getCode();
             Payement paye = paiements_tableView.getSelectionModel().getSelectedItem();
-            if(paye != null){
-                
-                
+            if(paye != null){      
                 if (key==KeyCode.DELETE){
                     Alert dialogConfirm = new Alert(Alert.AlertType.CONFIRMATION);
                     dialogConfirm.setTitle("Confirmation suppression");
@@ -148,6 +169,8 @@ public class HomeClientFolderController {
                     Optional<ButtonType> answer = dialogConfirm.showAndWait();
                     if (answer.get() == ButtonType.OK) {
                             paiements_tableView.getItems().remove(paye);
+                            resteapayer = currentFolder.getHonoraires() - calcMontantPaiementActu(0) + paye.getMontant();
+                            reste_label.setText(String.valueOf((long)resteapayer) +" FCFA");
                             paye.delete();
                       }
                 }
@@ -157,12 +180,20 @@ public class HomeClientFolderController {
     public void initTextFieldForNumbers(){
         UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
             String newText = t.getControlNewText() ;
-            if(newText.matches("-?[0-9]*")) {
+            if(newText.matches("([1-9][0-9]*)*") && newText.length() <= 13 ) {
                 return t ;
             }
             return null ;            
         };
         montantPaiement_textField.setTextFormatter(new TextFormatter<>(filter));
+    }
+    
+    public double calcMontantPaiementActu(double nveauMontant){
+        double paye = 0;
+        List<Payement> payeList = Payement.listByDossier(currentFolder);
+        for (int i = 0; i< payeList.size(); i++)
+            paye += payeList.get(i).getMontant();         
+        return paye+nveauMontant;
     }
 
 }

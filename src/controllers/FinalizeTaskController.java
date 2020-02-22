@@ -47,7 +47,7 @@ public class FinalizeTaskController  {
             if(depenses_textField.getText().equals(""))
                 op.setDepenses(0);
             else{
-                op.setDepenses(Integer.valueOf(depenses_textField.getText()));   
+                op.setDepenses(Long.valueOf(depenses_textField.getText()));   
             }
             op.update();
             ((TaskDoneController)tasksPassed.getController()).updateListView(op);
@@ -59,7 +59,7 @@ public class FinalizeTaskController  {
     public void initTextFieldForNumbers(){
         UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
             String newText = t.getControlNewText() ;
-            if(newText.matches("-?[0-9]*")) {
+            if(newText.matches("-?[0-9]*") && newText.length() <= 13) {
                 return t ;
             }
             return null ;
