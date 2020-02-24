@@ -97,7 +97,7 @@ public class CreateFolderController {
         initComboBox();
         initTextFieldForNumbers();
         initButtonsActions();
-        checkNoEmptyField();
+        setValidators();
         initTextField();
         initPhoneNumberField();
         initLimitLenghtEmail();
@@ -112,20 +112,21 @@ public class CreateFolderController {
         clientListStage.setScene(new Scene(rootClientList));
         save_button.setOnAction(e -> {
             if(this.checkNoEmptyField()){
-                Client client = this.clientChoice == null ? new Client(telephoneClient_textField.getText(),
-                                           emailClient_textField.getText(),
-                                           adresseClient_textField.getText(),
-                                           nomsClient_textField.getText(),
-                                           prenomsClient_textField.getText(),
+                Client client = this.clientChoice == null ? new Client(removeLeadingEmptySpace(telephoneClient_textField.getText()),
+                                           removeLeadingEmptySpace(emailClient_textField.getText()),
+                                           removeLeadingEmptySpace(adresseClient_textField.getText()),
+                                           removeLeadingEmptySpace(nomsClient_textField.getText()),
+                                           removeLeadingEmptySpace(prenomsClient_textField.getText()),
                                             "cni") : this.clientChoice;
                 Dossier doc = new Dossier();
                 int nbDoc = Dossier.listByClient(client) == null ? 0 : Dossier.listByClient(client).size();
-                String dirName0 = "F:\\Dossiers Clients\\DOSSIER "+nomsClient_textField.getText().toUpperCase()+" "+prenomsClient_textField.getText().toUpperCase();
+                String dirName0 = "F:\\Dossiers Clients\\DOSSIER "+removeLeadingEmptySpace(nomsClient_textField.getText().toUpperCase())+" "+
+                        removeLeadingEmptySpace(prenomsClient_textField.getText().toUpperCase());
                 String dirName = nbDoc == 0 ? dirName0 : dirName0+" "+String.valueOf(nbDoc+1);
                 File dir = new File(dirName);
                 boolean isCreated = dir.mkdirs();
                 client.save();
-                Adversaire adv  = new Adversaire(nomAdvers_textField.getText(), "", "cni");
+                Adversaire adv  = new Adversaire(removeLeadingEmptySpace(nomAdvers_textField.getText()), "", "cni");
                 adv.save();
                 doc.setCheminDossier(dirName);
                 doc.setClient(client);
@@ -185,6 +186,28 @@ public class CreateFolderController {
     
     public boolean checkNoEmptyField(){
     
+        
+        String combo1 = qualiteAvocat_comboBox.getSelectionModel().getSelectedItem();
+        String combo2 = typeAffaire_comboBox.getSelectionModel().getSelectedItem();
+        String combo3 = juridiction_comboBox.getSelectionModel().getSelectedItem();
+         
+        return 
+          (    
+               combo1 != null
+            && combo2 != null
+            && combo3 != null
+            && nomsClient_textField.validate() 
+            && prenomsClient_textField.validate() 
+            && adresseClient_textField.validate()
+            && honoraires_textField.validate()
+            && provisions_textField.validate()
+            && nomAdvers_textField.validate()
+            && emailClient_textField.validate()
+            && telephoneClient_textField.validate()
+          );
+       }
+    
+    public void setValidators(){
         ValidatorBase requireNom = new RequiredFieldValidator();
         ValidatorBase requirePrenom = new RequiredFieldValidator();
         ValidatorBase requireAddrClient = new RequiredFieldValidator();
@@ -208,11 +231,6 @@ public class CreateFolderController {
         requireEmail.setMessage("Ce champ ne doit pas être vide");
         emailClient_textField.getValidators().addAll(requireEmail,emailValidator);
 
-       /* emailClient_textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                emailClient_textField.validate();
-            }
-        });*/
         emailClient_textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!(newValue.equals(oldValue))) {
                 emailClient_textField.validate();
@@ -225,27 +243,7 @@ public class CreateFolderController {
         putTextFieldValidator(telephoneClient_textField, requireTelephone);      
         putTextFieldValidator(provisions_textField, requireProvisions);
         putTextFieldValidator(nomAdvers_textField, requireNomAdv);
-        
-        String combo1 = qualiteAvocat_comboBox.getSelectionModel().getSelectedItem();
-        String combo2 = typeAffaire_comboBox.getSelectionModel().getSelectedItem();
-        String combo3 = juridiction_comboBox.getSelectionModel().getSelectedItem();
-         
-        return 
-          (    
-               combo1 != null
-            && combo2 != null
-            && combo3 != null
-            && nomsClient_textField.validate() 
-            && prenomsClient_textField.validate() 
-            && adresseClient_textField.validate()
-            && honoraires_textField.validate()
-            && provisions_textField.validate()
-            && nomAdvers_textField.validate()
-            && emailClient_textField.validate()
-            && telephoneClient_textField.validate()
-          );
-       }
-    
+    }
     public void initTextField(){
         UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
             String newText = t.getControlNewText();
@@ -265,7 +263,7 @@ public class CreateFolderController {
     public void initLimitLenghtEmail(){
         UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
             String newText = t.getControlNewText();
-            if(newText.length()< 150) {
+            if(newText.length()< 100) {
                 return t ;
             }
             return null ;
@@ -276,7 +274,7 @@ public class CreateFolderController {
     public void initPhoneNumberField(){
         UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
             String newText = t.getControlNewText() ;
-            if(newText.matches("^[0-9]*") && newText.length()< 18) {
+            if(newText.matches("[0-9]*") && newText.length()< 18) {
                 return t ;
             }
             return null ;
@@ -292,7 +290,23 @@ public class CreateFolderController {
             }
             return null ;
         };
+        
+        UnaryOperator<TextFormatter.Change> filterProv = (TextFormatter.Change t) -> {
+            String newText = t.getControlNewText() ;
+            if(newText.matches("([1-9][0-9]*)*|[0]") && newText.length() <= 13) {
+                return t ;
+            }
+            return null ;
+        };    
      honoraires_textField.setTextFormatter(new TextFormatter<>(filter));
-     provisions_textField.setTextFormatter(new TextFormatter<>(filter));
+     provisions_textField.setTextFormatter(new TextFormatter<>(filterProv));
+    }
+    
+    public String removeLeadingEmptySpace(String s) {
+        StringBuilder sb = new StringBuilder(s);
+        while (sb.length() > 1 && sb.charAt(sb.length()-1) == ' ') {
+            sb.deleteCharAt(sb.length()-1);
+        }
+        return sb.toString();
     }
 }

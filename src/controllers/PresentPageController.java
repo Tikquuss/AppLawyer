@@ -34,13 +34,16 @@ public class PresentPageController {
     
     private Parent clientList, archDocs, home;
     
-    public static FXMLLoader homeLoader;
+    public static FXMLLoader homeLoader, clientListLoader, endedFoldersLoader;
     
     @FXML
     public void initialize() throws IOException{
-        clientList = FXMLLoader.load(getClass().getResource("../views/ClientsList.fxml"));
+        clientListLoader = new FXMLLoader(getClass().getResource("../views/ClientsList.fxml"));
         homeLoader = new FXMLLoader(getClass().getResource("../views/CurrentFolders.fxml"));
+        endedFoldersLoader = new FXMLLoader(getClass().getResource("../views/EndedFolders.fxml"));
         home = homeLoader.load();
+        clientList = clientListLoader.load();
+        archDocs = endedFoldersLoader.load();
         this.add(home);
         initButtonsActions();
         
@@ -62,7 +65,7 @@ public class PresentPageController {
             this.add(clientList);
         });
         archDoc_button.setOnAction( e -> {
-            
+            this.add(archDocs);
         });
         
     }

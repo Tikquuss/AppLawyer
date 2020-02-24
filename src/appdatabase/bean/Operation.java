@@ -187,9 +187,10 @@ public class Operation implements Serializable {
     }
     
     public static Operation getById(long id){
-        List <Operation> list = getDAO().LoadByAtt(Operation.class, "ID", id);
-        if(!list.isEmpty())
+        List <Operation> list = getDAO().LoadByAtt(Operation.class, "id", id);
+        if(!list.isEmpty()){
             return list.get(0);
+        }
         return new Operation();
     }
     @Override

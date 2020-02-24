@@ -18,7 +18,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import static controllers.PresentPageController.homeLoader;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
@@ -51,8 +59,9 @@ public class ClientsListController {
     private JFXTextField search_textField;
     
     @FXML
-    private JFXButton choiceClient_button;
+    private JFXButton modifClient_button;
     
+    public static Stage modifClientStage;
     
     
     public void initialize() {
@@ -60,6 +69,7 @@ public class ClientsListController {
        search_textField.textProperty().addListener((observable, oldValue, newValue) -> {
             clientsList_tableView.setItems(FXCollections.observableArrayList(Client.filtrer(search_textField.getText())));
        });
+       initButtonAction();
     }    
     public void initTable(){
         noms_column.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -68,7 +78,7 @@ public class ClientsListController {
         adresse_column.setCellValueFactory(new PropertyValueFactory<>("adresse"));
         telephone_column.setCellValueFactory(new PropertyValueFactory<>("telephone"));
         
-        noms_column.setCellFactory(TextFieldTableCell.forTableColumn());
+        /*noms_column.setCellFactory(TextFieldTableCell.forTableColumn());
         prenoms_column.setCellFactory(TextFieldTableCell.forTableColumn());
         email_column.setCellFactory(TextFieldTableCell.forTableColumn());
         adresse_column.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -83,12 +93,7 @@ public class ClientsListController {
                 Dossier doc = listDossier.get(ind);
                 String pathDoc0 = "F:\\Dossiers Clients\\DOSSIER "+doc.getClient().getNom().toUpperCase()+" "+doc.getClient().getPrenom().toUpperCase();
                 String pathDoc = ind == 0 ? pathDoc0 : pathDoc0 + " " + String.valueOf(ind+1);                
-                /*Document.listByDossier(doc).forEach(a -> {
-                a.setFichier(pathDoc+"\\"+a.getNom());
-                a.update();
-                });
-                ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).setNom(removeLeadingEmptySpace(event.getNewValue()));
-                ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).update();*/
+
                 String newPathDoc0 = "F:\\Dossiers Clients\\DOSSIER "+client.getNom().toUpperCase()+" "+client.getPrenom().toUpperCase(); 
                 String newPathDoc = ind == 0 ? newPathDoc0 : newPathDoc0+" "+String.valueOf(ind+1);
                 Document.listByDossier(doc).forEach(a -> {
@@ -113,12 +118,7 @@ public class ClientsListController {
                 Dossier doc = listDossier.get(ind);
                 String pathDoc0 = "F:\\Dossiers Clients\\DOSSIER "+doc.getClient().getNom().toUpperCase()+" "+doc.getClient().getPrenom().toUpperCase();
                 String pathDoc = ind == 0 ? pathDoc0 : pathDoc0 + " " + String.valueOf(ind+1);
-                /* Document.listByDossier(doc).forEach(a -> {
-                a.setFichier(pathDoc+"\\"+a.getNom());
-                a.update();
-                });*/
-                /*((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).setPrenom(removeLeadingEmptySpace(event.getNewValue()));
-                ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).update();*/
+
                 String newPathDoc0 = "F:\\Dossiers Clients\\DOSSIER "+client.getNom().toUpperCase()+" "+client.getPrenom().toUpperCase();
                 String newPathDoc = ind == 0 ? newPathDoc0 : newPathDoc0+" "+String.valueOf(ind+1);
                 Document.listByDossier(doc).forEach(a -> {
@@ -146,16 +146,35 @@ public class ClientsListController {
             ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).update();
             ((CurrentFoldersController)homeLoader.getController()).initListView();
         });
+        clientsList_tableView.setEditable(true);*/
         clientsList_tableView.setItems(FXCollections.observableArrayList(Client.all()));
-        clientsList_tableView.setEditable(true);
+        
 
     }
-    public String removeLeadingEmptySpace(String s) {
-    StringBuilder sb = new StringBuilder(s);
-    while (sb.length() > 1 && sb.charAt(0) == ' ') {
-        sb.deleteCharAt(0);
-    }
-    return sb.toString();
-    }
     
+    public void initButtonAction(){
+        modifClient_button.setOnAction(e -> {
+            
+            Client client = clientsList_tableView.getSelectionModel().getSelectedItem();
+            if(client != null){
+                modifClientStage = new Stage();
+                FXMLLoader modifClientLoader  = new FXMLLoader(getClass().getResource("../views/ModifClient.fxml"));
+                try {
+                    Parent modifClientRoot = modifClientLoader.load();
+                    ((ModifClientController)modifClientLoader.getController()).setClient(client);
+                    modifClientStage.setScene(new Scene(modifClientRoot));
+                    modifClientStage.setResizable(false);
+                    modifClientStage.initModality(Modality.APPLICATION_MODAL);
+                    modifClientStage.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(ClientsListController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+        });
+    }
+
+    public void displaySelectionError(){
+        
+    }
 }

@@ -27,6 +27,8 @@ import java.util.Optional;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 /**
  *
@@ -60,6 +62,7 @@ public class DocumentsController {
         this.initButtonsActions();
         this.manageTable();    
         this.checkIfDocExist();
+        this.initKeyBoardsActions();
     }
     public void checkIfDocExist(){
         Document.listByDossier(currentFolder).forEach(doc -> {
@@ -80,57 +83,77 @@ public class DocumentsController {
            stageNewDoc.show();
         });
         openDoc_button.setOnAction(event -> {
-            Document doc = documents_tableView.getSelectionModel().getSelectedItem();
-            if(doc != null){
-                String absPath = doc.getFichier();
-                Desktop desk = Desktop.getDesktop();
-                try {
-                    File file = new File(absPath);
-                    if(file.exists())
-                        desk.open(new File(absPath));
-                    else{
-                        Alert al = new Alert(Alert.AlertType.WARNING);
-                        al.setHeaderText("FICHIER NON EXISTANT");
-                        al.setContentText("Ce fichier n'existe plus. Il a pu être supprimé.");
-                        al.show();
-                    }
-                } catch (IOException ex) {
-                    Logger.getLogger(DocumentsController.class.getName()).log(Level.SEVERE, null, ex);
-                }   
-            }
-            else{
-                displaySelectionError();
-            }
-
+            openDocAction();
         });
         suppDoc_button.setOnAction(e -> {
-            Document doc = documents_tableView.getSelectionModel().getSelectedItem();
-            if(doc != null){
-                Alert dialogConfirm = new Alert(Alert.AlertType.CONFIRMATION);
-                dialogConfirm.setTitle("Confirmation de suppression");
-                dialogConfirm.setHeaderText("Confirmation de suppression du document");
-                dialogConfirm.setContentText("Voulez vous vraiment supprimer ce doument ??");
-                Optional<ButtonType> answer = dialogConfirm.showAndWait();
-                if (answer.get() == ButtonType.OK) {
-                      File file = new File(doc.getFichier());
-                      if(file.exists()){                       
-                          if(file.delete() && doc.delete())
-                              documents_tableView.getItems().remove(doc);
-                      }                       
-                      else{
-                          Alert al = new Alert(Alert.AlertType.WARNING);
-                          al.setHeaderText("FICHIER NON EXISTANT");
-                          al.setContentText("Ce fichier n'existe plus. Il a pu être supprimé.");
-                          al.show();
-                      }
-                }                
+            supDocAction();
+        });
+        
+    }
+    public void initKeyBoardsActions(){
+        documents_tableView.setOnKeyPressed((KeyEvent t) ->{
+            KeyCode key=t.getCode();
+            if(key == KeyCode.ENTER){
+                openDocAction();
             }
-            else{
-                displaySelectionError();
+            else if(key == KeyCode.DELETE){
+                supDocAction();
             }
         });
+        
     }
     
+    public void supDocAction(){
+        Document doc = documents_tableView.getSelectionModel().getSelectedItem();
+        if(doc != null){
+            Alert dialogConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+            dialogConfirm.setTitle("Confirmation de suppression");
+            dialogConfirm.setHeaderText("Confirmation de suppression du document");
+            dialogConfirm.setContentText("Voulez vous vraiment supprimer ce doument ??");
+            Optional<ButtonType> answer = dialogConfirm.showAndWait();
+            if (answer.get() == ButtonType.OK) {
+                  File file = new File(doc.getFichier());
+                  if(file.exists()){                       
+                      if(file.delete() && doc.delete())
+                          documents_tableView.getItems().remove(doc);
+                  }                       
+                  else{
+                      Alert al = new Alert(Alert.AlertType.WARNING);
+                      al.setHeaderText("FICHIER NON EXISTANT");
+                      al.setContentText("Ce fichier n'existe plus. Il a pu être supprimé.");
+                      al.show();
+                  }
+            }                
+        }
+        else{
+            displaySelectionError();
+        }
+    }
+    
+    public void openDocAction(){
+        Document doc = documents_tableView.getSelectionModel().getSelectedItem();
+        if(doc != null){
+            String absPath = doc.getFichier();
+            Desktop desk = Desktop.getDesktop();
+            try {
+                File file = new File(absPath);
+                if(file.exists())
+                    desk.open(new File(absPath));
+                else{
+                    Alert al = new Alert(Alert.AlertType.WARNING);
+                    al.setHeaderText("FICHIER NON EXISTANT");
+                    al.setContentText("Ce fichier n'existe plus. Il a pu être supprimé.");
+                    al.show();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(DocumentsController.class.getName()).log(Level.SEVERE, null, ex);
+            }   
+        }
+        else{
+            displaySelectionError();
+        }
+
+    }
     public void manageTable(){
         nomDoc_tableColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         typeDoc_tableColumn.setCellValueFactory(value -> {

@@ -16,7 +16,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import static controllers.CurrentFoldersController.newFoldLoader;
 import static controllers.CreateFolderController.clientListStage;
+import java.util.function.UnaryOperator;
 import javafx.event.ActionEvent;
+import javafx.scene.control.TextFormatter;
 /**
  *
  * @author Utilisateur
@@ -54,7 +56,8 @@ public class ClientsList2Controller {
     
     public void initialize() {
        initTable();
-       initButtonsActions();
+       initActions();
+       limitTextEnters();
     }    
     public void initTable(){
         noms_column.setCellValueFactory(new PropertyValueFactory<Client, String>("nom"));
@@ -63,17 +66,11 @@ public class ClientsList2Controller {
         adresse_column.setCellValueFactory(new PropertyValueFactory<Client, String>("adresse"));
         telephone_column.setCellValueFactory(new PropertyValueFactory<Client, String>("telephone"));
         
-        noms_column.setCellFactory(TextFieldTableCell.forTableColumn());
-        prenoms_column.setCellFactory(TextFieldTableCell.forTableColumn());
-        email_column.setCellFactory(TextFieldTableCell.forTableColumn());
-        adresse_column.setCellFactory(TextFieldTableCell.forTableColumn());
-        telephone_column.setCellFactory(TextFieldTableCell.forTableColumn());
-        
         clientsList_tableView.setItems(FXCollections.observableArrayList(Client.all()));
 
     }
     
-    public void initButtonsActions(){
+    public void initActions(){
         choiceClient_button.setOnAction((ActionEvent e) -> {
             Client client = clientsList_tableView.getSelectionModel().getSelectedItem();
             if(client != null){
@@ -85,5 +82,18 @@ public class ClientsList2Controller {
             clientsList_tableView.setItems(FXCollections.observableArrayList(Client.filtrer(search_textField.getText())));
         });
     }
+    
+    public void limitTextEnters(){
+            UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
+            String newText = t.getControlNewText();
+            if( newText.length()< 40) {
+                return t ;
+            }
+            return null ;
+        };
+        search_textField.setTextFormatter(new TextFormatter<>(filter));
+    }
+    
+    
     
 }

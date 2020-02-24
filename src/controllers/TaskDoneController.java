@@ -19,6 +19,8 @@ import static controllers.CurrentFoldersController.currentFolder;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -62,17 +64,15 @@ public class TaskDoneController{
         editTaskStage.initModality(Modality.APPLICATION_MODAL);
         manageTable();
         voirPlus_button.setOnAction(event -> {
-                Operation op = listeOperation_tableView.getSelectionModel().getSelectedItem();
-                if (op != null){                   
-                    ((EditTaskController)editTaskLoader.getController()).setContent(op);
-                    ((EditTaskController)editTaskLoader.getController()).initView();
-                    editTaskStage.show();
+            openTasksDetails();
+        });
+        listeOperation_tableView.setOnKeyPressed((KeyEvent t) ->{
+            KeyCode key=t.getCode();
+            if(key == KeyCode.ENTER){
+                    openTasksDetails();
                 }
-                else{
-                    displaySelectionError();
-                }
-        });  
-    }   
+            });
+        }   
     public void manageTable(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         tache_tableColumn.setCellValueFactory(new PropertyValueFactory<Operation, String>("tache"));
@@ -92,5 +92,18 @@ public class TaskDoneController{
         al.setContentText("Vous n'avez sélectionné aucune tâche!");
         al.setHeaderText("AUCUNE TACHE SELECTIONNEE");
         al.show();
+    }
+    
+    
+    public void openTasksDetails(){
+        Operation op = listeOperation_tableView.getSelectionModel().getSelectedItem();
+        if (op != null){                   
+            ((EditTaskController)editTaskLoader.getController()).setContent(op);
+            ((EditTaskController)editTaskLoader.getController()).initView();
+            editTaskStage.show();
+        }
+        else{
+            displaySelectionError();
+        }
     }
 }

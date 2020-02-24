@@ -80,7 +80,7 @@
                   </TableView>
                   <Label alignment="CENTER" layoutX="25.0" layoutY="466.0" prefHeight="156.0" prefWidth="410.0" styleClass="small-label" text="Pour enregistrer un nouveau paiement, remplissez les champs ci-dessous puis cliquez sur Enregistrer. Si vous ne rensignez pas de date ni d'heure, l'heure et la date prises en compte seront l'heure et la date actuelles." wrapText="true" AnchorPane.bottomAnchor="372.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" />
                   <Label layoutX="40.0" layoutY="380.0" prefHeight="50.0" prefWidth="222.0" styleClass="small-label" stylesheets="@../ressources/css/style.css" text="Reste à payer :" AnchorPane.topAnchor="400.0" />
-                  <Label fx:id="reste_label" layoutX="308.0" layoutY="400.0" prefHeight="50.0" prefWidth="235.0" styleClass="small-label" AnchorPane.topAnchor="400.0" />
+                  <Label fx:id="reste_label" layoutX="250.0" layoutY="400.0" prefHeight="50.0" prefWidth="300.0" styleClass="small-label" AnchorPane.topAnchor="400.0" />
                </children>
             </AnchorPane>
          </children>

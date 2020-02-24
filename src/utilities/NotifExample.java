@@ -8,8 +8,6 @@ package utilities;
 
 import appdatabase.bean.Operation;
 import com.sun.javafx.geom.Rectangle;
-import java.awt.AWTException;
-import java.awt.SystemTray;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Timer;
@@ -22,6 +20,7 @@ import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import org.controlsfx.control.action.Action;
 
 /**
  *
@@ -67,15 +66,17 @@ public class NotifExample {
             }
         }, Timeinterval, Timeinterval);
       }
+   
     public static void setAlarmTask(LocalDateTime datetime, Operation ope){
         Date desiredDate = new Date(datetime.getYear()-1900, datetime.getMonthValue()-1, datetime.getDayOfMonth(), datetime.getHour()-1, datetime.getMinute()+1);
         long delay = desiredDate.getTime() - System.currentTimeMillis();
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.schedule(new Runnable(){ @Override
             public void run() {
-                //timerallfeaturesrepeating(11000, task, datetime);
-                    
-                  showNotification(ope.getTache()+" (tâche APPLAWYER)","Vous avez une tâche prévue à "+datetime.toLocalTime(), Duration.seconds(100), "INFORMATION");
+                Operation op2 = Operation.getById(ope.getId());
+                if(op2.getEtat().equals("En attente"))
+                //timerallfeaturesrepeating(11000, task, datetime);                   
+                  showNotification(ope.getTache()+" (tâche APPLAWYER)","Vous avez une tâche prévue à "+datetime.toLocalTime(), Duration.minutes(15), "INFORMATION");
                     
             }
                 }, delay, TimeUnit.MILLISECONDS);

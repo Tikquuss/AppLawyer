@@ -22,7 +22,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <JFXButton fx:id="choiceClient_button" layoutX="568.0" layoutY="741.0" prefHeight="40.0" prefWidth="200.0" styleClass="pretty-button-rounded" text="Choisir" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="250.0" />
+      <JFXButton fx:id="modifClient_button" layoutX="568.0" layoutY="741.0" prefHeight="40.0" prefWidth="200.0" styleClass="pretty-button-rounded" text="Modifier" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="250.0" />
       <JFXTextField fx:id="search_textField" labelFloat="true" layoutX="673.0" layoutY="75.0" promptText="Rechercher" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="75.0" />
    </children>
 </AnchorPane>

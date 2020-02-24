@@ -111,9 +111,9 @@ public class TaskToLaterController  {
             }
             else{
                 Alert al = new Alert(Alert.AlertType.WARNING);
-                    al.setContentText("Veuillez remplir ces 03 champs s'il vous plait");
-                    al.setHeaderText("CHAMPS VIDES");
-                    al.show();
+                al.setContentText("Veuillez remplir ces 03 champs s'il vous plait");
+                al.setHeaderText("CHAMPS VIDES");
+                al.show();
             }
         });
         

@@ -15,7 +15,7 @@ import javafx.stage.StageStyle;
 
 public class AppLawyer extends Application {
 
-    public static Stage stage = new Stage();
+    public static Stage stage;
     private FXMLLoader  homeForFolder;
     
     @Override
@@ -31,5 +31,4 @@ public class AppLawyer extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
 }
