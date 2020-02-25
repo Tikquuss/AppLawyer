@@ -7,7 +7,6 @@ package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.util.function.UnaryOperator;
@@ -29,6 +28,7 @@ import static main.AppLawyer.stage;
  * @author Utilisateur
  */
 public class ConnexionController {
+    
     @FXML
     private JFXTextField username_textField;
 
@@ -40,9 +40,7 @@ public class ConnexionController {
     
     @FXML
     private AnchorPane form_anchorPane;
-     
-    @FXML
-    private JFXSpinner spinner;
+
     
     public static Scene presentPageScene;
     private Parent presentPageRoot;
@@ -52,7 +50,6 @@ public class ConnexionController {
     public void initialize(){
        initButtonsActions();
        initTextField();
-       spinner.setVisible(false);
     }
     
     public void initButtonsActions(){
