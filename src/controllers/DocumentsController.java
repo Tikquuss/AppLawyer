@@ -27,6 +27,7 @@ import java.util.Optional;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableRow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -63,6 +64,8 @@ public class DocumentsController {
         this.manageTable();    
         this.checkIfDocExist();
         this.initKeyBoardsActions();
+        this.hideProperties();
+        this.activedoubleclick();
     }
     public void checkIfDocExist(){
         Document.listByDossier(currentFolder).forEach(doc -> {
@@ -71,6 +74,13 @@ public class DocumentsController {
                   doc.delete();
             }
         });
+    }
+    
+    public void hideProperties(){
+        if(currentFolder.getStatut().equals("Archivé")){
+            suppDoc_button.setVisible(false);
+            newDoc_button.setVisible(false);
+        }
     }
     
     public void initButtonsActions()  throws IOException{
@@ -90,6 +100,18 @@ public class DocumentsController {
         });
         
     }
+    
+    public void activedoubleclick(){
+        documents_tableView.setRowFactory(tv -> {
+            TableRow<Document> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    openDocAction();
+                }
+            });
+             return row;       
+        });
+    }
     public void initKeyBoardsActions(){
         documents_tableView.setOnKeyPressed((KeyEvent t) ->{
             KeyCode key=t.getCode();
@@ -97,7 +119,8 @@ public class DocumentsController {
                 openDocAction();
             }
             else if(key == KeyCode.DELETE){
-                supDocAction();
+                if(currentFolder.getStatut().equals("En cours"))
+                     supDocAction();
             }
         });
         

@@ -14,6 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import static controllers.TaskDoneController.editTaskStage;
+import static controllers.CurrentFoldersController.currentFolder;
 /**
  * FXML Controller class
  *
@@ -48,6 +49,7 @@ public class EditTaskController {
             editTaskStage.close();
         });     
         initTextFieldForNumbers();
+        disableFields();
     }    
     
     public void initTextFieldForNumbers(){
@@ -71,5 +73,13 @@ public class EditTaskController {
         this.depenses_textField.setText(String.valueOf((int)operation.getDepenses()));
         this.dateHeureFin_label.setText(operation.dateFormatter(operation.getDateFin()));
         this.datePrevue_label.setText(operation.dateFormatter(operation.getDate()));
+    }
+    
+    public void disableFields(){
+        if(currentFolder.getStatut().equals("Archivé")){
+            this.depenses_textField.setDisable(true);
+            this.compteRendu_textArea.setDisable(true);
+            modifier_button.setVisible(false);
+        }
     }
 }

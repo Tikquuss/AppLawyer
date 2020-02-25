@@ -8,6 +8,7 @@ package controllers;
 import appdatabase.bean.Client;
 import appdatabase.bean.Document;
 import appdatabase.bean.Dossier;
+import appdatabase.bean.Operation;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
@@ -25,6 +26,8 @@ import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableRow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
@@ -63,6 +66,9 @@ public class ClientsListController {
     
     public static Stage modifClientStage;
     
+    private FXMLLoader modifClientLoader;
+    private Parent modifClientRoot;
+    
     
     public void initialize() {
        initTable();
@@ -70,6 +76,7 @@ public class ClientsListController {
             clientsList_tableView.setItems(FXCollections.observableArrayList(Client.filtrer(search_textField.getText())));
        });
        initButtonAction();
+       activeDoubleClickOnTableV();
     }    
     public void initTable(){
         noms_column.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -153,14 +160,18 @@ public class ClientsListController {
     }
     
     public void initButtonAction(){
-        modifClient_button.setOnAction(e -> {
-            
-            Client client = clientsList_tableView.getSelectionModel().getSelectedItem();
+        modifClient_button.setOnAction(e -> {          
+              openStageModifClient();
+        });
+    }
+
+    public void openStageModifClient(){
+        Client client = clientsList_tableView.getSelectionModel().getSelectedItem();
             if(client != null){
                 modifClientStage = new Stage();
-                FXMLLoader modifClientLoader  = new FXMLLoader(getClass().getResource("../views/ModifClient.fxml"));
+                modifClientLoader  = new FXMLLoader(getClass().getResource("../views/ModifClient.fxml"));
                 try {
-                    Parent modifClientRoot = modifClientLoader.load();
+                    modifClientRoot = modifClientLoader.load();
                     ((ModifClientController)modifClientLoader.getController()).setClient(client);
                     modifClientStage.setScene(new Scene(modifClientRoot));
                     modifClientStage.setResizable(false);
@@ -170,11 +181,26 @@ public class ClientsListController {
                     Logger.getLogger(ClientsListController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
-        });
+            else{
+                displaySelectionError();
+            }        
     }
-
     public void displaySelectionError(){
-        
+        Alert al = new Alert(Alert.AlertType.ERROR);
+        al.setContentText("Vous n'avez sélectionné aucun client !");
+        al.setHeaderText("AUCUN CLIENT SELECTIONNE");
+        al.show();
+    }
+    
+    public void activeDoubleClickOnTableV(){
+        clientsList_tableView.setRowFactory(tv -> {
+            TableRow<Client> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    openStageModifClient();
+                }
+            });
+             return row;       
+        });
     }
 }

@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import appdatabase.bean.Document;
 import appdatabase.bean.Operation;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import static controllers.CurrentFoldersController.currentFolder;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
@@ -57,11 +59,7 @@ public class TaskDoneController{
     }
     @FXML
     public void initialize() throws IOException {
-        editTaskStage = new Stage();
-        editTaskLoader = new FXMLLoader(getClass().getResource("../views/EditTask.fxml"));
-        editTaskStage.setScene(new Scene(editTaskLoader.load()));
-        editTaskStage.setResizable(false);
-        editTaskStage.initModality(Modality.APPLICATION_MODAL);
+        initEditTaskStage();
         manageTable();
         voirPlus_button.setOnAction(event -> {
             openTasksDetails();
@@ -72,7 +70,17 @@ public class TaskDoneController{
                     openTasksDetails();
                 }
             });
+        activeDoubleClickOnTableV();
         }   
+    
+    public void initEditTaskStage() throws IOException{
+        editTaskStage = new Stage();
+        editTaskLoader = new FXMLLoader(getClass().getResource("../views/EditTask.fxml"));
+        editTaskStage.setScene(new Scene(editTaskLoader.load()));
+        editTaskStage.setResizable(false);
+        editTaskStage.initModality(Modality.APPLICATION_MODAL);
+    }
+    
     public void manageTable(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         tache_tableColumn.setCellValueFactory(new PropertyValueFactory<Operation, String>("tache"));
@@ -105,5 +113,18 @@ public class TaskDoneController{
         else{
             displaySelectionError();
         }
+    }
+    
+        
+    public void activeDoubleClickOnTableV(){
+        listeOperation_tableView.setRowFactory(tv -> {
+            TableRow<Operation> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    openTasksDetails();
+                }
+            });
+             return row;       
+        });
     }
 }

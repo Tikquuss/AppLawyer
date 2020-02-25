@@ -51,7 +51,7 @@
             <AnchorPane maxWidth="400.0" minHeight="980.0" minWidth="570.0" prefHeight="980.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="450.0" styleClass="labelTitle" text="                   PAIEMENTS" textAlignment="JUSTIFY" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                  <GridPane layoutX="40.0" layoutY="557.0" prefHeight="165.0" prefWidth="400.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+                  <GridPane fx:id="paiementCreate_form" layoutX="40.0" layoutY="557.0" prefHeight="165.0" prefWidth="400.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -78,7 +78,7 @@
                         <TableColumn fx:id="montant_tableColumn" prefWidth="182.0" text="Montant (FCFA)" />
                      </columns>
                   </TableView>
-                  <Label alignment="CENTER" layoutX="25.0" layoutY="466.0" prefHeight="156.0" prefWidth="410.0" styleClass="small-label" text="Pour enregistrer un nouveau paiement, remplissez les champs ci-dessous puis cliquez sur Enregistrer. Si vous ne rensignez pas de date ni d'heure, l'heure et la date prises en compte seront l'heure et la date actuelles." wrapText="true" AnchorPane.bottomAnchor="372.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" />
+                  <Label fx:id="savePaiement_label" alignment="CENTER" layoutX="25.0" layoutY="466.0" prefHeight="156.0" prefWidth="410.0" styleClass="small-label" text="Pour enregistrer un nouveau paiement, remplissez les champs ci-dessous puis cliquez sur Enregistrer. Si vous ne rensignez pas de date ni d'heure, l'heure et la date prises en compte seront l'heure et la date actuelles." wrapText="true" AnchorPane.bottomAnchor="372.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" />
                   <Label layoutX="40.0" layoutY="380.0" prefHeight="50.0" prefWidth="222.0" styleClass="small-label" stylesheets="@../ressources/css/style.css" text="Reste à payer :" AnchorPane.topAnchor="400.0" />
                   <Label fx:id="reste_label" layoutX="250.0" layoutY="400.0" prefHeight="50.0" prefWidth="300.0" styleClass="small-label" AnchorPane.topAnchor="400.0" />
                </children>

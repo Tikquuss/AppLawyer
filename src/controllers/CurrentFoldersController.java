@@ -1,6 +1,7 @@
 package controllers;
 
 import appdatabase.bean.Dossier;
+import appdatabase.bean.Operation;
 import appdatabase.bean.Payement;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
@@ -41,7 +42,8 @@ public class CurrentFoldersController {
     @FXML
     private JFXButton deleteFolder_button;
     
-    private Stage newFolderStage, singleFolderStage;
+    private Stage  singleFolderStage;
+    public static Stage newFolderStage;
     private FXMLLoader homeForFolder, homeClientFolder;
     private Parent root,  newFoldParent, homeClientFolderParent;
     public static Dossier currentFolder;
@@ -54,6 +56,7 @@ public class CurrentFoldersController {
         Dossier.all().forEach( fold -> {
             checkIfFolderExist(fold);
         });
+        activeDoubleClick();
     }
         
     public boolean checkIfFolderExist(Dossier fold){
@@ -79,45 +82,12 @@ public class CurrentFoldersController {
         listFolders_listView.setOnKeyPressed((KeyEvent t)-> {
             KeyCode key=t.getCode();
             if(key == KeyCode.ENTER){
-                Dossier fold   = listFolders_listView.getSelectionModel().getSelectedItem();
-                currentFolder = fold;
-                if(fold != null){
-                    if(checkIfFolderExist(fold))
-                        try {     
-                             makeStageForSingleFolder(fold);
-
-                        } catch (IOException ex) {
-                            Logger.getLogger(CurrentFoldersController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    else{
-                        Alert al = new Alert(Alert.AlertType.WARNING);
-                        al.setContentText("Le chemin vers le repertoire correspondant à ce dossier n'a pas été retrouvé. Il a peut ëtre été supprimé.");
-                        al.show();
-                    }
-                }
-            }
-            
+                openFoldAction();
+            }         
         });
         
-        openFolder_button.setOnAction(event -> {  
-            
-            Dossier fold   = listFolders_listView.getSelectionModel().getSelectedItem();
-            currentFolder = fold;
-            if(fold != null){
-                if(checkIfFolderExist(fold))
-                    try {     
-                         makeStageForSingleFolder(fold);
-
-                    } catch (IOException ex) {
-                        Logger.getLogger(CurrentFoldersController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                else{
-                        displayFolderDontExists();
-                }
-            }
-            else {
-                displayNoFolderSelected();
-            }
+        openFolder_button.setOnAction(event -> {             
+            openFoldAction();
         });
         
         deleteFolder_button.setOnAction(e -> {
@@ -152,10 +122,15 @@ public class CurrentFoldersController {
                             dialogConfirmArch.setContentText("Vous n'avez pas été totalement payé, tenez-vous quand même à archiver ce dossier ??");
                             Optional<ButtonType> answerF = dialogConfirmArch.showAndWait();
                             if (answerF.get() == ButtonType.OK) {
-                                 fold.setStatut("Archivé");
-                                 fold.update();
-                                 listFolders_listView.getItems().remove(fold);
-                                 ((EndedFoldersController)endedFoldersLoader.getController()).initListView();
+                                if(Operation.listByDifEtat("effectuée", currentFolder).isEmpty()){
+                                    fold.setStatut("Archivé");
+                                    fold.update();
+                                    listFolders_listView.getItems().remove(fold);
+                                    ((EndedFoldersController)endedFoldersLoader.getController()).initListView();
+                                    }
+                                else{
+                                        displayTasksDontEnded();
+                                    }
                                 }
                             }
                         else{
@@ -191,6 +166,33 @@ public class CurrentFoldersController {
         singleFolderStage.show();*/
     }
     
+    public void openFoldAction(){
+        Dossier fold   = listFolders_listView.getSelectionModel().getSelectedItem();
+        currentFolder = fold;
+        if(fold != null){
+            if(checkIfFolderExist(fold))
+                try {     
+                     makeStageForSingleFolder(fold);
+
+                } catch (IOException ex) {
+                    Logger.getLogger(CurrentFoldersController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            else{
+                    displayFolderDontExists();
+            }
+        }
+        else {
+            displayNoFolderSelected();
+        }
+    }
+    
+    public void activeDoubleClick(){
+        listFolders_listView.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 2 && event.getTarget() != null)
+                openFoldAction();
+        });
+    }
+    
     public void makeStageForCreateFolder() throws IOException{
         newFolderStage = new Stage();
         newFoldLoader = new FXMLLoader(getClass().getResource("../views/CreateFolder.fxml"));
@@ -224,6 +226,13 @@ public class CurrentFoldersController {
         for (int i = 0; i< payeList.size(); i++)
             paye += payeList.get(i).getMontant();         
         return paye;
+    }
+    
+    public void displayTasksDontEnded(){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("TACHES NON FINALISEES");
+        alert.setContentText("Les tâches programmées n'ont pas toutes été finalisées !");
+        alert.show();
     }
     
 }

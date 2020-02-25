@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import utilities.ViewDimensionner;
+import static controllers.CurrentFoldersController.currentFolder;
 
 
 public class PlanningController {
@@ -36,7 +37,10 @@ public class PlanningController {
         tasksLater = new FXMLLoader(getClass().getResource("../views/TaskToLater.fxml"));
         tasksLaterParent = tasksLater.load();
         tasksPassedParent = tasksPassed.load();
-        this.add(tasksLaterParent);
+        if(currentFolder.getStatut().equals("Archivé"))
+            this.add(tasksPassedParent);
+        else if(currentFolder.getStatut().equals("En cours"))
+            this.add(tasksLaterParent);
         this.initButtonsActions();
     }    
     
@@ -50,12 +54,19 @@ public class PlanningController {
         }        
     }
     public void initButtonsActions(){
-        taskToDone_button.setOnAction(event -> {
+        if(currentFolder.getStatut().equals("En cours")){
+            taskToDone_button.setOnAction(event -> {
             this.add(tasksLaterParent);
-        });
-        taskDone_button.setOnAction(event -> {
-            this.add(tasksPassedParent);
-        });
+            });
+            taskDone_button.setOnAction(event -> {
+                this.add(tasksPassedParent);
+            });
+        }
+        else if(currentFolder.getStatut().equals("Archivé")){
+            taskDone_button.setVisible(false);
+            taskToDone_button.setVisible(false);
+        }
+            
     }
     
 }

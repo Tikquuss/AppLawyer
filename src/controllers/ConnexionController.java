@@ -7,6 +7,7 @@ package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.util.function.UnaryOperator;
@@ -39,58 +40,53 @@ public class ConnexionController {
     
     @FXML
     private AnchorPane form_anchorPane;
+     
+    @FXML
+    private JFXSpinner spinner;
     
     public static Scene presentPageScene;
+    private Parent presentPageRoot;
 
     
     @FXML
     public void initialize(){
        initButtonsActions();
        initTextField();
+       spinner.setVisible(false);
     }
     
     public void initButtonsActions(){
         connect_button.setOnAction(e -> {
-        String username = username_textField.getText();
-        String password = password_textField.getText();
-            if(username.equals("") || password.equals(""))
-                displayEmptyFieldsErrors();
-            else{
-                if(!login())
-                    displayConnexionError();
-                else{
-                    try {
-                        setInitialView();
-                    } catch (IOException ex) {
-                        Logger.getLogger(ConnexionController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
+                loginAction();
         });
         
         form_anchorPane.setOnKeyPressed((KeyEvent t) ->{
             KeyCode key=t.getCode();
             if(key == KeyCode.ENTER){
-                String username = username_textField.getText();
-                String password = password_textField.getText();
-                    if(username.equals("") || password.equals(""))
-                        displayEmptyFieldsErrors();
-                    else{
-                        if(!login())
-                            displayConnexionError();
-                        else{
-                            try {
-                                setInitialView();
-                            } catch (IOException ex) {
-                                Logger.getLogger(ConnexionController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                    }
+                loginAction();
                 }     
         });
     }
     
-        public void initTextField(){
+    public void loginAction(){
+        String username = username_textField.getText();
+        String password = password_textField.getText();
+        if(username.equals("") || password.equals(""))
+            displayEmptyFieldsErrors();
+        else{
+            if(!login())
+                displayConnexionError();
+            else{
+                try {
+                    setInitialView();
+                } catch (IOException ex) {
+                    Logger.getLogger(ConnexionController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
+    public void initTextField(){
         UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
             String newText = t.getControlNewText();
             if(newText.matches("^([^\\s].*)*$") && newText.length()< 50) {
@@ -100,7 +96,7 @@ public class ConnexionController {
             };
         username_textField.setTextFormatter(new TextFormatter<>(filter));
         password_textField.setTextFormatter(new TextFormatter<>(filter));
-        }
+    }
     
     public void displayEmptyFieldsErrors(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -122,7 +118,7 @@ public class ConnexionController {
     
     public void setInitialView() throws IOException{
 
-        Parent presentPageRoot = FXMLLoader.load(getClass().getResource("../views/PresentPage.fxml"));
+        presentPageRoot = FXMLLoader.load(getClass().getResource("../views/PresentPage.fxml"));
         presentPageScene = new Scene(presentPageRoot);
         stage.setScene(presentPageScene);
         stage.setMinWidth(1000);

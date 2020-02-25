@@ -31,6 +31,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 
 /**
  * FXML Controller class
@@ -81,6 +82,10 @@ public class HomeClientFolderController {
     
     @FXML
     private Label reste_label;
+    @FXML
+    private Label savePaiement_label;
+    @FXML
+    private GridPane paiementCreate_form;
 
     private Dossier dossier;
     private double resteapayer;
@@ -92,7 +97,16 @@ public class HomeClientFolderController {
         initButtonsActions();
         initTextFieldForNumbers();
         initReste();
-    }    
+        hideProperties();
+    }  
+    
+    public void hideProperties(){
+        if(currentFolder.getStatut().equals("Archivé")){
+             paiementCreate_form.setVisible(false);
+             savePaiement_label.setVisible(false);
+             savePaiement_button.setVisible(false);
+        };       
+    }
     
     public void initReste(){
         long toBuy = (long)(currentFolder.getHonoraires() - calcMontantPaiementActu(0));
@@ -161,7 +175,7 @@ public class HomeClientFolderController {
             KeyCode key=t.getCode();
             Payement paye = paiements_tableView.getSelectionModel().getSelectedItem();
             if(paye != null){      
-                if (key==KeyCode.DELETE){
+                if (key==KeyCode.DELETE && currentFolder.getStatut().equals("En cours")){
                     Alert dialogConfirm = new Alert(Alert.AlertType.CONFIRMATION);
                     dialogConfirm.setTitle("Confirmation suppression");
                     dialogConfirm.setHeaderText("Confirmation suppression");

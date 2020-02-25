@@ -22,8 +22,12 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextFormatter;
 import static controllers.PresentPageController.homeLoader;
+import static controllers.PresentPageController.clientListLoader;
+import static controllers.CurrentFoldersController.newFolderStage;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.fxml.FXMLLoader;
@@ -71,6 +75,7 @@ public class CreateFolderController {
     
     
     private Client clientChoice;
+    private Parent rootClientList;
     public static Stage clientListStage;
 
 
@@ -106,10 +111,8 @@ public class CreateFolderController {
     
     public void initButtonsActions() throws IOException{        
         clientListStage = new Stage();
-        Parent rootClientList = FXMLLoader.load(getClass().getResource("../views/ClientsList2.fxml"));
         clientListStage.setResizable(false);
         clientListStage.initModality(Modality.APPLICATION_MODAL);
-        clientListStage.setScene(new Scene(rootClientList));
         save_button.setOnAction(e -> {
             if(this.checkNoEmptyField()){
                 Client client = this.clientChoice == null ? new Client(removeLeadingEmptySpace(telephoneClient_textField.getText()),
@@ -138,7 +141,9 @@ public class CreateFolderController {
                 doc.setHonoraires(Long.valueOf(honoraires_textField.getText()));
                 doc.setStatut("En cours");
                 doc.save();
-                ((CurrentFoldersController)homeLoader.getController()).addToListView(doc);               
+                ((CurrentFoldersController)homeLoader.getController()).addToListView(doc);      
+                ((ClientsListController)clientListLoader.getController()).initTable();
+                newFolderStage.close();
             }    
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -148,7 +153,14 @@ public class CreateFolderController {
             }
         });
         choiceClient_button.setOnAction(e -> {
-            clientListStage.show();
+            try {
+                rootClientList = FXMLLoader.load(getClass().getResource("../views/ClientsList2.fxml"));
+                clientListStage.setScene(new Scene(rootClientList));
+                clientListStage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(CreateFolderController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         });
     }
     
