@@ -75,7 +75,7 @@ public class TaskDoneController{
     
     public void initEditTaskStage() throws IOException{
         editTaskStage = new Stage();
-        editTaskLoader = new FXMLLoader(getClass().getResource("../views/EditTask.fxml"));
+        editTaskLoader = new FXMLLoader(getClass().getResource("/views/EditTask.fxml"));
         editTaskStage.setScene(new Scene(editTaskLoader.load()));
         editTaskStage.setResizable(false);
         editTaskStage.initModality(Modality.APPLICATION_MODAL);

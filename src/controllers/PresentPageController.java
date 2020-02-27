@@ -38,9 +38,9 @@ public class PresentPageController {
     
     @FXML
     public void initialize() throws IOException{
-        clientListLoader = new FXMLLoader(getClass().getResource("../views/ClientsList.fxml"));
-        homeLoader = new FXMLLoader(getClass().getResource("../views/CurrentFolders.fxml"));
-        endedFoldersLoader = new FXMLLoader(getClass().getResource("../views/EndedFolders.fxml"));
+        clientListLoader = new FXMLLoader(getClass().getResource("/views/ClientsList.fxml"));
+        homeLoader = new FXMLLoader(getClass().getResource("/views/CurrentFolders.fxml"));
+        endedFoldersLoader = new FXMLLoader(getClass().getResource("/views/EndedFolders.fxml"));
         home = homeLoader.load();
         clientList = clientListLoader.load();
         archDocs = endedFoldersLoader.load();

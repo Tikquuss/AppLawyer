@@ -115,7 +115,7 @@ public class ConnexionController {
     
     public void setInitialView() throws IOException{
 
-        presentPageRoot = FXMLLoader.load(getClass().getResource("../views/PresentPage.fxml"));
+        presentPageRoot = FXMLLoader.load(getClass().getResource("/views/PresentPage.fxml"));
         presentPageScene = new Scene(presentPageRoot);
         stage.setScene(presentPageScene);
         stage.setMinWidth(1000);

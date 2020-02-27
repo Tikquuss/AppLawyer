@@ -52,11 +52,11 @@ public class HomeForFolderController {
          
     @FXML
     public void initialize() throws IOException{
-             homeClientFolder = new FXMLLoader(getClass().getResource("../views/homeClientFolder.fxml"));
+             homeClientFolder = new FXMLLoader(getClass().getResource("/views/HomeClientFolder.fxml"));
              homeCFParent = homeClientFolder.load();
              ((HomeClientFolderController)homeClientFolder.getController()).setContent(currentFolder);
-             planningParent = FXMLLoader.load(getClass().getResource("../views/Planning.fxml"));
-             docsLoader = new FXMLLoader(getClass().getResource("../views/Documents.fxml"));
+             planningParent = FXMLLoader.load(getClass().getResource("/views/Planning.fxml"));
+             docsLoader = new FXMLLoader(getClass().getResource("/views/Documents.fxml"));
              docParent =  docsLoader.load();
              this.add(homeCFParent);
              this.initButtonsActions();

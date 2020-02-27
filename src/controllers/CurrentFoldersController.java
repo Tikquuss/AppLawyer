@@ -24,6 +24,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static main.AppLawyer.stage;
 import static controllers.PresentPageController.endedFoldersLoader;
+import main.AppLawyer;
         
 public class CurrentFoldersController {
 
@@ -154,16 +155,12 @@ public class CurrentFoldersController {
     
     public void makeStageForSingleFolder(Dossier dossier) throws IOException{
         currentFolder = dossier;
-        homeForFolder =  new FXMLLoader(getClass().getResource("../views/homeForFolder.fxml"));
+        homeForFolder =  new FXMLLoader(getClass().getResource("/views/HomeForFolder.fxml"));
         root = homeForFolder.load();
         stage.setScene(new Scene(root));
         stage.setMinWidth(1100);
         stage.setMinHeight(700);
-        /*singleFolderStage = new Stage();
-        singleFolderStage.setScene(new Scene(root));
-        singleFolderStage.setMinWidth(1100);
-        singleFolderStage.setMinHeight(700);
-        singleFolderStage.show();*/
+
     }
     
     public void openFoldAction(){
@@ -195,7 +192,7 @@ public class CurrentFoldersController {
     
     public void makeStageForCreateFolder() throws IOException{
         newFolderStage = new Stage();
-        newFoldLoader = new FXMLLoader(getClass().getResource("../views/CreateFolder.fxml"));
+        newFoldLoader = new FXMLLoader(getClass().getResource("/views/CreateFolder.fxml"));
         newFoldParent = newFoldLoader.load();
         newFolderStage.setScene(new Scene(newFoldParent));
         newFolderStage.setResizable(false);

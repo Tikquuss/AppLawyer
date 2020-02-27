@@ -169,7 +169,7 @@ public class ClientsListController {
         Client client = clientsList_tableView.getSelectionModel().getSelectedItem();
             if(client != null){
                 modifClientStage = new Stage();
-                modifClientLoader  = new FXMLLoader(getClass().getResource("../views/ModifClient.fxml"));
+                modifClientLoader  = new FXMLLoader(getClass().getResource("/views/ModifClient.fxml"));
                 try {
                     modifClientRoot = modifClientLoader.load();
                     ((ModifClientController)modifClientLoader.getController()).setClient(client);

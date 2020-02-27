@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../ressources/css/style.css">
+         <children>
+            <AnchorPane layoutX="30.0" layoutY="50.0" minHeight="670.0" minWidth="500.0" prefHeight="670.0" prefWidth="500.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="50.0">
+               <children>
+                  <JFXTextField fx:id="addJuridictions_tetField" layoutX="55.0" layoutY="47.0" prefHeight="31.0" prefWidth="270.0" AnchorPane.topAnchor="130.0" />
+                  <JFXButton fx:id="addJuridiction_button" layoutX="369.0" layoutY="47.0" styleClass="pretty-button-rounded" text="Ajouter" AnchorPane.topAnchor="130.0" />
+                  <JFXListView fx:id="juridictions_listView" layoutX="27.0" layoutY="100.0" prefHeight="500.0" prefWidth="480.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                  <Label layoutX="81.0" layoutY="24.0" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="300.0" styleClass="labelTitle" text="Juridictions" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="358.0" layoutY="55.0" minHeight="670.0" minWidth="500.0" prefHeight="670.0" prefWidth="500.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="555.0" AnchorPane.topAnchor="50.0">
+               <children>
+                  <JFXTextField fx:id="addTypesAffaires_textField" layoutX="45.0" layoutY="38.0" prefHeight="31.0" prefWidth="270.0" AnchorPane.topAnchor="130.0" />
+                  <JFXButton fx:id="addTypesAffaires_button" layoutX="340.0" layoutY="38.0" styleClass="pretty-button-rounded" text="Ajouter" AnchorPane.topAnchor="130.0" />
+                  <JFXListView fx:id="typesAffaires_listView" layoutX="14.0" layoutY="146.0" prefHeight="500.0" prefWidth="480.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                  <Label minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="300.0" styleClass="labelTitle" text="Types Affaires" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="40.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="670.0" layoutY="59.0" minHeight="670.0" minWidth="500.0" prefHeight="670.0" prefWidth="500.0" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="50.0">
+               <children>
+                  <JFXTextField fx:id="addQualitesAvocat_textField" layoutX="45.0" layoutY="36.0" prefHeight="31.0" prefWidth="280.0" AnchorPane.topAnchor="130.0" />
+                  <JFXButton fx:id="addQualite_button" layoutX="355.0" layoutY="36.0" prefHeight="31.0" prefWidth="88.0" styleClass="pretty-button-rounded" text="Ajouter" AnchorPane.topAnchor="130.0" />
+                  <JFXListView fx:id="qualites_listView" prefHeight="500.0" prefWidth="500.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                  <Label prefHeight="50.0" prefWidth="300.0" styleClass="labelTitle" text="Qualités (avocat)" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="40.0" />
+               </children>
+            </AnchorPane>
+            <Separator layoutX="537.0" layoutY="75.0" orientation="VERTICAL" prefHeight="804.0" prefWidth="6.0" />
+            <Separator layoutX="1062.0" layoutY="68.0" orientation="VERTICAL" prefHeight="780.0" prefWidth="6.0" />
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

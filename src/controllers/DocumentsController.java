@@ -85,7 +85,7 @@ public class DocumentsController {
     
     public void initButtonsActions()  throws IOException{
         Stage stageNewDoc = new Stage();
-        Parent parent = FXMLLoader.load(getClass().getResource("../views/AddDocument.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("/views/AddDocument.fxml"));
         stageNewDoc.setScene(new Scene(parent));
         stageNewDoc.setResizable(false);
         stageNewDoc.initModality(Modality.APPLICATION_MODAL);

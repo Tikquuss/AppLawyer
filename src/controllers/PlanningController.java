@@ -33,8 +33,8 @@ public class PlanningController {
  
     @FXML
     public void initialize() throws IOException {
-        tasksPassed = new FXMLLoader(getClass().getResource("../views/TaskDone.fxml"));
-        tasksLater = new FXMLLoader(getClass().getResource("../views/TaskToLater.fxml"));
+        tasksPassed = new FXMLLoader(getClass().getResource("/views/TaskDone.fxml"));
+        tasksLater = new FXMLLoader(getClass().getResource("/views/TaskToLater.fxml"));
         tasksLaterParent = tasksLater.load();
         tasksPassedParent = tasksPassed.load();
         if(currentFolder.getStatut().equals("Archivé"))
@@ -50,7 +50,6 @@ public class PlanningController {
             planningContainer.getChildren().clear();
             planningContainer.getChildren().add(parent);
             ViewDimensionner.bindSizes((Region)parent, planningContainer);
-
         }        
     }
     public void initButtonsActions(){

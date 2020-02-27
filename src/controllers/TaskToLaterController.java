@@ -57,7 +57,7 @@ public class TaskToLaterController  {
 
     @FXML
     public void initialize() throws IOException {
-        finalizeTaskLoader = new FXMLLoader(getClass().getResource("../views/FinalizeTask.fxml"));
+        finalizeTaskLoader = new FXMLLoader(getClass().getResource("/views/FinalizeTask.fxml"));
         finalizeTaskParent = finalizeTaskLoader.load();
         initButtonsActions();
         initListView();

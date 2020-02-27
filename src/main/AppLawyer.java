@@ -16,7 +16,7 @@ public class AppLawyer extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         stage = new Stage();
-        Parent connexionRoot = FXMLLoader.load(getClass().getResource("../views/Connexion.fxml"));
+        Parent connexionRoot = FXMLLoader.load(getClass().getResource("/views/Connexion.fxml"));
         stage.setScene(new Scene(connexionRoot));
         stage.setMinHeight(790);
         stage.setMinWidth(1000);

@@ -154,7 +154,7 @@ public class CreateFolderController {
         });
         choiceClient_button.setOnAction(e -> {
             try {
-                rootClientList = FXMLLoader.load(getClass().getResource("../views/ClientsList2.fxml"));
+                rootClientList = FXMLLoader.load(getClass().getResource("/views/ClientsList2.fxml"));
                 clientListStage.setScene(new Scene(rootClientList));
                 clientListStage.show();
             } catch (IOException ex) {

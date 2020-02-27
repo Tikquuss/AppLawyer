@@ -89,7 +89,7 @@ public class EndedFoldersController {
     
     public void makeStageForSingleFolder(Dossier dossier) throws IOException{
         currentFolder = dossier;
-        homeForFolder =  new FXMLLoader(getClass().getResource("../views/homeForFolder.fxml"));
+        homeForFolder =  new FXMLLoader(getClass().getResource("/views/homeForFolder.fxml"));
         root = homeForFolder.load();
         stage.setScene(new Scene(root));
         stage.setMinWidth(1100);
