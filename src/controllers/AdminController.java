@@ -6,21 +6,27 @@
 package controllers;
 
 import com.jfoenix.controls.JFXButton;
+import static controllers.ConnexionController.presentPageScene;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import static main.AppLawyer.stage;
 import utilities.ViewDimensionner;
 
 /**
  * FXML Controller class
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class AdminController{
 
@@ -30,8 +36,9 @@ public class AdminController{
     private JFXButton paramDossier_button;
     @FXML
     private AnchorPane containerAdmin_anchorPane;
-
-
+    @FXML
+    private JFXButton backhome_button;
+    
     private FXMLLoader adminForDocument, adminForFoldersParam;
     private Parent adminForDocParent, adminFoldersParamParent;
             
@@ -39,8 +46,10 @@ public class AdminController{
     public void initialize() throws IOException {
         initLoader();
         this.add(adminForDocParent);
+        initButtonsActions();
     } 
     
+
     public void initLoader() throws IOException{
         adminForDocument = new FXMLLoader(getClass().getResource("/views/AdminDocument.fxml"));
         adminForFoldersParam = new FXMLLoader(getClass().getResource("/views/Admin2.fxml"));
@@ -62,5 +71,16 @@ public class AdminController{
         paramDossier_button.setOnAction(e -> {
             this.add(adminFoldersParamParent);
         });
+        backhome_button.setOnAction((ActionEvent e) -> {
+              Alert dialogConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+              dialogConfirm.setTitle("Confirmation du retour à l'accueil");
+              dialogConfirm.setHeaderText("Confirmation du retour à l'accueil");
+              dialogConfirm.setContentText("Voulez vous vraiment retourner à l'accueil ??");
+              Optional<ButtonType> answer = dialogConfirm.showAndWait();
+              if (answer.get() == ButtonType.OK) {
+                    stage.setScene(presentPageScene);
+              }
+          });
+
     }
 }

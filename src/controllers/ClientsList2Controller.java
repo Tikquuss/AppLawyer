@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import static controllers.CurrentFoldersController.newFoldLoader;
 import static controllers.CreateFolderController.clientListStage;
 import java.util.function.UnaryOperator;
@@ -21,7 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.TextFormatter;
 /**
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class ClientsList2Controller {
     

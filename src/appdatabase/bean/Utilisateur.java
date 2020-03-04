@@ -13,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,24 +23,21 @@ import javax.persistence.Table;
 @Table(name = "utilisateur")
 public class Utilisateur extends Personne implements Serializable{
     private long id;
-    private String email;
-    private String telephone;
     private String username;
     private String password;
-    private String groupe; //Admin, SuperAdmin, User (ceux qui ne sont dans aucun groupe)...
+    private String typeUser; //Admin, SuperAdmin, User (ceux qui ne sont dans aucun typeUser)...
     private static Manager DAO;
 
-    public Utilisateur(String email, String telephone, String username, String password, String groupe) {
-        this.email = email;
-        this.telephone = telephone;
+    public Utilisateur(String username, String password, String typeUser) {
         this.username = username;
         this.password = password;
-        this.groupe = groupe;
+        this.typeUser = typeUser;
     }
     
     
     
     public Utilisateur(){
+        
     }
     
     @Id
@@ -57,31 +53,13 @@ public class Utilisateur extends Personne implements Serializable{
     public static void setDAO(Manager DAO) {
         Utilisateur.DAO = DAO;
     }
-    
 
-    @Column(name = "email")
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Column(name = "telephone")
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }    
-    
-    @Column(name = "username")
+    @Column(name="username")
     public String getUsername() {
         return username;
     }
-
+    
+    
     public void setUsername(String username) {
         this.username = username;
     }
@@ -95,16 +73,19 @@ public class Utilisateur extends Personne implements Serializable{
         this.password = password;
     }
     
-    @ManyToOne
-    public String getGroupe() {
-        return groupe;
+    @Column(name = "typeUser")
+    public String getTypeUser() {
+        return typeUser;
     }
 
-    public void setGroupe(String groupe) {
-        this.groupe = groupe;
+    public void setTypeUser(String typeUser) {
+        this.typeUser = typeUser;
     }
     
     public static Manager getDAO() {
+        if(DAO == null){
+            DAO = new Manager();
+        }
         return DAO;
     }
     
@@ -133,25 +114,6 @@ public class Utilisateur extends Personne implements Serializable{
         }
     }
     
-    public static Utilisateur getByEmail(String otherEmail){
-        List<Utilisateur> list = getDAO().LoadByAtt(Utilisateur.class, "email", otherEmail);
-        if(list != null){
-            if(!list.isEmpty()){
-                return list.get(0);
-            }
-        }
-        return new Utilisateur();
-    }
-    
-    public static Utilisateur getByTelephone(String otherTelephone){
-        List<Utilisateur> list = getDAO().LoadByAtt(Utilisateur.class, "telephone", otherTelephone);
-        if(list != null){
-            if(!list.isEmpty()){
-                return list.get(0);
-            }
-        }
-        return new Utilisateur();
-    }
   
     public static Utilisateur getByUsername(String otherUsername){
         List<Utilisateur> list = getDAO().LoadByAtt(Utilisateur.class, "username", otherUsername);
@@ -163,7 +125,7 @@ public class Utilisateur extends Personne implements Serializable{
         return new Utilisateur();
     }
     
-    public static List<Utilisateur> listByGroupe(String otherGroupe){
-        return getDAO().LoadByAtt(Utilisateur.class, "groupe", otherGroupe);
+    public static List<Utilisateur> listByTypeUser(String otherTypeUser){
+        return getDAO().LoadByAtt(Utilisateur.class, "typeUser", otherTypeUser);
     }
 }

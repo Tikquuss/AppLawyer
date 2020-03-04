@@ -36,7 +36,7 @@ import javafx.scene.layout.GridPane;
 /**
  * FXML Controller class
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class HomeClientFolderController {
 

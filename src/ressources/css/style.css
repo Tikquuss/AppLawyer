@@ -11,7 +11,7 @@
     -fx-font-size : 18px;
 }
 
-.date-picker, .time-picker, .jfx-text-field{
+.date-picker, .time-picker, .jfx-text-field, .jfx-password-field{
     -fx-font-family : Audiowide;
     -fx-font-size : 18px;
 }
@@ -19,6 +19,11 @@
 .audiowide-button{
     -fx-font-family: Audiowide;
     -fx-font-size : 18px;
+}
+
+.audiowide-button2{
+    -fx-font-family: Audiowide;
+    -fx-font-size : 15px; 
 }
 
 .pretty-button-rounded{
@@ -70,5 +75,4 @@
 .audiowide-combobox{
         -fx-font-family: "Audiowide";
          -fx-font-size: 18px ;
-
 }

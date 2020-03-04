@@ -34,15 +34,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
-import javafx.scene.layout.AnchorPane;
+import static controllers.PresentPageController.pathFolderRoot;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class CreateFolderController {
 
@@ -123,7 +121,7 @@ public class CreateFolderController {
                                             "cni") : this.clientChoice;
                 Dossier doc = new Dossier();
                 int nbDoc = Dossier.listByClient(client) == null ? 0 : Dossier.listByClient(client).size();
-                String dirName0 = "F:\\Dossiers Clients\\DOSSIER "+removeLeadingEmptySpace(nomsClient_textField.getText().toUpperCase())+" "+
+                String dirName0 = pathFolderRoot+"\\DOSSIER "+removeLeadingEmptySpace(nomsClient_textField.getText().toUpperCase())+" "+
                         removeLeadingEmptySpace(prenomsClient_textField.getText().toUpperCase());
                 String dirName = nbDoc == 0 ? dirName0 : dirName0+" "+String.valueOf(nbDoc+1);
                 File dir = new File(dirName);

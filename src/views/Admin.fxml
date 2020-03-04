@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="790.0" minWidth="1000.0" prefHeight="790.0" prefWidth="1000.0" stylesheets="@../ressources/css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
    <children>
-      <HBox layoutX="343.0" minHeight="50.0" minWidth="400.0" prefHeight="50.0" prefWidth="600.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+      <HBox alignment="TOP_CENTER" fillHeight="false" minHeight="50.0" minWidth="400.0" prefHeight="50.0" prefWidth="1000.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXButton fx:id="documents_button" prefHeight="40.0" prefWidth="300.0" styleClass="pretty-button" text="Admin Documents" />
-            <JFXButton fx:id="paramDossier_button" prefHeight="40.0" prefWidth="300.0" styleClass="pretty-button" text="Admin Parmètres Dossier" />
+            <JFXButton fx:id="documents_button" prefHeight="40.0" prefWidth="500.0" styleClass="pretty-button" text="Admin Documents" />
+            <JFXButton fx:id="paramDossier_button" prefHeight="40.0" prefWidth="500.0" styleClass="pretty-button" text="Admin Parmètres Dossier" />
          </children>
       </HBox>
-      <AnchorPane fx:id="containerAdmin_anchorPane" layoutY="50.0" minHeight="740.0" minWidth="1000.0" prefHeight="740.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+      <JFXButton fx:id="backhome_button" alignment="BOTTOM_CENTER" contentDisplay="TOP" minHeight="40.0" minWidth="91.0" prefHeight="40.0" prefWidth="91.0" style="-fx-background-color: black;" text="Rentrer à l'accueil" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../ressources/images/backhome.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <AnchorPane fx:id="containerAdmin_anchorPane" layoutY="59.0" minHeight="740.0" minWidth="1000.0" prefHeight="740.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
    </children>
 </AnchorPane>

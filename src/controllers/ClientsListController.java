@@ -21,6 +21,7 @@ import static controllers.PresentPageController.homeLoader;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.function.UnaryOperator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
@@ -28,12 +29,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableRow;
+import javafx.scene.control.TextFormatter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class ClientsListController {
 
@@ -77,6 +79,7 @@ public class ClientsListController {
        });
        initButtonAction();
        activeDoubleClickOnTableV();
+       limitTextEnters();
     }    
     public void initTable(){
         noms_column.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -202,5 +205,17 @@ public class ClientsListController {
             });
              return row;       
         });
+    }
+    
+        
+    public void limitTextEnters(){
+            UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
+            String newText = t.getControlNewText();
+            if( newText.length()< 40) {
+                return t ;
+            }
+            return null ;
+        };
+        search_textField.setTextFormatter(new TextFormatter<>(filter));
     }
 }

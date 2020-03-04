@@ -11,13 +11,9 @@ import appdatabase.bean.TypeAffaire;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -25,12 +21,12 @@ import javafx.scene.input.KeyEvent;
 /**
  * FXML Controller class
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class Admin2Controller {
 
     @FXML
-    private JFXTextField addJuridictions_tetField;
+    private JFXTextField addJuridictions_textField;
     @FXML
     private JFXButton addJuridiction_button;
     @FXML
@@ -50,32 +46,42 @@ public class Admin2Controller {
 
     @FXML
     public void initialize() {
-        initButtonsActions();
-        initListsViews();
-        initTextFields();
+        this.initButtonsActions();
+        this.initListsViews();
+        this.initTextFields();
+        this.initKeyBoardsActions();
     } 
     
-    public void initButtonsActions(){
-        addTypesAffaires_button.setOnAction(e -> {
-            if(!addTypesAffaires_textField.getText().equals("")){
+    public void addTypeAffAction(){
+        if(!addTypesAffaires_textField.getText().equals("")){
                 TypeAffaire typAff = new TypeAffaire(addTypesAffaires_textField.getText());
                 typAff.save();
                 typesAffaires_listView.getItems().add(typAff);
             }
-        });
-        addJuridiction_button.setOnAction(e -> {
-            if(!addJuridictions_tetField.getText().equals("")){
-                Juridiction jur = new Juridiction(addJuridictions_tetField.getText());
+    }
+    public void addJurAction(){
+        if(!addJuridictions_textField.getText().equals("")){
+                Juridiction jur = new Juridiction(addJuridictions_textField.getText());
                 jur.save();
                 juridictions_listView.getItems().add(jur);
             }
-        });
-        addQualite_button.setOnAction(e -> {
-            if(!addQualitesAvocat_textField.getText().equals("")){
+    }
+    public void addQualAction(){
+        if(!addQualitesAvocat_textField.getText().equals("")){
                 QualiteAvocat qualiteAvocat = new QualiteAvocat(addQualitesAvocat_textField.getText());
                 qualiteAvocat.save();
                 qualites_listView.getItems().add(qualiteAvocat);
             }
+    }
+    public void initButtonsActions(){
+        addTypesAffaires_button.setOnAction(e -> {
+            addTypeAffAction();
+        });
+        addJuridiction_button.setOnAction(e -> {
+            addJurAction();
+        });
+        addQualite_button.setOnAction(e -> {
+            addQualAction();
         });
         
     }
@@ -94,13 +100,31 @@ public class Admin2Controller {
             }
             return null ;
         };
-        addJuridictions_tetField.setTextFormatter(new TextFormatter<>(filter));
+        addJuridictions_textField.setTextFormatter(new TextFormatter<>(filter));
         addQualitesAvocat_textField.setTextFormatter(new TextFormatter<>(filter));
         addTypesAffaires_textField.setTextFormatter(new TextFormatter<>(filter));
     
     }
     
     public void initKeyBoardsActions(){
+        addJuridictions_textField.setOnKeyPressed((KeyEvent t) -> {
+            KeyCode key=t.getCode();
+            if(key == KeyCode.ENTER){
+                addJurAction();
+            }
+        });
+        addQualitesAvocat_textField.setOnKeyPressed((KeyEvent t) -> {
+            KeyCode key=t.getCode();
+                if(key == KeyCode.ENTER){
+                  addQualAction();
+            }
+        });
+        addTypesAffaires_textField.setOnKeyPressed((KeyEvent t) -> {
+            KeyCode key=t.getCode();
+                if(key == KeyCode.ENTER){
+                    addTypeAffAction();
+            }
+        });
         juridictions_listView.setOnKeyPressed((KeyEvent t)->{
             KeyCode key=t.getCode();
                 if(key == KeyCode.DELETE){
@@ -131,7 +155,6 @@ public class Admin2Controller {
                     }
             }
         });
-
     }
     
 }

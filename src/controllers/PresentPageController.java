@@ -6,17 +6,26 @@
 package controllers;
 
 import com.jfoenix.controls.JFXButton;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import static main.AppLawyer.stage;
 import utilities.ViewDimensionner;
+ 
 
 /**
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class PresentPageController {
     
@@ -31,13 +40,19 @@ public class PresentPageController {
 
     @FXML
     private JFXButton archDoc_button;
+
+    @FXML
+    private JFXButton configData_button;
     
-    private Parent clientList, archDocs, home;
+    private Parent clientList, archDocs, home, adminConfig;
     
-    public static FXMLLoader homeLoader, clientListLoader, endedFoldersLoader;
+    public static FXMLLoader homeLoader, clientListLoader, endedFoldersLoader, adminConfigLoader;
     
+    public static String pathFolderRoot;
+
     @FXML
     public void initialize() throws IOException{
+        setFolderPathRoot();
         clientListLoader = new FXMLLoader(getClass().getResource("/views/ClientsList.fxml"));
         homeLoader = new FXMLLoader(getClass().getResource("/views/CurrentFolders.fxml"));
         endedFoldersLoader = new FXMLLoader(getClass().getResource("/views/EndedFolders.fxml"));
@@ -46,6 +61,7 @@ public class PresentPageController {
         archDocs = endedFoldersLoader.load();
         this.add(home);
         initButtonsActions();
+        
         
     }
     
@@ -67,7 +83,20 @@ public class PresentPageController {
         archDoc_button.setOnAction( e -> {
             this.add(archDocs);
         });
-        
+        configData_button.setOnAction(e -> {
+            adminConfigLoader = new FXMLLoader(getClass().getResource("/views/Admin.fxml"));
+            try {
+                adminConfig = adminConfigLoader.load();
+                stage.setScene(new Scene(adminConfig));
+            } catch (IOException ex) {
+                Logger.getLogger(PresentPageController.class.getName()).log(Level.SEVERE, null, ex);
+            }               
+        });
     }
-    
+    public void setFolderPathRoot() throws FileNotFoundException, IOException{
+        BufferedReader in = new BufferedReader(new FileReader(new File("./src/utilities", "cheminDossierRacine")));
+        String line = in.readLine();
+        pathFolderRoot = line;     
+    }
+
 }

@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 /**
  * FXML Controller class
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class FinalizeTaskController  {
 

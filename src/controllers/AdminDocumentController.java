@@ -11,11 +11,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,7 +22,7 @@ import javafx.scene.input.KeyEvent;
 /**
  * FXML Controller class
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class AdminDocumentController {
 
@@ -56,6 +53,7 @@ public class AdminDocumentController {
     public void initialize() {
          initListView();
          initTableView();
+         initComboBox();
          initButtonsActions();
          initKeyBoardsActions();
     }    
@@ -69,19 +67,20 @@ public class AdminDocumentController {
     public void initListView(){
         categDoc_listView.setItems(FXCollections.observableArrayList(CategorieDocument.all()));
     }
-    
-    public void initButtonsActions(){
-        
-        saveCategDoc_button.setOnAction(e -> {
-            String nomCategDoc = categDoc_textField.getText();
+    public void initComboBox(){
+        categDoc_comboBox.setItems(FXCollections.observableArrayList(CategorieDocument.all()));
+    }
+    public void saveCategAction(){
+        String nomCategDoc = categDoc_textField.getText();
             if(!nomCategDoc.equals("")){
                  CategorieDocument cd = new CategorieDocument(categDoc_textField.getText());
                  cd.save();
                  categDoc_listView.getItems().add(cd);
             }
-        });
-        saveTypeDoc_button.setOnAction(e -> {
-            String nomTypeDoc = typeDoc_textField.getText();
+    }
+    
+    public void saveTypeDocAction(){
+        String nomTypeDoc = typeDoc_textField.getText();
             if(!nomTypeDoc.equals("")){
                 CategorieDocument cd = categDoc_comboBox.getSelectionModel().getSelectedItem();
                 if(cd != null){
@@ -90,10 +89,30 @@ public class AdminDocumentController {
                     typeDoc_tableView.getItems().add(td);
                 }
             }
+    }
+    public void initButtonsActions(){
+        
+        saveCategDoc_button.setOnAction(e -> {
+            saveCategAction();
+        });
+        saveTypeDoc_button.setOnAction(e -> {
+            saveTypeDocAction();
         });
     }
     
     public void initKeyBoardsActions(){
+        
+        categDoc_textField.setOnKeyPressed((KeyEvent keyevent) -> {
+            if(keyevent.getCode() == KeyCode.ENTER){
+                saveCategAction();
+            }
+        });
+        
+        typeDoc_textField.setOnKeyPressed((KeyEvent keyevent) -> {
+            if(keyevent.getCode() == KeyCode.ENTER){
+                saveTypeDocAction();
+            }
+        });
         categDoc_listView.setOnKeyPressed((KeyEvent event) -> {
             KeyCode key = event.getCode();
             if(key == KeyCode.DELETE){

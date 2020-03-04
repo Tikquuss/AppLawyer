@@ -24,8 +24,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static main.AppLawyer.stage;
 import static controllers.PresentPageController.endedFoldersLoader;
-import main.AppLawyer;
-        
+
+
+/**
+ *
+ * @author Nyatchou
+ */
 public class CurrentFoldersController {
 
     @FXML
@@ -228,7 +232,7 @@ public class CurrentFoldersController {
     public void displayTasksDontEnded(){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText("TACHES NON FINALISEES");
-        alert.setContentText("Les tâches programmées n'ont pas toutes été finalisées !");
+        alert.setContentText("Les tâches programmées n'ont pas toutes été finalisées! Veuillez d'abord les finaliser avant l'archivage de ce dossier.");
         alert.show();
     }
     

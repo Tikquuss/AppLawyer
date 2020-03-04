@@ -9,7 +9,6 @@ import appdatabase.bean.TypeDocument;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import static controllers.CurrentFoldersController.currentFolder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,11 +27,10 @@ import static controllers.CurrentFoldersController.currentFolder;
 import java.util.List;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 /**
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class AddDocumentController {
     
@@ -54,7 +52,7 @@ public class AddDocumentController {
     
     private File selectedFile = null;
     
-    private final int MAX_SIZE_FORFILE=30000000;
+    private final int MAX_SIZE_FORFILE=31457280;
     
 
     @FXML
@@ -99,10 +97,20 @@ public class AddDocumentController {
     
     public void initButtonsActions() throws IOException, FileNotFoundException{
         choiceDoc_button.setOnAction(e -> {
+            choiceDoc_textField.setEditable(true);
             FileChooser fileChooser = new FileChooser();
             selectedFile = fileChooser.showOpenDialog(null);
-            if(selectedFile != null && selectedFile.length()<MAX_SIZE_FORFILE)
+            if(selectedFile != null && selectedFile.length()<MAX_SIZE_FORFILE){
                 choiceDoc_textField.setText(selectedFile.getName());
+                choiceDoc_textField.setEditable(false);
+            }
+
+            else if(selectedFile.length()>=MAX_SIZE_FORFILE){
+                Alert al = new Alert(Alert.AlertType.WARNING);
+                al.setHeaderText("TAILLE DE FICHIER TROP ELEVEE");
+                al.setContentText("Vous ne pouvez pas choisir un fichier de taille supérieure à 30 Mo !");
+                al.show();
+            }
         });
         
         valider_button.setOnAction((ActionEvent e) -> {
@@ -145,7 +153,7 @@ public class AddDocumentController {
                 else {
                     Alert al = new Alert(Alert.AlertType.ERROR);
                     al.setContentText("Veuillez choisir un fichier s'il vous plait ! "
-                            + "Cliquez tout d'abord sur le bouton choisir  puis sélectionnez le fichier àchoisir à l'aide de la boîte de dialogue qui "
+                            + "Cliquez tout d'abord sur le bouton choisir  puis sélectionnez le fichier à choisir à l'aide de la boîte de dialogue qui "
                             + "s'ouvira et enfin validez.");
                     al.setHeaderText("AUCUN FICHIER CHOISI");
                     al.show();

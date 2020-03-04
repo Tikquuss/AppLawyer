@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import appdatabase.manager.LoginManager;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -25,7 +26,7 @@ import static main.AppLawyer.stage;
 
 /**
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class ConnexionController {
     
@@ -41,7 +42,6 @@ public class ConnexionController {
     @FXML
     private AnchorPane form_anchorPane;
 
-    
     public static Scene presentPageScene;
     private Parent presentPageRoot;
 
@@ -110,11 +110,12 @@ public class ConnexionController {
     }
     
     public boolean login(){
-        return true;
+        String username = username_textField.getText();
+        String password = password_textField.getText();
+        return LoginManager.login(username, String.valueOf(password.hashCode())).isWin();
     }
     
     public void setInitialView() throws IOException{
-
         presentPageRoot = FXMLLoader.load(getClass().getResource("/views/PresentPage.fxml"));
         presentPageScene = new Scene(presentPageRoot);
         stage.setScene(presentPageScene);

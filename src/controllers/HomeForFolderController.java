@@ -12,15 +12,13 @@ import utilities.ViewDimensionner;
 import static controllers.CurrentFoldersController.currentFolder;
 import java.util.Optional;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import static main.AppLawyer.stage;
 import static controllers.ConnexionController.presentPageScene;
 /**
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class HomeForFolderController {
     

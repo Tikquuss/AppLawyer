@@ -11,14 +11,11 @@ import com.jfoenix.controls.JFXListView;
 import static controllers.CurrentFoldersController.currentFolder;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -27,7 +24,7 @@ import static main.AppLawyer.stage;
 /**
  * FXML Controller class
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class EndedFoldersController {
 
@@ -89,7 +86,7 @@ public class EndedFoldersController {
     
     public void makeStageForSingleFolder(Dossier dossier) throws IOException{
         currentFolder = dossier;
-        homeForFolder =  new FXMLLoader(getClass().getResource("/views/homeForFolder.fxml"));
+        homeForFolder =  new FXMLLoader(getClass().getResource("/views/HomeForFolder.fxml"));
         root = homeForFolder.load();
         stage.setScene(new Scene(root));
         stage.setMinWidth(1100);

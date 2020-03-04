@@ -15,6 +15,10 @@ import javafx.scene.layout.Region;
 import utilities.ViewDimensionner;
 import static controllers.CurrentFoldersController.currentFolder;
 
+/**
+ *
+ * @author Nyatchou
+ */
 
 public class PlanningController {
 

@@ -18,7 +18,7 @@ import static controllers.CurrentFoldersController.currentFolder;
 /**
  * FXML Controller class
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class EditTaskController {
 

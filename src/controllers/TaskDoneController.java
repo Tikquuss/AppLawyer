@@ -30,7 +30,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class TaskDoneController{
     

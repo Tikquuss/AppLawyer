@@ -22,10 +22,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextFormatter;
+import static controllers.PresentPageController.pathFolderRoot;
 
 /**
  *
- * @author Utilisateur
+ * @author Nyatchou
  */
 public class ModifClientController {
     
@@ -183,10 +184,10 @@ public class ModifClientController {
                     client.setNom(noms);
                     for(int ind = 0; ind < listDossier.size(); ind++){
                         Dossier doc = listDossier.get(ind);
-                        String pathDoc0 = "F:\\Dossiers Clients\\DOSSIER "+doc.getClient().getNom().toUpperCase()+" "+doc.getClient().getPrenom().toUpperCase();
+                        String pathDoc0 = pathFolderRoot+ "\\DOSSIER "+doc.getClient().getNom().toUpperCase()+" "+doc.getClient().getPrenom().toUpperCase();
                         String pathDoc = ind == 0 ? pathDoc0 : pathDoc0 + " " + String.valueOf(ind+1);                
 
-                        String newPathDoc0 = "F:\\Dossiers Clients\\DOSSIER "+client.getNom().toUpperCase()+" "+client.getPrenom().toUpperCase(); 
+                        String newPathDoc0 = pathFolderRoot+"\\DOSSIER "+client.getNom().toUpperCase()+" "+client.getPrenom().toUpperCase(); 
                         String newPathDoc = ind == 0 ? newPathDoc0 : newPathDoc0+" "+String.valueOf(ind+1);
                         Document.listByDossier(doc).forEach(a -> {
                             a.setFichier(newPathDoc+"\\"+a.getNom());
@@ -204,7 +205,7 @@ public class ModifClientController {
                     client.setPrenom(prenoms);
                     for(int ind = 0; ind < listDossier.size(); ind++){
                         Dossier doc = listDossier.get(ind);
-                        String pathDoc0 = "F:\\Dossiers Clients\\DOSSIER "+doc.getClient().getNom().toUpperCase()+" "+doc.getClient().getPrenom().toUpperCase();
+                        String pathDoc0 = pathFolderRoot+"\\DOSSIER "+doc.getClient().getNom().toUpperCase()+" "+doc.getClient().getPrenom().toUpperCase();
                         String pathDoc = ind == 0 ? pathDoc0 : pathDoc0 + " " + String.valueOf(ind+1);
                         /* Document.listByDossier(doc).forEach(a -> {
                         a.setFichier(pathDoc+"\\"+a.getNom());
@@ -212,7 +213,7 @@ public class ModifClientController {
                         });*/
                         /*((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).setPrenom(removeLeadingEmptySpace(event.getNewValue()));
                         ((Client)event.getTableView().getItems().get(event.getTablePosition().getRow())).update();*/
-                        String newPathDoc0 = "F:\\Dossiers Clients\\DOSSIER "+client.getNom().toUpperCase()+" "+client.getPrenom().toUpperCase();
+                        String newPathDoc0 = pathFolderRoot+"\\DOSSIER "+client.getNom().toUpperCase()+" "+client.getPrenom().toUpperCase();
                         String newPathDoc = ind == 0 ? newPathDoc0 : newPathDoc0+" "+String.valueOf(ind+1);
                         Document.listByDossier(doc).forEach(a -> {
                             a.setFichier(newPathDoc+"\\"+a.getNom());

@@ -6,7 +6,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTimePicker;
-import static controllers.PlanningController.tasksPassed;
 import static controllers.CurrentFoldersController.currentFolder;
 import java.time.LocalDateTime;
 import javafx.collections.FXCollections;
@@ -17,7 +16,6 @@ import java.util.Optional;
 import java.util.function.UnaryOperator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -25,11 +23,12 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextFormatter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import org.controlsfx.control.Notifications;
 import utilities.NotifExample;
 
-
+/**
+ *
+ * @author Nyatchou
+ */
 public class TaskToLaterController  {
 
     @FXML
