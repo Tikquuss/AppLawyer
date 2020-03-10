@@ -11,12 +11,17 @@ import appdatabase.bean.TypeAffaire;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
+import java.util.Optional;
 import java.util.function.UnaryOperator;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -128,33 +133,51 @@ public class Admin2Controller {
         juridictions_listView.setOnKeyPressed((KeyEvent t)->{
             KeyCode key=t.getCode();
                 if(key == KeyCode.DELETE){
-                    Juridiction jur = juridictions_listView.getSelectionModel().getSelectedItem();
-                    if(jur != null){
-                        juridictions_listView.getItems().remove(jur);
-                        jur.delete();
-                    }
-            }
-        });
+                    if(displayDeleteConfirmation()){
+                        Juridiction jur = juridictions_listView.getSelectionModel().getSelectedItem();
+                        if(jur != null){
+                            juridictions_listView.getItems().remove(jur);
+                            jur.delete();
+                        }
+                    }      
+                }
+            });
         qualites_listView.setOnKeyPressed((KeyEvent t)->{
             KeyCode key=t.getCode();
                 if(key == KeyCode.DELETE){
-                    QualiteAvocat qual = qualites_listView.getSelectionModel().getSelectedItem();
-                    if(qual != null){
-                        qualites_listView.getItems().remove(qual);
-                        qual.delete();
-                    }
+                    if(displayDeleteConfirmation()){
+                        QualiteAvocat qual = qualites_listView.getSelectionModel().getSelectedItem();
+                        if(qual != null){
+                            qualites_listView.getItems().remove(qual);
+                            qual.delete();
+                        }
+                }
             }
         });
         typesAffaires_listView.setOnKeyPressed((KeyEvent t)->{
             KeyCode key=t.getCode();
                 if(key == KeyCode.DELETE){
-                    TypeAffaire ta = typesAffaires_listView.getSelectionModel().getSelectedItem();
-                    if(ta != null){
-                        typesAffaires_listView.getItems().remove(ta);
-                        ta.delete();
+                    if(displayDeleteConfirmation()){
+                        TypeAffaire ta = typesAffaires_listView.getSelectionModel().getSelectedItem();
+                        if(ta != null){
+                            typesAffaires_listView.getItems().remove(ta);
+                            ta.delete();
+                        }
                     }
-            }
+                }
         });
     }
     
+    public boolean displayDeleteConfirmation(){
+        Alert dialogConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Stage)dialogConfirm.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
+        dialogConfirm.setTitle("Confirmation de suppression");
+        dialogConfirm.setHeaderText("Confirmation de suppression");
+        dialogConfirm.setContentText("Voulez vous vraiment supprimer cet élément ??");
+        Optional<ButtonType> answer = dialogConfirm.showAndWait();
+        
+        return (answer.get() == ButtonType.OK) ;         
+        
+    }
+       
 }

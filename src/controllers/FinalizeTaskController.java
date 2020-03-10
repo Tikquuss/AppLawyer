@@ -38,8 +38,7 @@ public class FinalizeTaskController  {
      * Initializes the controller class.
      */
     @FXML
-    public void initialize() {
-        
+    public void initialize() {       
         save_button.setOnAction(event -> {
             op.setEtat("effectuée");
             op.setDateFin(LocalDateTime.now());
@@ -68,10 +67,9 @@ public class FinalizeTaskController  {
     }
     public void setContent(Operation operation){
         labelTache_label.setText(operation.getTache());
+        depenses_textField.setText("");
+        compteRendu_textArea.setText("");
         this.op = operation;
     }
-    
 
-    
-    
 }

@@ -8,18 +8,17 @@ package controllers;
 import com.jfoenix.controls.JFXButton;
 import static controllers.ConnexionController.presentPageScene;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Optional;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.stage.Stage;
 import static main.AppLawyer.stage;
 import utilities.ViewDimensionner;
 
@@ -73,6 +72,7 @@ public class AdminController{
         });
         backhome_button.setOnAction((ActionEvent e) -> {
               Alert dialogConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+              ((Stage)dialogConfirm.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
               dialogConfirm.setTitle("Confirmation du retour à l'accueil");
               dialogConfirm.setHeaderText("Confirmation du retour à l'accueil");
               dialogConfirm.setContentText("Voulez vous vraiment retourner à l'accueil ??");

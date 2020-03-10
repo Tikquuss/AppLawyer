@@ -16,6 +16,7 @@ import utilities.ViewDimensionner;
 import static controllers.CurrentFoldersController.currentFolder;
 
 /**
+ * FXML Controller class
  *
  * @author Nyatchou
  */

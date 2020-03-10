@@ -30,8 +30,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import static main.AppLawyer.stage;
 /**
  * FXML Controller class
  *
@@ -177,8 +180,11 @@ public class ClientsListController {
                     modifClientRoot = modifClientLoader.load();
                     ((ModifClientController)modifClientLoader.getController()).setClient(client);
                     modifClientStage.setScene(new Scene(modifClientRoot));
+                    modifClientStage.getIcons().add(new Image("/ressources/images/icon_lawyer.png"));
                     modifClientStage.setResizable(false);
+                    modifClientStage.initStyle(StageStyle.UTILITY);
                     modifClientStage.initModality(Modality.APPLICATION_MODAL);
+                    modifClientStage.initOwner(stage);
                     modifClientStage.show();
                 } catch (IOException ex) {
                     Logger.getLogger(ClientsListController.class.getName()).log(Level.SEVERE, null, ex);
@@ -190,6 +196,7 @@ public class ClientsListController {
     }
     public void displaySelectionError(){
         Alert al = new Alert(Alert.AlertType.ERROR);
+        ((Stage)al.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
         al.setContentText("Vous n'avez sélectionné aucun client !");
         al.setHeaderText("AUCUN CLIENT SELECTIONNE");
         al.show();

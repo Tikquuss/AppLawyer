@@ -24,10 +24,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static main.AppLawyer.stage;
 import static controllers.PresentPageController.endedFoldersLoader;
+import javafx.scene.image.Image;
+import javafx.stage.StageStyle;
 
 
 /**
  *
+ * FXML Controller class
  * @author Nyatchou
  */
 public class CurrentFoldersController {
@@ -58,6 +61,7 @@ public class CurrentFoldersController {
     public void initialize() throws IOException{
         initListView();
         initButtonsActions();
+        initStageForCreateFolder();
         Dossier.all().forEach( fold -> {
             checkIfFolderExist(fold);
         });
@@ -101,11 +105,12 @@ public class CurrentFoldersController {
             if(fold != null){
                 if(checkIfFolderExist(fold)){
                     fold.setStatut("Supprimé");
+                    listFolders_listView.getItems().remove(fold);
                 }
                 else{
                     displayFolderDontExists();
                 }
-                        }
+            }
             else{
                 displayNoFolderSelected();
             }
@@ -117,6 +122,7 @@ public class CurrentFoldersController {
             if(fold != null){
                 if(checkIfFolderExist(fold)){
                     Alert dialogConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+                    ((Stage)dialogConfirm.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
                     dialogConfirm.setTitle("Confirmation fin du dossier");
                     dialogConfirm.setHeaderText("Confirmation archivage");
                     dialogConfirm.setContentText("Vous êtes sur le point d'archiver ce dossier, voulez-vous continuer ??");
@@ -124,6 +130,7 @@ public class CurrentFoldersController {
                     if (answer.get() == ButtonType.OK) {
                         if(calcMontantPaiement(fold)<fold.getHonoraires()){
                             Alert dialogConfirmArch = new Alert(Alert.AlertType.CONFIRMATION);
+                            ((Stage)dialogConfirmArch.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
                             dialogConfirmArch.setContentText("Vous n'avez pas été totalement payé, tenez-vous quand même à archiver ce dossier ??");
                             Optional<ButtonType> answerF = dialogConfirmArch.showAndWait();
                             if (answerF.get() == ButtonType.OK) {
@@ -162,6 +169,7 @@ public class CurrentFoldersController {
         homeForFolder =  new FXMLLoader(getClass().getResource("/views/HomeForFolder.fxml"));
         root = homeForFolder.load();
         stage.setScene(new Scene(root));
+        stage.getIcons().add(new Image("/ressources/images/icon_lawyer.png"));
         stage.setMinWidth(1100);
         stage.setMinHeight(700);
 
@@ -194,13 +202,17 @@ public class CurrentFoldersController {
         });
     }
     
-    public void makeStageForCreateFolder() throws IOException{
+    public void initStageForCreateFolder() throws IOException{
         newFolderStage = new Stage();
         newFoldLoader = new FXMLLoader(getClass().getResource("/views/CreateFolder.fxml"));
         newFoldParent = newFoldLoader.load();
         newFolderStage.setScene(new Scene(newFoldParent));
-        newFolderStage.setResizable(false);
         newFolderStage.initModality(Modality.APPLICATION_MODAL);
+        newFolderStage.initStyle(StageStyle.UTILITY);
+    }
+    
+    public void makeStageForCreateFolder() throws IOException{
+        initStageForCreateFolder();
         newFolderStage.show();
     }
     public void initListView(){
@@ -212,12 +224,14 @@ public class CurrentFoldersController {
     
     public void displayFolderDontExists(){
         Alert al = new Alert(Alert.AlertType.WARNING);
-        al.setContentText("Le chemin vers le repertoire correspondant à ce dossier n'a pas été retrouvé. Il a peut ëtre été supprimé.");
+        ((Stage)al.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
+        al.setContentText("Le chemin vers le repertoire correspondant à ce dossier n'a pas été retrouvé. Il a peut être été supprimé.");
         al.show();
     }
     
     public void displayNoFolderSelected(){
         Alert al = new Alert(Alert.AlertType.ERROR);
+        ((Stage)al.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
         al.setContentText("Veuillez sélectionner un dossier dans la liste avant de cliquer sur ce bouton !");
         al.show();
     }
@@ -230,7 +244,9 @@ public class CurrentFoldersController {
     }
     
     public void displayTasksDontEnded(){
-        Alert alert = new Alert(Alert.AlertType.WARNING);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        ((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
+        alert.setTitle("Tâches non finalisées");
         alert.setHeaderText("TACHES NON FINALISEES");
         alert.setContentText("Les tâches programmées n'ont pas toutes été finalisées! Veuillez d'abord les finaliser avant l'archivage de ce dossier.");
         alert.show();

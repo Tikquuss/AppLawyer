@@ -19,6 +19,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import static main.AppLawyer.stage;
 
 /**
@@ -101,12 +103,14 @@ public class EndedFoldersController {
         
     public void displayFolderDontExists(){
         Alert al = new Alert(Alert.AlertType.WARNING);
+        ((Stage)al.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
         al.setContentText("Le chemin vers le repertoire correspondant à ce dossier n'a pas été retrouvé. Il a peut ëtre été supprimé.");
         al.show();
     }
     
     public void displayNoFolderSelected(){
         Alert al = new Alert(Alert.AlertType.ERROR);
+        ((Stage)al.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
         al.setContentText("Veuillez sélectionner un dossier dans la liste avant de cliquer sur ce bouton !");
         al.show();
     }

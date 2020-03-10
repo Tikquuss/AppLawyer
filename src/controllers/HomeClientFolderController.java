@@ -29,9 +29,11 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -85,8 +87,8 @@ public class HomeClientFolderController {
     @FXML
     private Label savePaiement_label;
     @FXML
-    private GridPane paiementCreate_form;
-
+    private GridPane paiementCreateForm_gridPane;
+    
     private Dossier dossier;
     private double resteapayer;
    
@@ -102,7 +104,7 @@ public class HomeClientFolderController {
     
     public void hideProperties(){
         if(currentFolder.getStatut().equals("Archivé")){
-             paiementCreate_form.setVisible(false);
+             paiementCreateForm_gridPane.setVisible(false);
              savePaiement_label.setVisible(false);
              savePaiement_button.setVisible(false);
         };       
@@ -134,42 +136,49 @@ public class HomeClientFolderController {
         initView();
     }
     
+    public void savePaiementAction(){    
+        if(checkIfNoEmptyField()){
+            if(LocalDateTime.of(datePaiement_datePicker.getValue(), heurePaiement_timePicker.getValue()).isAfter(LocalDateTime.now())){
+                    Alert al = new Alert(Alert.AlertType.WARNING);
+                    ((Stage)al.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
+                    al.setContentText("Vous ne pouvez pas enregistrer un paiement à une date ultérieure à la date actuelle.");
+                    al.setHeaderText("ERREUR DATE");
+                    al.show();
+            }
+            else{
+                if(calcMontantPaiementActu(Long.valueOf(montantPaiement_textField.getText())) > currentFolder.getHonoraires()){
+                    Alert al = new Alert(Alert.AlertType.WARNING);
+                    ((Stage)al.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
+                    al.setContentText("La valeur totale des paiements n'est pas censée dépasser celle des honoraires.");
+                    al.setHeaderText("VALEUR DE CHAMP ERRONEE");
+                    al.show();
+                }
+                else{
+                    Payement paye = new Payement(Long.valueOf(montantPaiement_textField.getText()), 
+                    currentFolder , datePaiement_datePicker.getValue(), heurePaiement_timePicker.getValue() );
+                    resteapayer = currentFolder.getHonoraires() - calcMontantPaiementActu(Long.valueOf(montantPaiement_textField.getText()));
+                    reste_label.setText(String.valueOf((long)resteapayer)+" FCFA");
+                    paye.save();
+                    paiements_tableView.getItems().add(paye);
+                }                 
+            }
+        }
+        else {
+                Alert al = new Alert(Alert.AlertType.WARNING);
+                ((Stage)al.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
+                al.setContentText("Veuillez remplir ces 03 champs s'il vous plait");
+                al.setHeaderText("CHAMPS VIDES");
+                al.show();
+        } 
+    }
+    
     public boolean checkIfNoEmptyField(){
         return (datePaiement_datePicker.getValue()!= null && heurePaiement_timePicker.getValue() != null && !montantPaiement_textField.getText().equals(""));
     }
     
     public void initButtonsActions(){
         savePaiement_button.setOnAction(e -> {
-            if(checkIfNoEmptyField()){
-                if(LocalDateTime.of(datePaiement_datePicker.getValue(), heurePaiement_timePicker.getValue()).isAfter(LocalDateTime.now())){
-                        Alert al = new Alert(Alert.AlertType.WARNING);
-                        al.setContentText("Vous ne pouvez pas enregistrer un paiement à une date ultérieure à la date actuelle.");
-                        al.setHeaderText("ERREUR DATE");
-                        al.show();
-                }
-                else{
-                    if(calcMontantPaiementActu(Long.valueOf(montantPaiement_textField.getText())) > currentFolder.getHonoraires()){
-                        Alert al = new Alert(Alert.AlertType.WARNING);
-                        al.setContentText("La valeur totale des paiements n'est pas censée dépasser celle des honoraires.");
-                        al.setHeaderText("VALEUR DE CHAMP ERRONEE");
-                        al.show();
-                    }
-                    else{
-                        Payement paye = new Payement(Long.valueOf(montantPaiement_textField.getText()), 
-                        currentFolder , datePaiement_datePicker.getValue(), heurePaiement_timePicker.getValue() );
-                        resteapayer = currentFolder.getHonoraires() - calcMontantPaiementActu(Long.valueOf(montantPaiement_textField.getText()));
-                        reste_label.setText(String.valueOf((long)resteapayer)+" FCFA");
-                        paye.save();
-                        paiements_tableView.getItems().add(paye);
-                    }                 
-                }
-            }
-            else {
-                    Alert al = new Alert(Alert.AlertType.WARNING);
-                    al.setContentText("Veuillez remplir ces 03 champs s'il vous plait");
-                    al.setHeaderText("CHAMPS VIDES");
-                    al.show();
-            }      
+            savePaiementAction();
         });
         paiements_tableView.setOnKeyPressed((KeyEvent t)-> {
             KeyCode key=t.getCode();
@@ -177,6 +186,7 @@ public class HomeClientFolderController {
             if(paye != null){      
                 if (key==KeyCode.DELETE && currentFolder.getStatut().equals("En cours")){
                     Alert dialogConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+                    ((Stage)dialogConfirm.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
                     dialogConfirm.setTitle("Confirmation suppression");
                     dialogConfirm.setHeaderText("Confirmation suppression");
                     dialogConfirm.setContentText("Voulez vous vraiment supprimer ce paiement de la liste ??");
@@ -188,6 +198,13 @@ public class HomeClientFolderController {
                             paye.delete();
                       }
                 }
+            }
+        });
+        
+        paiementCreateForm_gridPane.setOnKeyPressed((KeyEvent t)-> {
+            KeyCode key=t.getCode();
+            if(key == KeyCode.ENTER){
+                savePaiementAction();
             }
         });
     }

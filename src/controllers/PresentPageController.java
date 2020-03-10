@@ -24,6 +24,7 @@ import utilities.ViewDimensionner;
  
 
 /**
+ * FXML Controller class
  *
  * @author Nyatchou
  */

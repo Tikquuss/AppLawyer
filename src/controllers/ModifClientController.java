@@ -26,6 +26,7 @@ import static controllers.PresentPageController.pathFolderRoot;
 
 /**
  *
+ * FXML Controller class
  * @author Nyatchou
  */
 public class ModifClientController {

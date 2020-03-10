@@ -28,11 +28,15 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableRow;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.StageStyle;
+import static main.AppLawyer.stage;
 
 /**
  *
+ * FXML Controller class
  * @author Nyatchou
  */
 public class DocumentsController {
@@ -87,8 +91,9 @@ public class DocumentsController {
         Stage stageNewDoc = new Stage();
         Parent parent = FXMLLoader.load(getClass().getResource("/views/AddDocument.fxml"));
         stageNewDoc.setScene(new Scene(parent));
-        stageNewDoc.setResizable(false);
-        stageNewDoc.initModality(Modality.APPLICATION_MODAL);
+        stageNewDoc.initStyle(StageStyle.UTILITY);
+        stageNewDoc.initModality(Modality.APPLICATION_MODAL); 
+        stageNewDoc.initOwner(stage);
         newDoc_button.setOnAction(e -> {
            stageNewDoc.show();
         });
@@ -130,9 +135,10 @@ public class DocumentsController {
         Document doc = documents_tableView.getSelectionModel().getSelectedItem();
         if(doc != null){
             Alert dialogConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+            ((Stage)dialogConfirm.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
             dialogConfirm.setTitle("Confirmation de suppression");
             dialogConfirm.setHeaderText("Confirmation de suppression du document");
-            dialogConfirm.setContentText("Voulez vous vraiment supprimer ce doument ??");
+            dialogConfirm.setContentText("Voulez vous vraiment supprimer ce document ??");
             Optional<ButtonType> answer = dialogConfirm.showAndWait();
             if (answer.get() == ButtonType.OK) {
                   File file = new File(doc.getFichier());
@@ -142,6 +148,7 @@ public class DocumentsController {
                   }                       
                   else{
                       Alert al = new Alert(Alert.AlertType.WARNING);
+                      ((Stage)al.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
                       al.setHeaderText("FICHIER NON EXISTANT");
                       al.setContentText("Ce fichier n'existe plus. Il a pu être supprimé.");
                       al.show();
@@ -164,6 +171,7 @@ public class DocumentsController {
                     desk.open(new File(absPath));
                 else{
                     Alert al = new Alert(Alert.AlertType.WARNING);
+                    ((Stage)al.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
                     al.setHeaderText("FICHIER NON EXISTANT");
                     al.setContentText("Ce fichier n'existe plus. Il a pu être supprimé.");
                     al.show();
@@ -193,6 +201,7 @@ public class DocumentsController {
     
     public void displaySelectionError(){
         Alert al = new Alert(Alert.AlertType.ERROR);
+        ((Stage)al.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
         al.setContentText("Vous n'avez sélectionné aucun document !");
         al.setHeaderText("AUCUN DOCUMENT SELECTIONNE");
         al.show();

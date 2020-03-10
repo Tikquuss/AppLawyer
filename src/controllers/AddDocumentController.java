@@ -28,7 +28,10 @@ import java.util.List;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 /**
+ * FXML Controller class
  *
  * @author Nyatchou
  */
@@ -103,14 +106,16 @@ public class AddDocumentController {
             if(selectedFile != null && selectedFile.length()<MAX_SIZE_FORFILE){
                 choiceDoc_textField.setText(selectedFile.getName());
                 choiceDoc_textField.setEditable(false);
+                
             }
-
-            else if(selectedFile.length()>=MAX_SIZE_FORFILE){
+            else if(selectedFile!=null && selectedFile.length()>=MAX_SIZE_FORFILE){
                 Alert al = new Alert(Alert.AlertType.WARNING);
+                ((Stage)al.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
                 al.setHeaderText("TAILLE DE FICHIER TROP ELEVEE");
                 al.setContentText("Vous ne pouvez pas choisir un fichier de taille supérieure à 30 Mo !");
                 al.show();
             }
+            
         });
         
         valider_button.setOnAction((ActionEvent e) -> {
@@ -152,6 +157,7 @@ public class AddDocumentController {
                 }
                 else {
                     Alert al = new Alert(Alert.AlertType.ERROR);
+                    ((Stage)al.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
                     al.setContentText("Veuillez choisir un fichier s'il vous plait ! "
                             + "Cliquez tout d'abord sur le bouton choisir  puis sélectionnez le fichier à choisir à l'aide de la boîte de dialogue qui "
                             + "s'ouvira et enfin validez.");
@@ -160,6 +166,7 @@ public class AddDocumentController {
                 }
             } else {
                 Alert al = new Alert(Alert.AlertType.WARNING);
+                ((Stage)al.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
                 al.setContentText("Remplissez tous les champs s'il vous plait !");
                 al.show();
             }

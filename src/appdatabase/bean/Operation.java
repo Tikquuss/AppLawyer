@@ -8,6 +8,7 @@ package appdatabase.bean;
 import appdatabase.manager.Manager;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -195,17 +196,14 @@ public class Operation implements Serializable {
     }
     @Override
     public String toString(){
-        String operation = new String();
+        DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd-MM-yyyy à HH:mm");
+        String operation;
         if(!this.etat.equals("effectuée"))
-            operation = this.tache + "  Le "+dateFormatter(this.date)+"  ("+ this.etat+")";
+            operation = this.tache.toUpperCase() + " , prévu pour le "+this.date.format(formatter)+"  ("+ this.etat+")";
         else{
-            operation = this.tache +" ;  a été prévue pour le "+this.dateFormatter(this.date)+ ", a débuté le "+this.dateFormatter(this.getDateDebut());
+            operation = this.tache.toUpperCase() +" ,  a été prévue pour le "+this.date.format(formatter)+ ", a débuté le "+this.getDateDebut().format(formatter);
         }
         return operation;
     }
     
-    public String dateFormatter(LocalDateTime date){
-        return date.getDayOfMonth()+"/"+date.getMonthValue()+
-                    "/"+date.getYear()+" à "+date.getHour()+":"+date.getMinute();
-    }
 }

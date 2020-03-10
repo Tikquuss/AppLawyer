@@ -19,6 +19,7 @@ import java.util.function.UnaryOperator;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextFormatter;
 /**
+ * FXML Controller class
  *
  * @author Nyatchou
  */
@@ -92,7 +93,5 @@ public class ClientsList2Controller {
         };
         search_textField.setTextFormatter(new TextFormatter<>(filter));
     }
-    
-    
     
 }

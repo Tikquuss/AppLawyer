@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controllers;
 
-import appdatabase.bean.Document;
 import appdatabase.bean.Operation;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -21,10 +16,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import static main.AppLawyer.stage;
 
 
 /**
@@ -77,7 +75,8 @@ public class TaskDoneController{
         editTaskStage = new Stage();
         editTaskLoader = new FXMLLoader(getClass().getResource("/views/EditTask.fxml"));
         editTaskStage.setScene(new Scene(editTaskLoader.load()));
-        editTaskStage.setResizable(false);
+        editTaskStage.initStyle(StageStyle.UTILITY);
+        editTaskStage.initOwner(stage);
         editTaskStage.initModality(Modality.APPLICATION_MODAL);
     }
     
@@ -97,6 +96,7 @@ public class TaskDoneController{
     
     public void displaySelectionError(){
         Alert al = new Alert(Alert.AlertType.ERROR);
+        ((Stage)al.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
         al.setContentText("Vous n'avez sélectionné aucune tâche!");
         al.setHeaderText("AUCUNE TACHE SELECTIONNEE");
         al.show();

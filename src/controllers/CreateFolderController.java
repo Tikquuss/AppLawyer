@@ -26,8 +26,6 @@ import static controllers.PresentPageController.clientListLoader;
 import static controllers.CurrentFoldersController.newFolderStage;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.fxml.FXMLLoader;
@@ -35,8 +33,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import static controllers.PresentPageController.pathFolderRoot;
+import java.util.ArrayList;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 /**
  * FXML Controller class
  *
@@ -74,6 +75,8 @@ public class CreateFolderController {
     
     private Client clientChoice;
     private Parent rootClientList;
+    private FXMLLoader clientList2Loader;
+    private ArrayList <JFXTextField> textFieldsList ;
     public static Stage clientListStage;
 
 
@@ -106,11 +109,26 @@ public class CreateFolderController {
         initLimitLenghtEmail();
     }  
 
+    public void initTextFieldsList(){
+        textFieldsList = new ArrayList<>();
+        textFieldsList.add(nomsClient_textField);
+        textFieldsList.add(prenomsClient_textField);
+        textFieldsList.add(adresseClient_textField);
+        textFieldsList.add(telephoneClient_textField);
+        textFieldsList.add(emailClient_textField);
+        textFieldsList.add(nomAdvers_textField);
+        textFieldsList.add(honoraires_textField);
+        textFieldsList.add(provisions_textField);   
+    }
     
     public void initButtonsActions() throws IOException{        
         clientListStage = new Stage();
-        clientListStage.setResizable(false);
         clientListStage.initModality(Modality.APPLICATION_MODAL);
+        clientListStage.initStyle(StageStyle.UTILITY);
+        clientList2Loader = new FXMLLoader(getClass().getResource("/views/ClientsList2.fxml"));
+        rootClientList = clientList2Loader.load();
+        clientListStage.setScene(new Scene(rootClientList));
+        clientListStage.initOwner(newFolderStage);
         save_button.setOnAction(e -> {
             if(this.checkNoEmptyField()){
                 Client client = this.clientChoice == null ? new Client(removeLeadingEmptySpace(telephoneClient_textField.getText()),
@@ -141,24 +159,19 @@ public class CreateFolderController {
                 doc.save();
                 ((CurrentFoldersController)homeLoader.getController()).addToListView(doc);      
                 ((ClientsListController)clientListLoader.getController()).initTable();
+                ((ClientsList2Controller)clientList2Loader.getController()).initTable();
                 newFolderStage.close();
             }    
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
+                ((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
                 alert.setHeaderText("ERREUR");
                 alert.setContentText("Vérifiez que vous avez remplis tous les champs et que ceux-ci sont tous valides.");
                 alert.show();
             }
         });
         choiceClient_button.setOnAction(e -> {
-            try {
-                rootClientList = FXMLLoader.load(getClass().getResource("/views/ClientsList2.fxml"));
-                clientListStage.setScene(new Scene(rootClientList));
                 clientListStage.show();
-            } catch (IOException ex) {
-                Logger.getLogger(CreateFolderController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
         });
     }
     
@@ -174,7 +187,7 @@ public class CreateFolderController {
         juridiction_comboBox.setItems(FXCollections.observableList(Juridiction.allJuridictions()));
     }
     
-    public void putTextFieldValidator(JFXTextField field, ValidatorBase validator){
+    public void putTextFieldNoEmptyValidator(JFXTextField field, ValidatorBase validator){
         validator.setMessage("Ce champ ne doit pas être vide");
         field.getValidators().add(validator);
         /*field.focusedProperty().addListener((o, oldVal, newVal) -> {
@@ -201,34 +214,21 @@ public class CreateFolderController {
         String combo2 = typeAffaire_comboBox.getSelectionModel().getSelectedItem();
         String combo3 = juridiction_comboBox.getSelectionModel().getSelectedItem();
          
-        return 
-          (    
-               combo1 != null
-            && combo2 != null
-            && combo3 != null
-            && nomsClient_textField.validate() 
-            && prenomsClient_textField.validate() 
-            && adresseClient_textField.validate()
-            && honoraires_textField.validate()
-            && provisions_textField.validate()
-            && nomAdvers_textField.validate()
-            && emailClient_textField.validate()
-            && telephoneClient_textField.validate()
-          );
+        boolean areValids = combo1 != null && combo2 != null && combo3 != null;
+        
+       for (JFXTextField textField : textFieldsList)
+           areValids = areValids && textField.validate();
+        return areValids;
+               
        }
     
     public void setValidators(){
-        ValidatorBase requireNom = new RequiredFieldValidator();
-        ValidatorBase requirePrenom = new RequiredFieldValidator();
-        ValidatorBase requireAddrClient = new RequiredFieldValidator();
-        ValidatorBase requireHonoraires = new RequiredFieldValidator();
-        ValidatorBase requireEmail = new RequiredFieldValidator();
-        ValidatorBase requireTelephone = new RequiredFieldValidator();
-        ValidatorBase requireProvisions = new RequiredFieldValidator();
-        ValidatorBase requireNomAdv = new RequiredFieldValidator();
-        ValidatorBase requireQualiteAvocat = new RequiredFieldValidator();
-        ValidatorBase requireTypAff = new RequiredFieldValidator();
-        ValidatorBase requireJuridiction = new RequiredFieldValidator();
+        initTextFieldsList();
+        ArrayList <ValidatorBase> validatorsList = new ArrayList<>();
+        textFieldsList.forEach((textField) -> {
+            putTextFieldNoEmptyValidator(textField, new RequiredFieldValidator());
+        });
+
         ValidatorBase emailValidator = new ValidatorBase() {
                 @Override
                 protected void eval() {
@@ -238,21 +238,14 @@ public class CreateFolderController {
                     } else hasErrors.set(false);
                 }
             };
-        requireEmail.setMessage("Ce champ ne doit pas être vide");
-        emailClient_textField.getValidators().addAll(requireEmail,emailValidator);
+        emailClient_textField.getValidators().add(emailValidator);
 
         emailClient_textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!(newValue.equals(oldValue))) {
                 emailClient_textField.validate();
             }
         });
-        putTextFieldValidator(nomsClient_textField, requireNom);
-        putTextFieldValidator(prenomsClient_textField, requirePrenom);
-        putTextFieldValidator(adresseClient_textField, requireAddrClient);
-        putTextFieldValidator(honoraires_textField, requireHonoraires);
-        putTextFieldValidator(telephoneClient_textField, requireTelephone);      
-        putTextFieldValidator(provisions_textField, requireProvisions);
-        putTextFieldValidator(nomAdvers_textField, requireNomAdv);
+
     }
     public void initTextField(){
         UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
@@ -265,15 +258,13 @@ public class CreateFolderController {
         nomAdvers_textField.setTextFormatter(new TextFormatter<>(filter));
         nomsClient_textField.setTextFormatter(new TextFormatter<>(filter));
         prenomsClient_textField.setTextFormatter(new TextFormatter<>(filter));
-        telephoneClient_textField.setTextFormatter(new TextFormatter<>(filter));
         adresseClient_textField.setTextFormatter(new TextFormatter<>(filter));
-        emailClient_textField.setTextFormatter(new TextFormatter<>(filter));
     }
     
     public void initLimitLenghtEmail(){
         UnaryOperator<TextFormatter.Change> filter = (TextFormatter.Change t) -> {
             String newText = t.getControlNewText();
-            if(newText.length()< 100) {
+            if(newText.matches("^([^\\s].*)*$") && newText.length()< 100) {
                 return t ;
             }
             return null ;
@@ -318,5 +309,11 @@ public class CreateFolderController {
             sb.deleteCharAt(sb.length()-1);
         }
         return sb.toString();
+    }
+    
+    public void clearAllTextFields(){
+        textFieldsList.forEach((textField) -> {
+            textField.setText("");
+        });
     }
 }

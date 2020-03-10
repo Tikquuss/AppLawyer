@@ -172,8 +172,8 @@ public class Manager implements ManagerI{
         try {
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(classe);
-            Criterion nomCriterion = Restrictions.like("nom", "%"+nom+"%");
-            Criterion nomCriterion2 = Restrictions.like("prenom", "%"+nom+"%");
+            Criterion nomCriterion = Restrictions.like("nom", "%"+nom+"%").ignoreCase();
+            Criterion nomCriterion2 = Restrictions.like("prenom", "%"+nom+"%").ignoreCase();
             criteria.add(Restrictions.or(nomCriterion, nomCriterion2));
             liste = criteria.list();
             tx.commit();

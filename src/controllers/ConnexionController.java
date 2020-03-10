@@ -19,12 +19,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import static main.AppLawyer.stage;
 
 /**
+ * FXML Controller class
  *
  * @author Nyatchou
  */
@@ -97,6 +100,7 @@ public class ConnexionController {
     
     public void displayEmptyFieldsErrors(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        ((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
         alert.setHeaderText("CHAMPS VIDES");
         alert.setContentText("Remplissez les tous les champs s'il vous plaît !");
         alert.show();
@@ -104,6 +108,7 @@ public class ConnexionController {
     
     public void displayConnexionError(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        ((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
         alert.setHeaderText("CHAMPS INCORRECTS");
         alert.setContentText("Nom d'utilisateur et/ou mot de passe incorrect(s) !");
         alert.show();
@@ -120,6 +125,7 @@ public class ConnexionController {
         presentPageScene = new Scene(presentPageRoot);
         stage.setScene(presentPageScene);
         stage.setMinWidth(1000);
-        stage.setMinHeight(800);        
+        stage.setMinHeight(800);     
+        
     }
 }

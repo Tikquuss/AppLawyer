@@ -16,8 +16,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import static main.AppLawyer.stage;
 import static controllers.ConnexionController.presentPageScene;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 /**
  *
+ * FXML Controller class
  * @author Nyatchou
  */
 public class HomeForFolderController {
@@ -72,6 +75,7 @@ public class HomeForFolderController {
           });
           backhome_button.setOnAction((ActionEvent e) -> {
               Alert dialogConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+              ((Stage)dialogConfirm.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/ressources/images/icon_lawyer2.png"));
               dialogConfirm.setTitle("Confirmation du retour à l'accueil");
               dialogConfirm.setHeaderText("Confirmation du retour à l'accueil");
               dialogConfirm.setContentText("Voulez vous vraiment retourner à l'accueil ??");

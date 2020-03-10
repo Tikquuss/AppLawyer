@@ -43,8 +43,8 @@
       <Label layoutX="50.0" layoutY="14.0" prefHeight="45.0" prefWidth="200.0" styleClass="small-label" text="Label             :" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="0.0" />
       <HBox layoutX="43.0" layoutY="62.0" prefHeight="60.0" prefWidth="700.0" AnchorPane.leftAnchor="50.0">
          <children>
-            <Label prefHeight="50.0" prefWidth="200.0" styleClass="small-label" text="Prévue le      :" />
-            <Label fx:id="datePrevue_label" prefHeight="50.0" prefWidth="500.0" styleClass="small-label" />
+            <Label prefHeight="50.0" prefWidth="236.0" styleClass="small-label" text="Prévue pour le      :" />
+            <Label fx:id="datePrevue_label" prefHeight="50.0" prefWidth="405.0" styleClass="small-label" />
          </children>
       </HBox>
       <HBox layoutX="46.0" layoutY="130.0" prefHeight="60.0" prefWidth="700.0" AnchorPane.leftAnchor="50.0">

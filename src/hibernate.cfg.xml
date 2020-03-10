@@ -35,7 +35,7 @@ However, if you add GPL Version 2 code and therefore, elected the GPL
 Version 2 license, then the option applies only if the new code is
 made subject to such option by the copyright holder.
 Contributor(s):
--->
+
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
@@ -45,4 +45,15 @@ Contributor(s):
     <property name="hibernate.connection.password">app</property>
     <property name = "hbm2ddl.auto">update</property>
   </session-factory>
+</hibernate-configuration>
+-->
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/applawyer</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password"></property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name= "hbm2ddl.auto">update</property>
+    </session-factory>
 </hibernate-configuration>

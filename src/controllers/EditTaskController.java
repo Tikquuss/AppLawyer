@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import static controllers.TaskDoneController.editTaskStage;
 import static controllers.CurrentFoldersController.currentFolder;
+import java.time.format.DateTimeFormatter;
 /**
  * FXML Controller class
  *
@@ -67,12 +68,13 @@ public class EditTaskController {
     }
     
     public void initView(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy à HH:mm");
         this.labelTache_label.setText(operation.getTache());
         this.compteRendu_textArea.setText(operation.getCompteRendu());
-        this.dateHeureDebut_label.setText(operation.dateFormatter(operation.getDateDebut()));
+        this.dateHeureDebut_label.setText(operation.getDateDebut().format(formatter));
         this.depenses_textField.setText(String.valueOf((int)operation.getDepenses()));
-        this.dateHeureFin_label.setText(operation.dateFormatter(operation.getDateFin()));
-        this.datePrevue_label.setText(operation.dateFormatter(operation.getDate()));
+        this.dateHeureFin_label.setText(operation.getDateFin().format(formatter));
+        this.datePrevue_label.setText(operation.getDate().format(formatter));
     }
     
     public void disableFields(){

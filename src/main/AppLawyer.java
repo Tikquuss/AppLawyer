@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
@@ -31,12 +32,10 @@ public class AppLawyer extends Application {
             stage.setMinWidth(1000);
         }
         stage.setScene(new Scene(initRoot));
+        stage.getIcons().add(new Image("/ressources/images/icon_lawyer.png"));
         stage.show();
     }
    
-    public boolean checkIfThereIsUsers(){
-        return !Utilisateur.all().isEmpty();
-    }  
     public static void main(String[] args) {
         launch(args);
     }
